@@ -1,0 +1,14 @@
+.button
+{
+    border: 3px outset gray;
+    background-color: var(--ngf-red);
+    color: white;
+}
+
+.button:hover
+{
+    background-color: white; 
+    font-weight: bold; 
+    color: var(--ngf-red);
+    cursor: pointer
+}

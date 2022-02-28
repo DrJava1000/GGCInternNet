@@ -1,0 +1,15 @@
+.FooterWrapper
+{
+    background-color: var(--ngf-dark-blue);
+    color: white;
+    text-align: center;
+    height: 10vh; 
+    top: 0%;
+    bottom: 0%;
+}
+  
+.FooterText
+{
+    padding-top: 1.7%;
+    font-weight: lighter;
+}
