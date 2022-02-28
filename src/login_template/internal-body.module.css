@@ -1,0 +1,16 @@
+.PageBody
+{
+    background-color: white;
+    align-items: center;
+    color: black;
+    font-size: calc(10px + 2vmin);
+    padding-top: 20vh; 
+}
+
+.ScrollingContent
+{
+    display: flex;
+    min-height: 100vh; 
+    flex-direction: column;
+    justify-content: space-between;
+}

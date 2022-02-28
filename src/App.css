@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  --ngf-red: #cc2433;
+  --ngf-light-blue: #649fce;
+  --ngf-dark-blue: #404d87;
 }
 
 .App-logo {

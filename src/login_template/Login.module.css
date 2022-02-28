@@ -1,0 +1,70 @@
+.Login 
+{
+  text-align: center;
+}
+
+.prompt
+{
+  color: white;
+  margin-right: 85%;
+}
+
+.accountError
+{
+  color: white;
+  background-color: var(--ngf-dark-blue);
+}
+
+.loginForm
+{
+  text-align: center;
+  vertical-align: central;
+}
+
+.username, .password
+{
+  height: 40px;
+  width: 550px;
+  margin-bottom: 3%;
+  font-size: 75%;
+}
+
+.loginButton
+{
+  composes: button from './Button.module.css';
+  font-size: 80%;
+  height: 50px;
+  width: 150px;
+  margin-bottom: 0%;
+}
+
+.registerPrompt
+{
+  composes: button from './Button.module.css';
+  display: block; 
+  font-size: 50%;
+  font-style: italic; 
+  height: 30px;
+  margin-top: 20px;
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.bodyFamily 
+{
+  background-color: white;
+  height: 70vh;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("./images/happy-multiracial-families-taking-selfie-beach-making-funny-faces-happy-multiracial-families-taking-selfie-beach-making-128444185.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 20vh; 
+}
+  
