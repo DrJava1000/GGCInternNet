@@ -69,7 +69,7 @@ class Portal extends Component
    */
   onSubmit(e)
   { 
-    {/* Here, we will interact with Firebase to authenticate user.*/}
+    /* Here, we will interact with Firebase to authenticate user.*/
   }
     
   /**
@@ -106,6 +106,7 @@ class Portal extends Component
                     <input className={styles.loginButton} type="submit" name="login" value="Login"/>
                 </form>
               </div>
+              <a className={styles.registerPrompt} href="/Signup">Don't have an account?</a>
           </div>
           <AppFooter />
         </div>
