@@ -2,6 +2,7 @@ import styles from './Login.module.css';
 import AppHeader from './page-header/header-and-navebar';
 import bodyStyles from './internal-body.module.css';
 import AppFooter from './page-footer/footer';
+import { login } from '../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
 
 /**
@@ -21,30 +22,27 @@ class Portal extends Component
 
     // This Bindings (required for 'this' keyword usage in some methods)
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = 
     {
-      accountToLaunch : "", // username to login with
+      accountEmail : "", // username to login with
       accountLoginError : "", // username/password error message if username/password wrong
       accountPassword : "", // password to login with
     }
   }
 
   /**
-   * @name onChangeUsername
-   * Username Change Handler: Save Updated Username in Portal State
+   * @name onChangeEmail
+   * Email Change Handler: Save Updated Email in Portal State
    * @param {Event} e
    */
-  onChangeUsername(e) 
+  onChangeEmail(e) 
   {
-    this.setState
-    (
-      {
-        accountToLaunch : e.target.value
-      }
-    );
+    this.setState({
+      accountEmail : e.target.value
+    });
   }
 
   /**
@@ -54,22 +52,20 @@ class Portal extends Component
    */
   onChangePassword(e) 
   {
-    this.setState
-    (
-      {
-        accountPassword : e.target.value
-      }
-    );
+    this.setState({
+      accountPassword : e.target.value
+    });
   }
 
   /**
    * @name onSubmit
-   * Login: Validate Username/Password and Login if Successful, Set Error Message If Not
+   * Login: Validate Email/Password and Login if Successful, Set Error Message If Not
    * @param {Event} e
    */
   onSubmit(e)
   { 
-    /* Here, we will interact with Firebase to authenticate user.*/
+    e.preventDefault(); 
+    login(this.state.accountEmail, this.state.accountPassword);
   }
     
   /**
@@ -99,8 +95,8 @@ class Portal extends Component
             <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
               <div className={styles.loginForm}>
                 <form onSubmit={this.onSubmit}>
-                    <div className={styles.prompt}>Username*</div>
-                    <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeUsername}/><br/>
+                    <div className={styles.prompt}>Email*</div>
+                    <input className={styles.username} type="email" placeholder="Enter your Email" onChange={this.onChangeEmail}/><br/>
                     <div className={styles.prompt}>Password*</div>
                     <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
                     <input className={styles.loginButton} type="submit" name="login" value="Login"/>
