@@ -1,0 +1,44 @@
+.registrationHeadings{
+    color: var(--ngf-red); 
+}
+
+.requiredAsterisk{
+    color: var(--ngf-red);
+}
+
+.registrationTable{
+    margin: auto; 
+    margin-bottom: 1%;
+    width: 35%; 
+    border-collapse: separate; 
+    border-spacing: 10px; 
+    background-color: var(--ngf-light-blue); 
+    color: white; 
+}
+
+.registrationTable td:first-child{
+    text-align: right; 
+    width: 40%; 
+}
+
+.registrationTable td:last-child{
+    width: 60%; 
+}
+
+.registrationButton{
+    margin: auto; 
+    border-width: 3px;
+    background-color: var(--ngf-red);
+    color: white;
+    font-size: 80%;
+    height: 50px;
+    width: auto; 
+}
+
+.textRegistrationEntries{
+    vertical-align: middle; 
+    font-size: 100%; 
+    height: 40px; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
