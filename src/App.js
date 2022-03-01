@@ -1,3 +1,4 @@
+import './firebase/firebase_init';
 import Portal from './login_template/Portal';
 import Signup from './login_template/User-Provisioning'; 
 import {Route, Routes} from 'react-router-dom';
