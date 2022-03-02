@@ -1,19 +1,26 @@
 .registrationHeadings{
-    color: var(--ngf-red); 
+    display: inline-block;
+    color: #ffffff;
+    background-color: #176748;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 13px;
 }
 
 .requiredAsterisk{
-    color: var(--ngf-red);
+    color: red;
 }
 
 .registrationTable{
     margin: auto; 
-    margin-bottom: 1%;
-    width: 35%; 
+    margin-bottom: 2.0%;
+    width: 50%; 
     border-collapse: separate; 
     border-spacing: 10px; 
-    background-color: var(--ngf-light-blue); 
-    color: white; 
+    background-color: #b5c8bd;
+    color: black;
 }
 
 .registrationTable td:first-child{
@@ -26,18 +33,16 @@
 }
 
 .registrationButton{
-    margin: auto; 
-    border-width: 3px;
-    background-color: var(--ngf-red);
-    color: white;
-    font-size: 80%;
+    composes: button from './Button.module.css';
+    font-size: 70%;
     height: 50px;
-    width: auto; 
+    width: 200px;
+    margin-bottom: 0%;
 }
 
 .textRegistrationEntries{
     vertical-align: middle; 
-    font-size: 100%; 
+    font-size: 85%; 
     height: 40px; 
     width: 100%; 
     box-sizing: border-box; 

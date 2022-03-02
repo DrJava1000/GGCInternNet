@@ -26,21 +26,24 @@ class UserProvisioning extends Component{
           <div className={bodyStyles.ScrollingContent}>
             <div className={bodyStyles.PageBody}>
               <div>
-                <h3 className={regStyles.registrationHeadings}>To setup a new user, fill out the form below</h3>
-                <h5 className={regStyles.registrationHeadings}>The * is for required fields.</h5>
+                <h4 className={regStyles.registrationHeadings}>Fill out the form below to create an account<hr style={{color: '#ffffff'}}></hr><span style={{fontSize: '19px'}}>The <span className={regStyles.requiredAsterisk}>*</span> is for required fields.</span></h4>
                 <form onSubmit={this.onSubmit}>
                   <table className={regStyles.registrationTable}>
                     <tbody>
-                    <tr>
-                        <td>E-mail<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                      <tr>
+                        <td style={{fontWeight: 'bold'}}>Full Name<span className={regStyles.requiredAsterisk}>* </span></td>
+                        <td><input className={regStyles.textRegistrationEntries} type="fullName" placeholder="Enter your full name"/><br/></td>
+                      </tr>
+                      <tr>
+                        <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>* </span></td>
                         <td><input className={regStyles.textRegistrationEntries} type="email" placeholder="Enter your email"/><br/></td>
                       </tr>
                       <tr>
-                        <td>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                        <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>* </span></td>
                         <td><input className={regStyles.textRegistrationEntries} type="password" placeholder="Enter your password"/><br/></td>
                       </tr>
                       <tr>
-                        <td>Re-type Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                        <td style={{fontWeight: 'bold'}}>Re-type Password<span className={regStyles.requiredAsterisk}>* </span></td>
                         <td><input className={regStyles.textRegistrationEntries} type="password" placeholder="Enter your password"/><br/></td>
                       </tr>
                     </tbody>
