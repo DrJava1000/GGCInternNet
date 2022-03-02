@@ -1,7 +1,7 @@
 import styles from './Login.module.css';
 import AppHeader from './page-header/header-and-navebar';
-import bodyStyles from './internal-body.module.css';
 import AppFooter from './page-footer/footer';
+import bodyStyles from './internal-body.module.css';
 import { login } from '../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
 import {Navigate} from 'react-router-dom';
@@ -79,7 +79,8 @@ class Portal extends Component
    * @name render
    * Renders Consistent Header and Footer and loads Login Portal
    */
-  render(){
+  render()
+  {
     if(this.state.redirectToInternal)
     {
       return <Navigate to="/InternalPage" />;
@@ -87,38 +88,38 @@ class Portal extends Component
     {
       return (
         <Fragment>
-          <AppHeader pageTitle="Family Portal" navBarContents=
+          <AppHeader navBarContents=
           {
             [
               {
-                'text': "NGF Home",
-                'link': "https://nextgenerationfocus.org/"
-              },
+                'text': "Home",
+                'link': "/"
+              }/*,
               {
                 'text': "Admin Portal",
                 'link': "/Admin_Portal"
-              },
+              },*/
             ]
           }
           />
           <div className={bodyStyles.ScrollingContent}>
-            <div className={styles.bodyFamily}>
+            <div className={styles.bodyLogIn}>
               <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
                 <div className={styles.loginForm}>
                   <form onSubmit={this.onSubmit}>
-                      <div className={styles.prompt}>Email*</div>
-                      <input className={styles.username} type="email" placeholder="Enter your Email" onChange={this.onChangeEmail}/><br/>
-                      <div className={styles.prompt}>Password*</div>
+                      <div className={styles.prompt}><b>Username</b></div>
+                      <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeEmail}/><br/>
+                      <div className={styles.prompt}><b>Password</b></div>
                       <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
                       <input className={styles.loginButton} type="submit" name="login" value="Login"/>
                   </form>
                 </div>
-                <a className={styles.registerPrompt} href="/Signup">Don't have an account?</a>
+                <a className={styles.registerPrompt} href="/Signup" style={{textDecoration: 'none'}}>Sign Up</a>
             </div>
             <AppFooter />
           </div>
-        </Fragment>
-      );
+          </Fragment>
+        );
     }
   }
 }

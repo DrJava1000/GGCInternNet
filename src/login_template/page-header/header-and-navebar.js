@@ -1,6 +1,7 @@
 import styles from './header-and-navebar.module.css';
-import logoNGF from '../images/NGF-Logo_150.jpg';
+import internNetLogo from '../images/Grizzly InternNET Logo Banner.png';
 import React, { Component } from "react";
+import { Link } from '@material-ui/core';
 /**
  * @class AppHeader
  * This component: acts as a functional component for the navigation bar
@@ -32,11 +33,15 @@ class AppHeader extends Component
     {
         return (
             <header className={styles.PageHeader}>
-                {/* NGF Logo and Page Title (if used)*/}
-                <div className={styles.IconAndPageIdentifier}>
-                    <img src={logoNGF} className={styles.NgfLogo} alt="logo" />
-                    <h1 className={styles.PageIdentifier}>{this.state.pageTitle}</h1>
-                </div>
+
+                {/*Grizzly InternNet Logo*/}
+                <Link href="/">
+                    <div className={styles.IconAndPageIdentifier}>
+                        <img src={internNetLogo} className={styles.NgfLogo} alt="Grizzly InternNet"/>
+                    </div>
+                </Link>
+
+
                 {/* App Navigation Bar*/}
                 <nav className={styles.AppNav}>
                     <ul>

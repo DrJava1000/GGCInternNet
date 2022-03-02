@@ -1,6 +1,6 @@
 import AppHeader from './page-header/header-and-navebar';
 import bodyStyles from './internal-body.module.css';
-import regStyles from './Registration.module.css'; 
+import regStyles from './Registration.module.css';
 import AppFooter from './page-footer/footer';
 import { createAccount } from '../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
@@ -104,17 +104,21 @@ class UserProvisioning extends Component
                 <table className={regStyles.registrationTable}>
                   <tbody>
                     <tr>
-                      <td>E-mail<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                      <td style={{fontWeight: 'bold'}}>Full Name<span className={regStyles.requiredAsterisk}>* </span></td>
+                      <td><input className={regStyles.textRegistrationEntries} type="fullName" placeholder="Enter your Full Name"/><br/></td>
+                    </tr>
+                    <tr>
+                      <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>*</span>:</td>
                       <td><input className={regStyles.textRegistrationEntries} type="email" 
                       placeholder="Enter your email" onChange={this.onChangeEmail}/><br/></td>
                     </tr>
                     <tr>
-                      <td>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                      <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
                       <td><input className={regStyles.textRegistrationEntries} type="password" 
                         placeholder="Enter your password" onChange={this.onChangePassword}/><br/></td>
                     </tr>
                     <tr>
-                      <td>Retype Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                      <td style={{fontWeight: 'bold'}}>Retype Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
                       <td><input className={regStyles.textRegistrationEntries} type="password" 
                         placeholder="Enter your password again" onChange={this.onChangeRetypePassword}/><br/></td>
                     </tr>
