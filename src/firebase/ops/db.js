@@ -1,4 +1,4 @@
-import {db} from './firebase_init'; 
+import {db} from '../firebase_init'; 
 
 import { collection, addDoc, getDocs } from "firebase/firestore"; 
 

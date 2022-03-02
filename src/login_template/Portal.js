@@ -1,8 +1,10 @@
 import styles from './Login.module.css';
 import AppHeader from './page-header/header-and-navebar';
-import bodyStyles from './internal-body.module.css';
 import AppFooter from './page-footer/footer';
+import bodyStyles from './internal-body.module.css';
+import { login } from '../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
+import {Navigate} from 'react-router-dom';
 
 /**
  * @class Portal
@@ -21,30 +23,28 @@ class Portal extends Component
 
     // This Bindings (required for 'this' keyword usage in some methods)
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = 
     {
-      accountToLaunch : "", // username to login with
+      accountEmail : "", // username to login with
       accountLoginError : "", // username/password error message if username/password wrong
       accountPassword : "", // password to login with
+      redirectToInternal : false
     }
   }
 
   /**
-   * @name onChangeUsername
-   * Username Change Handler: Save Updated Username in Portal State
+   * @name onChangeEmail
+   * Email Change Handler: Save Updated Email in Portal State
    * @param {Event} e
    */
-  onChangeUsername(e) 
+  onChangeEmail(e) 
   {
-    this.setState
-    (
-      {
-        accountToLaunch : e.target.value
-      }
-    );
+    this.setState({
+      accountEmail : e.target.value
+    });
   }
 
   /**
@@ -54,22 +54,25 @@ class Portal extends Component
    */
   onChangePassword(e) 
   {
-    this.setState
-    (
-      {
-        accountPassword : e.target.value
-      }
-    );
+    this.setState({
+      accountPassword : e.target.value
+    });
   }
 
   /**
    * @name onSubmit
-   * Login: Validate Username/Password and Login if Successful, Set Error Message If Not
+   * Login: Validate Email/Password and Login if Successful, Set Error Message If Not
    * @param {Event} e
    */
   onSubmit(e)
   { 
-    /* Here, we will interact with Firebase to authenticate user.*/
+    e.preventDefault(); 
+    
+    this.setState({
+      redirectToInternal : true
+    });
+    
+    login(this.state.accountEmail, this.state.accountPassword);
   }
     
   /**
@@ -78,40 +81,46 @@ class Portal extends Component
    */
   render()
   {
-    return (
-      <Fragment>
-        <AppHeader navBarContents=
-        {
-          [
-            {
-              'text': "Home",
-              'link': "/"
-            }/*,
-            {
-              'text': "Admin Portal",
-              'link': "/Admin_Portal"
-            },*/
-          ]
-        }
-        />
-        <div className={bodyStyles.ScrollingContent}>
-          <div className={styles.bodyLogIn}>
-            <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
-              <div className={styles.loginForm}>
-                <form onSubmit={this.onSubmit}>
-                    <div className={styles.prompt}><b>Username</b></div>
-                    <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeUsername}/><br/>
-                    <div className={styles.prompt}><b>Password</b></div>
-                    <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
-                    <input className={styles.loginButton} type="submit" name="login" value="Login"/>
-                </form>
-              </div>
-              <a className={styles.registerPrompt} href="/Signup" style={{textDecoration: 'none'}}>Sign Up</a>
+    if(this.state.redirectToInternal)
+    {
+      return <Navigate to="/InternalPage" />;
+    }else
+    {
+      return (
+        <Fragment>
+          <AppHeader navBarContents=
+          {
+            [
+              {
+                'text': "Home",
+                'link': "/"
+              }/*,
+              {
+                'text': "Admin Portal",
+                'link': "/Admin_Portal"
+              },*/
+            ]
+          }
+          />
+          <div className={bodyStyles.ScrollingContent}>
+            <div className={styles.bodyLogIn}>
+              <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
+                <div className={styles.loginForm}>
+                  <form onSubmit={this.onSubmit}>
+                      <div className={styles.prompt}><b>Username</b></div>
+                      <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeEmail}/><br/>
+                      <div className={styles.prompt}><b>Password</b></div>
+                      <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
+                      <input className={styles.loginButton} type="submit" name="login" value="Login"/>
+                  </form>
+                </div>
+                <a className={styles.registerPrompt} href="/Signup" style={{textDecoration: 'none'}}>Sign Up</a>
+            </div>
+            <AppFooter />
           </div>
-          <AppFooter />
-        </div>
-      </Fragment>
-    );
+          </Fragment>
+        );
+    }
   }
 }
   
