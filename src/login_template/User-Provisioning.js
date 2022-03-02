@@ -141,7 +141,7 @@ class UserProvisioning extends Component
                       <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>* </span></td>
                       <td><input className={regStyles.textRegistrationEntries} type="email"
                       placeholder="Enter your E-mail" onChange={this.onChangeEmail}
-                      pattern="+ggc@\.edu" title="The specified email is invalid. The domain should be @ggc.edu."/><br/></td>
+                      pattern=".+ggc@\.edu" title="The specified email is invalid. The domain should be @ggc.edu."/><br/></td>
                     </tr>
                     <tr>
                       <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
