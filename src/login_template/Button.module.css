@@ -1,14 +1,15 @@
 .button
 {
-    border: 3px outset gray;
-    background-color: var(--ngf-red);
+    border: 3px outset #176748;
+    border-radius: 15px;
+    background-color: #176748;
     color: white;
 }
 
 .button:hover
 {
-    background-color: white; 
+    background-color: #b5c8bd;
     font-weight: bold; 
-    color: var(--ngf-red);
-    cursor: pointer
+    color: #176748;
+    cursor: pointer;
 }

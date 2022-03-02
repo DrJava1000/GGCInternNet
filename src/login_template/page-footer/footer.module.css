@@ -1,9 +1,9 @@
 .FooterWrapper
 {
-    background-color: var(--ngf-dark-blue);
+    background-color: #176748;
     color: white;
     text-align: center;
-    height: 10vh; 
+    height: 9vh; 
     top: 0%;
     bottom: 0%;
 }
