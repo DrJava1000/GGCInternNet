@@ -3,6 +3,7 @@ import
     getAuth, 
     onAuthStateChanged,
     createUserWithEmailAndPassword, 
+    updateProfile,
     signInWithEmailAndPassword, 
     signOut
 } from "firebase/auth";
@@ -11,8 +12,7 @@ const appAuthInstance = getAuth();
 
 onAuthStateChanged(appAuthInstance, (user) => 
 {
-    user = appAuthInstance.currentUser; 
-    if (user) // if user is signed in
+    if (appAuthInstance.currentUser) // if user is signed in
     {
         console.log("Currently Signed In: Current User's UID: " + user.uid); 
     }else // if user isn't signed in
@@ -22,11 +22,19 @@ onAuthStateChanged(appAuthInstance, (user) =>
 });
 
 
-export async function createAccount(email, password)
+export async function createAccount(email, password, name)
 {
     createUserWithEmailAndPassword(appAuthInstance, email, password)
     .then((userCredential) => {
-        console.log("User " + userCredential.user.email + " has been created successfully."); 
+        updateProfile(appAuthInstance.currentUser, {
+            displayName: name,
+        }).then(() => {
+            console.log("User " + appAuthInstance.currentUser.displayName + " has been created successfully."); 
+        }).catch((error) => {
+            console.log("User account couldn't be named. See below.");
+            console.log(error);
+        });
+        console.log("User " + appAuthInstance.currentUser.email + " has been created successfully."); 
     })
     .catch((error) => {
         console.log("User account couldn't be created. See below.");

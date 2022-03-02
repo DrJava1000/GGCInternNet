@@ -19,12 +19,14 @@ class UserProvisioning extends Component
 
     // This Bindings (required for 'this' keyword usage in some methods)
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeRetypePassword = this.onChangeRetypePassword.bind(this); 
 
     this.state = 
     {
+      desiredName: "",
       desiredEmail : "", 
       accountLoginError : "", // username/password error message if username/password wrong
       desiredPassword : "", 
@@ -32,6 +34,18 @@ class UserProvisioning extends Component
       redirectToInternal: false
     }
   }
+
+  /**
+  * @name onChangeName
+  * Email Change Handler: Save Updated Name in Portal State
+  * @param {Event} e
+  */
+   onChangeName(e) 
+   {
+     this.setState({
+       desiredName : e.target.value
+     });
+   }
  
   /**
   * @name onChangeEmail
@@ -78,11 +92,14 @@ class UserProvisioning extends Component
   { 
     e.preventDefault(); 
     
-    this.setState({
-      redirectToInternal : true
-    });
+    if(!this.state.email)
+    {
+      this.setState({
+        redirectToInternal : true
+      });
+    }
 
-    createAccount(this.state.desiredEmail, this.state.desiredPassword);
+    createAccount(this.state.desiredEmail, this.state.desiredPassword, this.state.desiredName);
   }
 
   render()
@@ -105,12 +122,14 @@ class UserProvisioning extends Component
                   <tbody>
                     <tr>
                       <td style={{fontWeight: 'bold'}}>Full Name<span className={regStyles.requiredAsterisk}>* </span></td>
-                      <td><input className={regStyles.textRegistrationEntries} type="fullName" placeholder="Enter your Full Name"/><br/></td>
+                      <td><input className={regStyles.textRegistrationEntries} type="fullName" 
+                      placeholder="Enter your Full Name" onChange={this.onChangeName}/><br/></td>
                     </tr>
                     <tr>
                       <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>*</span>:</td>
                       <td><input className={regStyles.textRegistrationEntries} type="email" 
-                      placeholder="Enter your email" onChange={this.onChangeEmail}/><br/></td>
+                      placeholder="Enter your email" pattern=".+@ggc\.edu" title="The specified email should be a GGC address (ggc.edu). "
+                      onChange={this.onChangeEmail}/><br/></td>
                     </tr>
                     <tr>
                       <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
