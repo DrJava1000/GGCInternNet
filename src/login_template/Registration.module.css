@@ -16,8 +16,8 @@
 .registrationTable{
     margin: auto; 
     margin-bottom: 2.0%;
-    width: 50%; 
-    border-collapse: separate; 
+    border-collapse: separate;
+    width: 100%;
     border-spacing: 10px; 
     background-color: #b5c8bd;
     color: black;

@@ -95,13 +95,13 @@ class Portal extends Component
         }
         />
         <div className={bodyStyles.ScrollingContent}>
-          <div className={styles.bodyFamily}>
+          <div className={styles.bodyLogIn}>
             <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
               <div className={styles.loginForm}>
                 <form onSubmit={this.onSubmit}>
-                    <div className={styles.prompt}>Username</div>
+                    <div className={styles.prompt}><b>Username</b></div>
                     <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeUsername}/><br/>
-                    <div className={styles.prompt}>Password</div>
+                    <div className={styles.prompt}><b>Password</b></div>
                     <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
                     <input className={styles.loginButton} type="submit" name="login" value="Login"/>
                 </form>
