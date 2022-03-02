@@ -34,10 +34,10 @@ class AppHeader extends Component
         return (
             <header className={styles.PageHeader}>
 
-                {/* InternNet Logo*/}
+                {/*Grizzly InternNet Logo*/}
                 <Link href="/">
                     <div className={styles.IconAndPageIdentifier}>
-                        <img src={internNetLogo} className={styles.NgfLogo} alt="logo"/>
+                        <img src={internNetLogo} className={styles.NgfLogo} alt="Grizzly InternNet"/>
                     </div>
                 </Link>
 
