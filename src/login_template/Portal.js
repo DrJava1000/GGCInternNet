@@ -4,6 +4,7 @@ import bodyStyles from './internal-body.module.css';
 import AppFooter from './page-footer/footer';
 import { login } from '../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
+import {Navigate} from 'react-router-dom';
 
 /**
  * @class Portal
@@ -30,6 +31,7 @@ class Portal extends Component
       accountEmail : "", // username to login with
       accountLoginError : "", // username/password error message if username/password wrong
       accountPassword : "", // password to login with
+      redirectToInternal : false
     }
   }
 
@@ -65,6 +67,11 @@ class Portal extends Component
   onSubmit(e)
   { 
     e.preventDefault(); 
+    
+    this.setState({
+      redirectToInternal : true
+    });
+    
     login(this.state.accountEmail, this.state.accountPassword);
   }
     
@@ -72,42 +79,47 @@ class Portal extends Component
    * @name render
    * Renders Consistent Header and Footer and loads Login Portal
    */
-  render()
-  {
-    return (
-      <Fragment>
-        <AppHeader pageTitle="Family Portal" navBarContents=
-        {
-          [
-            {
-              'text': "NGF Home",
-              'link': "https://nextgenerationfocus.org/"
-            },
-            {
-              'text': "Admin Portal",
-              'link': "/Admin_Portal"
-            },
-          ]
-        }
-        />
-        <div className={bodyStyles.ScrollingContent}>
-          <div className={styles.bodyFamily}>
-            <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
-              <div className={styles.loginForm}>
-                <form onSubmit={this.onSubmit}>
-                    <div className={styles.prompt}>Email*</div>
-                    <input className={styles.username} type="email" placeholder="Enter your Email" onChange={this.onChangeEmail}/><br/>
-                    <div className={styles.prompt}>Password*</div>
-                    <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
-                    <input className={styles.loginButton} type="submit" name="login" value="Login"/>
-                </form>
-              </div>
-              <a className={styles.registerPrompt} href="/Signup">Don't have an account?</a>
+  render(){
+    if(this.state.redirectToInternal)
+    {
+      return <Navigate to="/InternalPage" />;
+    }else
+    {
+      return (
+        <Fragment>
+          <AppHeader pageTitle="Family Portal" navBarContents=
+          {
+            [
+              {
+                'text': "NGF Home",
+                'link': "https://nextgenerationfocus.org/"
+              },
+              {
+                'text': "Admin Portal",
+                'link': "/Admin_Portal"
+              },
+            ]
+          }
+          />
+          <div className={bodyStyles.ScrollingContent}>
+            <div className={styles.bodyFamily}>
+              <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
+                <div className={styles.loginForm}>
+                  <form onSubmit={this.onSubmit}>
+                      <div className={styles.prompt}>Email*</div>
+                      <input className={styles.username} type="email" placeholder="Enter your Email" onChange={this.onChangeEmail}/><br/>
+                      <div className={styles.prompt}>Password*</div>
+                      <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
+                      <input className={styles.loginButton} type="submit" name="login" value="Login"/>
+                  </form>
+                </div>
+                <a className={styles.registerPrompt} href="/Signup">Don't have an account?</a>
+            </div>
+            <AppFooter />
           </div>
-          <AppFooter />
-        </div>
-      </Fragment>
-    );
+        </Fragment>
+      );
+    }
   }
 }
   
