@@ -9,8 +9,20 @@ class UserProvisioning extends Component{
   render(){
       return (
         <Fragment>
-        <AppHeader pageTitle="Signup" navBarContents={[
-          ]}/>
+        <AppHeader navBarContents=
+        {
+          [
+            {
+              'text': "Home",
+              'link': "/"
+            }/*,
+            {
+              'text': "Admin Portal",
+              'link': "/Admin_Portal"
+            },*/
+          ]
+        }
+        />
           <div className={bodyStyles.ScrollingContent}>
             <div className={bodyStyles.PageBody}>
               <div>
@@ -28,8 +40,8 @@ class UserProvisioning extends Component{
                         <td><input className={regStyles.textRegistrationEntries} type="password" placeholder="Enter your password"/><br/></td>
                       </tr>
                       <tr>
-                        <td>Retype Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
-                        <td><input className={regStyles.textRegistrationEntries} type="password" placeholder="Enter your password again"/><br/></td>
+                        <td>Re-type Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                        <td><input className={regStyles.textRegistrationEntries} type="password" placeholder="Enter your password"/><br/></td>
                       </tr>
                     </tbody>
                   </table>

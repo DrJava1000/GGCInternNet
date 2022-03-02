@@ -11,7 +11,7 @@ const AppFooter = function NavBar(props)
 { // AppFooter Functional Component's NavBar function is ill-named (footer IS NOT navigation bar)
     return (
         <footer className={styles.FooterWrapper}>
-            <div className={styles.FooterText}>@Copyright {new Date().getFullYear()} Next Generation Focus, Inc.</div>
+            <div className={styles.FooterText}>Copyright © {new Date().getFullYear()} Grizzly InternNET</div>
         </footer>
     )
 }

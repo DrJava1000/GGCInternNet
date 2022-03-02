@@ -3,8 +3,9 @@
     letter-spacing: 0.1em;
     font-weight: bold;
     text-align: right;
-    font-size: 1em;
-    width: 60%;
+    font-size: 10pt;
+    width: 50%;
+    height: 8%;
     float: right;
     margin-top: 45px;
     color: #ffffff;
@@ -19,15 +20,21 @@
   .AppNav li 
   {
     display: inline-block;
-    background-color: var(--ngf-light-blue);
-    padding: 0.5em 3em 0.5em 0.5em;
+    border: 3px outset #176748;
+    background-color: #176748;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-right: 10%;
+    border-radius: 15px;
   }
   
   .AppNav a 
   {
     text-decoration: none;
     display: block;
-    font-size: 25pt; 
+    font-size: 20pt; 
     letter-spacing: .01em; 
   }
   
@@ -48,7 +55,7 @@
   
   .AppNav a:hover 
   {
-    color: var(--ngf-dark-blue);
+    color: #B5C8CD;
   }
 
   .PageHeader
@@ -73,19 +80,19 @@
   
   .NgfLogo 
   {
-    height: 15vmin;
-    width: 15vmin;
+    height: 17.5vmin;
+    width: 46vmin;
     pointer-events: none;
-    padding-left: 10px;
     padding-top: 10px; 
   }
 
   .PageIdentifier
   {
-    color: var(--ngf-red);
-    font-size: 40pt;
-    letter-spacing: .01em; 
-    float: right;
+    color: var(--ngf-black);
+    font-size: 20pt;
+    letter-spacing: .01em;
+    float: left;
+    display: inline-flex;
     padding-right: 230px;
     padding-top: 20px;
   }
