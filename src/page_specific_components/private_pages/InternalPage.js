@@ -1,4 +1,4 @@
-import bodyStyles from './internal-body.module.css';
+import bodyStyles from '../../shared_site_css/body_styles/internal-body.module.css';
 import React, { Component, Fragment, } from "react";
 import { logout } from '../../firebase/ops/auth';
 
