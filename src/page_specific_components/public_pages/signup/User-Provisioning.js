@@ -1,9 +1,8 @@
-import AppHeader from './page-header/header-and-navebar';
-import bodyStyles from './internal-body.module.css';
+import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
+import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
 import regStyles from './Registration.module.css';
-import styles from './Login.module.css';
-import AppFooter from './page-footer/footer';
-import { createAccount } from '../firebase/ops/auth';
+import AppFooter from '../../../shared_site_components/page-footer/footer';
+import { createAccount } from '../../../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
 import {Navigate} from 'react-router-dom';
 
@@ -127,7 +126,7 @@ class UserProvisioning extends Component
           }
           />
         <div className={bodyStyles.ScrollingContent}>
-          <div className={styles.bodySignUp}>
+          <div className={regStyles.bodySignUp}>
             <h4 className={regStyles.registrationHeadings}>Fill out the form below to create an account<hr style={{color: '#ffffff'}}></hr><span style={{fontSize: '19px'}}>The <span className={regStyles.requiredAsterisk}>*</span> is for required fields.</span></h4>
             <form style={{width:"57.75%"}} onSubmit={this.onSubmit}>
                 <table className={regStyles.registrationTable}>
