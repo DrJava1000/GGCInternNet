@@ -1,8 +1,8 @@
-import AppHeader from './page-header/header-and-navebar';
+import AppHeader from '../shared_site_components/page-header/header-and-navebar';
 import bodyStyles from './internal-body.module.css';
 import regStyles from './Registration.module.css';
 import styles from './Login.module.css';
-import AppFooter from './page-footer/footer';
+import AppFooter from '../shared_site_components/page-footer/footer';
 import { createAccount } from '../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
 import {Navigate} from 'react-router-dom';
