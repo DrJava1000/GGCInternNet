@@ -1,6 +1,6 @@
 import bodyStyles from './internal-body.module.css';
 import React, { Component, Fragment, } from "react";
-import { logout } from '../firebase/ops/auth';
+import { logout } from '../../firebase/ops/auth';
 
 class InternalPage extends Component
 {

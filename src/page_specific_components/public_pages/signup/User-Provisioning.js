@@ -1,5 +1,5 @@
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
-import bodyStyles from './internal-body.module.css';
+import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
 import regStyles from './Registration.module.css';
 import styles from './Login.module.css';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
