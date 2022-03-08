@@ -1,8 +1,8 @@
 import styles from './Login.module.css';
-import AppHeader from '../shared_site_components/page-header/header-and-navebar';
-import AppFooter from '../shared_site_components/page-footer/footer';
+import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
+import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from './internal-body.module.css';
-import { login } from '../firebase/ops/auth';
+import { login } from '../../../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
 import {Navigate} from 'react-router-dom';
 

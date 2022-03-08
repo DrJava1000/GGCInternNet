@@ -1,6 +1,6 @@
 import './firebase/firebase_init';
-import Portal from './login_template/Portal';
-import Signup from './login_template/User-Provisioning'; 
+import Portal from './page_specific_components/public_pages/login_portal/Portal';
+import Signup from './page_specific_components/public_pages/signup/User-Provisioning'; 
 import InternalPage from './login_template/InternalPage';
 import {Route, Routes} from 'react-router-dom'
 import './App.css';
