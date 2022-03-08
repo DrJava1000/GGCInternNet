@@ -47,3 +47,21 @@
     width: 100%; 
     box-sizing: border-box; 
 }
+
+.bodySignUp
+{
+  background-color: white;
+  height: 70vh;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("../../../images/Grizzly InternNET Background 2.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 20vh; 
+}
