@@ -33,7 +33,7 @@
 }
 
 .registrationButton{
-    composes: button from './Button.module.css';
+    composes: button from '../../../shared_site_css/button_styles/Button.module.css';
     font-size: 70%;
     height: 50px;
     width: 200px;
