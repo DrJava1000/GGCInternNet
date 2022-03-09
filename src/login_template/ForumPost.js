@@ -36,14 +36,18 @@ class ForumPost extends Component
 
     render()
     {
-        return
-        (
+        return(
             <div>
                 <form onSubmit={this.onSubmit}>
-                    <label>
-                        Description:
-                        <input type="text" value={this.state.value} onChange={this.onDescriptionChange}/>
-                    </label>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style={{fontWeight: 'bold'}}>Description:</td>
+                                <td><input type="text" value={this.state.value} placeHolder="Enter description here" 
+                                onChange={this.onDescriptionChange}/> <br/> </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <input type="submit" value="Post" />
                 </form>
             </div>
