@@ -1,5 +1,5 @@
 import styles from './header-and-navebar.module.css';
-import internNetLogo from '../images/Grizzly InternNET Logo Banner.png';
+import internNetLogo from '../../images/Grizzly InternNET Logo Banner.png';
 import React, { Component } from "react";
 import { Link } from '@material-ui/core';
 /**
