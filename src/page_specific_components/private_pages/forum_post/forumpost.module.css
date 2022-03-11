@@ -1,0 +1,85 @@
+.Login 
+{
+  text-align: center;
+}
+
+.prompt
+{
+  color: white;
+  margin-right: 85%;
+}
+
+.accountError
+{
+  color: white;
+  background-color: var(--ngf-dark-blue);
+}
+
+.loginForm
+{
+  text-align: center;
+  vertical-align: central;
+}
+
+.username, .password
+{
+  height: 40px;
+  width: 550px;
+  margin-bottom: 3%;
+  font-size: 75%;
+}
+
+.loginButton
+{
+  composes: button from '../../../shared_site_css/button_styles/Button.module.css';
+  font-size: 80%;
+  height: 50px;
+  width: 150px;
+  margin-bottom: 0%;
+}
+
+.registerPrompt
+{
+  composes: button from '../../../shared_site_css/button_styles/Button.module.css';
+  border: 3px outset #6c9980;
+  background-color: #6c9980;
+  color: white;
+  display: block; 
+  font-size: 60%;
+  height: 30px;
+  margin-top: 10px;
+  padding-top: 6px;
+  padding-left: 30px; 
+  padding-right: 30px;
+}
+
+.bodyMain
+{
+  background-color: #6c9980;
+  height: 70vh;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  padding-top: 20vh;
+}
+
+.bodyLeft
+{
+  background-color: #cdcdcd;
+  height: 70vh;
+  width: 15%;
+  margin: auto;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  padding-top: 20vh;
+}
