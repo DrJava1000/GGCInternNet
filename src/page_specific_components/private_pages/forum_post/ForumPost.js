@@ -5,6 +5,9 @@ import AppHeader from '../../../shared_site_components/page-header/header-and-na
 import AppFooter from '../../../shared_site_components/page-footer/footer';
 import { Button } from "../../../../node_modules/@material-ui/core/index";
 import { TextField } from "../../../../node_modules/@material-ui/core/index";
+import { List } from "../../../../node_modules/@material-ui/core/index";
+import { ListItem } from "../../../../node_modules/@material-ui/core/index";
+import { Divider } from "../../../../node_modules/@material-ui/core/index";
 
 class ForumPost extends Component {
     constructor(props) {
@@ -54,34 +57,39 @@ class ForumPost extends Component {
                     }
                 />
                 <div className={bodyStyles.ScrollingContent}>
-                    {/* #Unfinished code, need a Wrapper for this to display correctly
-                    <div className={styles.bodyLeft}>
-                        This is the left-side of the screen
-                    </div>
-                    */}
                     <div className={styles.bodyMain}>
-                        <form onSubmit={this.onSubmit}>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td style={{ fontWeight: 'bold' }}>Description:</td>
-                                        <td><TextField id="standard-basic" value={this.state.value}
-                                            onChange={this.onDescriptionChange} label="Enter description here"
-                                            variant="standard" /></td>
-                                        {/* #Old, unused code
-                                        <td><input type="text" value={this.state.value} placeholder="Enter description here"
-                                            onChange={this.onDescriptionChange} /> <br /> </td>
-                                        */}
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <Button type={"submit"} variant="outlined">
-                                Post
-                            </Button>
-                            {/* #Old, unused code
-                            <input type="submit" value="Post" />
-                            */}
-                        </form>
+                        <div className={styles.bodyProfile}>
+                            This is where the Profiles should go, preferably on the Left Side of the screen
+                        </div>
+                        <div className={styles.bodyInput}>
+                            <form onSubmit={this.onSubmit}>
+                                Create a Forum Post:
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style={{ fontWeight: 'bold' }}>Description:</td>
+                                            <td><TextField id="standard-basic" value={this.state.value}
+                                                onChange={this.onDescriptionChange} label="Enter description here"
+                                                variant="standard" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <Button type={"submit"} variant="outlined">
+                                    Post
+                                </Button>
+                            </form>
+                        </div>
+                        <div className={styles.bodyPostList}>
+                            This is where the Forum Posts will go, right below the Input box
+                            <List>
+                                <ListItem>
+                                    Forum Post Description #1
+                                </ListItem>
+                                <ListItem>
+                                    Forum Post Description #2
+                                </ListItem>
+                            </List>
+                        </div>
                     </div>
                     <AppFooter />
                 </div>

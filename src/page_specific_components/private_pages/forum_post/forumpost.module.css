@@ -55,9 +55,9 @@
 
 .bodyMain
 {
-  background-color: #6c9980;
+  background-color: #a2a2a2;
   height: 70vh;
-  width: 60%;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -65,21 +65,28 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
-  padding-top: 20vh;
 }
 
-.bodyLeft
+.bodyInput
 {
-  background-color: #cdcdcd;
-  height: 70vh;
-  width: 15%;
-  margin: auto;
+  border: 2px;
+  border-style: dashed;
+  width: 60%;
+}
+
+.bodyProfile
+{
   float: left;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
-  padding-top: 20vh;
+  border: 2px;
+  border-style: double;
+  background-color:#c2c2c2;
+  width: 20%;
+}
+
+.bodyPostList
+{
+  border: 3px;
+  border: double;
+  width: 60%;
+  background-color: #dadada;
 }
