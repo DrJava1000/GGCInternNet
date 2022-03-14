@@ -90,3 +90,9 @@
   width: 60%;
   background-color: #dadada;
 }
+
+.PostListItem
+{
+  border: 3px;
+  border-style: double;
+}

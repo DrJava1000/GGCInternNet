@@ -9,6 +9,8 @@ import { List } from "../../../../node_modules/@material-ui/core/index";
 import { ListItem } from "../../../../node_modules/@material-ui/core/index";
 import { Divider } from "../../../../node_modules/@material-ui/core/index";
 
+//var fptest = new ForumPost();
+
 class ForumPost extends Component {
     constructor(props) {
         super(props);
@@ -58,9 +60,6 @@ class ForumPost extends Component {
                 />
                 <div className={bodyStyles.ScrollingContent}>
                     <div className={styles.bodyMain}>
-                        <div className={styles.bodyProfile}>
-                            This is where the Profiles should go, preferably on the Left Side of the screen
-                        </div>
                         <div className={styles.bodyInput}>
                             <form onSubmit={this.onSubmit}>
                                 Create a Forum Post:
@@ -82,11 +81,14 @@ class ForumPost extends Component {
                         <div className={styles.bodyPostList}>
                             This is where the Forum Posts will go, right below the Input box
                             <List>
-                                <ListItem>
-                                    Forum Post Description #1
+                                <ListItem className={styles.PostListItem}>
+                                    Placeholder Item #1
                                 </ListItem>
-                                <ListItem>
-                                    Forum Post Description #2
+                                <ListItem className={styles.PostListItem}>
+                                    Placeholder Item #2
+                                </ListItem>
+                                <ListItem className={styles.PostListItem}>
+                                    Placeholder Item #3
                                 </ListItem>
                             </List>
                         </div>
