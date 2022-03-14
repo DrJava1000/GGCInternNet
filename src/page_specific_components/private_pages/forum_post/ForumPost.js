@@ -10,7 +10,7 @@ import { ListItem } from "../../../../node_modules/@material-ui/core/index";
 import { Divider } from "../../../../node_modules/@material-ui/core/index";
 
 let forumposts = ['FP #1', 'FP #2', 'FP #3'];
-let listItems = forumposts.map((forumposts) => <li>{forumposts}</li>)
+let listItems = forumposts.map((forumposts) => <li>{forumposts}</li>);
 
 class ForumPost extends Component {
     constructor(props) {
