@@ -9,7 +9,8 @@ import { List } from "../../../../node_modules/@material-ui/core/index";
 import { ListItem } from "../../../../node_modules/@material-ui/core/index";
 import { Divider } from "../../../../node_modules/@material-ui/core/index";
 
-//var fptest = new ForumPost();
+let forumposts = ['FP #1', 'FP #2', 'FP #3'];
+let listItems = forumposts.map((forumposts) => <li>{forumposts}</li>)
 
 class ForumPost extends Component {
     constructor(props) {
@@ -36,6 +37,8 @@ class ForumPost extends Component {
 
         //Placeholder "alert" function to test ForumPost object
         alert('Text Description: ' + this.state.textDescription);
+
+        listItems.push(this.state.textDescription);
 
         //Code to submit ForumPost object somewhere
         //createForumPost(this.state.textDescription);
@@ -88,7 +91,7 @@ class ForumPost extends Component {
                                     Placeholder Item #2
                                 </ListItem>
                                 <ListItem className={styles.PostListItem}>
-                                    Placeholder Item #3
+                                    <ul>{listItems}</ul>
                                 </ListItem>
                             </List>
                         </div>
