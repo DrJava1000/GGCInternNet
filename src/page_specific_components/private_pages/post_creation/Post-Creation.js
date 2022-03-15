@@ -4,6 +4,7 @@ import styles from './post-creation.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
 import { createPost } from '../../../firebase/ops/post';
+import { Navigate } from "react-router-dom";
 
 class PostCreation extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class PostCreation extends Component {
         {
             title: '',
             description: '',
-            feedPosts: []
+            feedPosts: [],
+            successfulPost: false
         }
     }
 
@@ -42,34 +44,43 @@ class PostCreation extends Component {
             title: this.state.title,
             description: this.state.description
         });
+
+        this.setState({
+            successfulPost : true
+        });
     }
 
     render() {
-        return (
-            <Fragment>
-                <AppHeader navBarContents=
-                    {
-                        [
-                            {
-                                'text': "Main Feed",
-                                'link': "/Main_Feed"
-                            }
-                        ]
-                    }
-                />
-                <div className={bodyStyles.ScrollingContent}>
-                    <div className={bodyStyles.PageBody}>
-                        <form onSubmit={this.onSubmit}>
-                            <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
-                            <input type="text" placeholder="Add Description Here" onChange={this.onDescriptionChange}/><br/>
-                            <input type="submit" name="Post" value="Post"/>
-                        </form>
+        if(this.state.successfulPost)
+        {
+            return (<Navigate to="/Main_Feed"/>)
+        }else{
+            return (
+                <Fragment>
+                    <AppHeader navBarContents=
+                        {
+                            [
+                                {
+                                    'text': "Main Feed",
+                                    'link': "/Main_Feed"
+                                }
+                            ]
+                        }
+                    />
+                    <div className={bodyStyles.ScrollingContent}>
+                        <div className={bodyStyles.PageBody}>
+                            <form onSubmit={this.onSubmit}>
+                                <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
+                                <input type="text" placeholder="Add Description Here" onChange={this.onDescriptionChange}/><br/>
+                                <input type="submit" name="Post" value="Post"/>
+                            </form>
+                        </div>
+                        <AppFooter />
                     </div>
-                    <AppFooter />
-                </div>
 
-            </Fragment>
-        );
+                </Fragment>
+            );
+        }
     }
 }
 
