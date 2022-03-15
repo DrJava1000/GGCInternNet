@@ -3,10 +3,10 @@ const ggc_degrees = [
         major: "Biology",
         concentrations: [
             "Biochemistry",
-            "Cell biology and biotechnology",
-            "General biology",
-            "Biology teacher certification",
-            "Biology minor"
+            "Cell Biology & Biotechnology",
+            "General",
+            "Pre-Biology Teacher Certification",
+            "Biology Teacher Certification"
         ]
     },{
         major: "Business Administration", 
@@ -14,137 +14,152 @@ const ggc_degrees = [
             "Accounting",
             "Economics",
             "Finance",
-            "International business",
+            "General",
+            "International Business",
+            "Leadership",
             "Management",
-            "Management information systems",
+            "Management Information Systems",
             "Marketing",
-            "Supply chain management",
-            "Business administration minor"
+            "Supply Chain Management"
         ]
     },{
         major: "Chemistry", 
         concentrations: [
-            "General chemistry",
-            "Professional chemistry",
-            "Chemistry teacher certification",
-            "Chemistry minor"
+            "General",
+            "Professional Chemistry",
+            "Pre-Chemistry Teacher Certification",
+            "Chemistry Teacher Certification"
         ]
     },{
         major: "Cinema and Media Arts Production", 
         concentrations: [
-            "Design and production",
-            "Entertainment industries studies",
-            "Writing for stage and screen",
-            "Nexus degree: professional sound design",
-            "Film minor"
+            "Design and Production",
+            "Entertainment Industries Studies",
+            "Writing for Stage & Screen",
+            "Nexus Degree: Professional Sound Design for Film & Television"
         ]
     },{
-        major: "Criminal Justice/Criminalogy", 
+        major: "Criminal Justice/Criminology", 
         concentrations: [
-            "Corrections",
-            "Law",
-            "Parole",
-            "Policing",
-            "Probations"
+            "Criminal Justice",
+            "Criminology",
+            "Liberal Arts"
         ]
     },{
         major: "Education", 
         concentrations: [
+            "Early Childhood Education",
             "Elementary Education",
             "Middle Grades Education",
+            "Pre-Early Childhood Education",
+            "Pre-Elementary Education",
+            "Pre-Middle Grades Education",
+            "Pre-Special Education",
             "Special Education"
         ]
     },{
         major: "English", 
         concentrations: [
-            "Writing and rhetoric",
-            "Language and literature",
-            "Interdisciplinary studies",
-            "English teacher certification",
-            "English minor"
+            "Interdisciplinary Studies",
+            "Language & Literature",
+            "Pre-English Teacher Certification",
+            "English Teacher Certification",
+            "Writing & Rhetoric"
         ]
-    }, {
+    },{
         major: "Environmental Science", 
         concentrations: [
-            "Natural science",
-            "Social science"
+            "Associate Degree",
+            "Natural Science",
+            "Social Science"
         ]
-    }, {
+    },{
         major: "Exercise Science", 
         concentrations: [
             "Clinical",
-            "Health promotion"
+            "Health Promotion",
+            "Wellness Promotion",
+            "Wellness/Nursing"
         ]
-    }, {
+    },{
         major: "Health Science", 
         concentrations: [
-            "Patient navigation",
-            "Public health"
+            "Nursing Interest",
+            "Patient Navigation",
+            "Public Health"
         ]
-    }, {
+    },{
         major: "History", 
         concentrations: [
-            "U.S history",
-            "Western civilization",
-            "World history",
-            "Interdisciplinary/thematic history",
-            "History teacher certification",
-            "History minor"
+            "Interdisciplinary/Thematic History",
+            "United States History",
+            "Western Civilization",
+            "World History",
+            "Pre-History Teacher Certification",
+            "History Teacher Certification"
         ]
-    }, {
+    },{
         major: "Human Development and Aging Services", 
         concentrations: [
-            "Government Sector",
-            "Non-Profit Sector",
-            "For-Profit/Business Sector"
+            "General"
         ]
-    }, {
+    },{
         major: "Information Technology", 
         concentrations: [
-            "Data Science and Analytics",
+            "Data Science & Analytics",
             "Digital Media",
             "Enterprise Systems",
             "Software Development",
-            "Systems and Security",
-            "Information Technology Minor"
+            "Systems and Security"
         ]
-    }, {
+    },{
         major: "Integrative Studies", 
         concentrations: [
-            "Integrative Studies"
+            "General"
         ]
-    }, {
+    },{
         major: "Mathematics", 
         concentrations: [
-            "Applied mathematics",
-            "Pure mathematics",
-            "Mathematics teacher certification",
-            "Mathematics minor"
+            "Applied Mathematics",
+            "Pure Mathematics",
+            "Pre-Mathematics Teacher Certification",
+            "Mathematics Teacher Certification"
         ]
-    }, {
+    },{
+        major: "Nexus Degree", 
+        concentrations: [
+            "Professional Sound Design for Film & Television"
+        ]
+    },{
         major: "Nursing", 
         concentrations: [
+            "Pre-Nursing",
             "Nursing"
         ]
-    }, {
+    },{
         major: "Political Science", 
         concentrations: [
-            "American government",
-            "Comparative politics",
-            "General political science",
-            "International relations",
-            "Legal studies",
-            "Public administration",
-            "Political science teacher certification",
-            "Political science minor"
+            "American Government",
+            "Comparative Politics",
+            "General",
+            "International Relations",
+            "Legal Studies",
+            "Public Administration",
+            "Pre-Political Science Teacher Certification",
+            "Political Science Teacher Certification"
         ]
-    }, {
+    },{
         major: "Psychology", 
         concentrations: [
-            "Clinical/personality",
-            "Cognitive/neuroscience",
-            "Developmental/educational",
-            "Social/applied"
+            "Clinical/Personality",
+            "Cognitive/Neuroscience",
+            "Developmental/Educational",
+            "Social/Applied"
+        ]
+    },{
+        major: "Undecided", 
+        concentrations: [
+            "Undecided"
         ]
     }
 ]

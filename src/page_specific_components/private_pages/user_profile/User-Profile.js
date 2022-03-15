@@ -5,6 +5,11 @@ import bodyStyles from '../../../shared_site_css/body_styles/internal-body.modul
 import { loadUserProfile, updateUserProfile } from '../../../firebase/ops/profile';
 import React, { Component, Fragment, } from "react";
 import { ggc_degrees } from './majors_and_concentrations';
+import { Button, Grid, MenuItem } from '../../../../node_modules/@mui/material/index';
+import { TextField } from '../../../../node_modules/@mui/material/index';
+import { Typography } from '../../../../node_modules/@mui/material/index';
+import { Select } from '../../../../node_modules/@mui/material/index';
+import titleStyle from '../../../shared_site_css/button_styles/Button.module.css';
 
 /**
  * @class Profile
@@ -128,44 +133,118 @@ class Profile extends Component{
     return (
         <Fragment>
             <AppHeader navBarContents={[{
-                'text': "Main Feed",
-                'link': "/Main_Feed"
+                'text': "Main Forum",
+                'link': "/"
             }]}
             />
             <div className={bodyStyles.ScrollingContent}>
-            <div className={bodyStyles.PageBody}>
-              <div>
+            <div className={styles.profileBody}>
+            <Grid container alignItems="center" justify="center" direction="column" sx={{width:'70%'}}>
                 <form onSubmit={this.onSubmit}>
-                  <div><b>Profile Name</b></div>
-                  <input type="text" placeholder={this.state.name} onChange={this.onNameChange}/><br/>
-                  <div ><b>Profile Pic</b></div>
-                  <img alt="User's Profile Pic" src={this.state.picUrl} /><br/>
-                  <input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/>
-                  <div><b>Major</b></div>
-                  <select name="majors" value={this.state.major} onChange={this.onMajorChange}>
-                  {
-                    ggc_degrees.map(degree => <option key={degree.major} value={degree.major}>{degree.major}</option>)
-                  }
-                  </select><br/>
-                  <div ><b>Concentration</b></div>
-                  <select name="concentrations" value={this.state.concentration} onChange={this.onConcentrationChange}>
-                  {
-                    this.state.concentrationList.map(concentration => <option key={concentration} 
-                      value={concentration}>{concentration}</option>)
-                  }
-                  </select><br/>
-                  <div><b>Resume Download Link</b></div>
-                  {
-                    this.state.downloadResumePreview ? <><a href={this.state.resumeUrl} download={this.state.resume.name}>Click here to download the resume.</a><br /></> :
-                    <><a href={this.state.resumeUrl}>Click here to download the resume.</a><br /></>
-                  }
-                  <div><b>Resume Upload</b></div>
-                  <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
-                  {
-                    this.state.updateButton ? <input type="submit" name="Update" value="Update"/> : <div></div>
-                  }
+                  <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px', marginTop: '60px' }}>
+                    <Typography
+                    variant="h6"
+                    className={titleStyle.title}
+                    >
+                      Profile Picture
+                    </Typography>
+                    <img src={this.state.picUrl} style={{paddingTop:"15px", height:"175px", width:"175px"}} /><br/>
+                    <input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/>
+                  </Grid> <br></br>
+
+                  <Grid item>
+                    <Typography
+                    variant="h6"
+                    className={titleStyle.title}
+                    >
+                      Full Name
+                    </Typography>
+                    <TextField
+                      type="text"
+                      inputProps={{
+                        style: { textAlign: 'center' }
+                      }}
+                      sx={{
+                        width: '100%'
+                      }}
+                      value={this.state.name}
+                      onChange={this.onNameChange}
+                    />
+                  </Grid> <br></br>
+            
+                  <Grid item>
+                    <Typography
+                    variant="h6"
+                    className={titleStyle.title}
+                    >
+                      Major
+                    </Typography>
+                    <Select
+                      value={this.state.major}
+                      onChange={this.onMajorChange}
+                      sx={{
+                        width: '100%'
+                      }}
+                    >
+                      {
+                        ggc_degrees.map(degree => <MenuItem key={degree.major} value={degree.major}>{degree.major}</MenuItem>)
+                      }
+                    </Select>
+                  </Grid> <br></br>
+                  
+                  <Grid item>
+                    <Typography
+                    variant="h6"
+                    className={titleStyle.title}
+                    >
+                      Concentration
+                    </Typography>
+                    <Select
+                      value={this.state.concentration}
+                      onChange={this.onConcentrationChange}
+                      sx={{
+                        width: '100%'
+                      }}
+                    >
+                      {
+                        this.state.concentrationList.map(concentration => <MenuItem key={concentration} value={concentration}>{concentration}</MenuItem>)
+                      }
+                    </Select>
+                  </Grid> <br></br>
+       
+                  <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2}}>
+                  <Typography
+                    variant="h6"
+                    className={titleStyle.title}
+                    >
+                      Download Resume
+                    </Typography>
+                    <Button
+                      sx={{
+                        width: '100%'
+                      }}
+                    >
+                      {
+                        this.state.downloadResumePreview ? <><a href={this.state.resumeUrl} download={this.state.resume.name}>Click to Download Resume</a><br /></> :
+                        <><a href={this.state.resumeUrl} style={{textDecoration:'none'}}>Click to Download Resume</a><br /></>
+                      }
+                    </Button>
+                  </Grid> <br></br>
+
+                  <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px'}}>
+                  <Typography
+                    variant="h6"
+                    className={titleStyle.title}
+                    >
+                      Upload Resume
+                    </Typography>
+                    <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
+                    {
+                      this.state.updateButton ? <input type="submit" name="Update" value="Update"/> : <div></div>
+                    }
+                  </Grid> <br></br>
                 </form>
-              </div>
+                </Grid>
             </div>
             <AppFooter />
             </div>

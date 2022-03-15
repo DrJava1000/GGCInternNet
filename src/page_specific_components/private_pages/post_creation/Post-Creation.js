@@ -61,7 +61,7 @@ class PostCreation extends Component {
                         {
                             [
                                 {
-                                    'text': "Main Feed",
+                                    'text': "Main Forum",
                                     'link': "/Main_Feed"
                                 }
                             ]

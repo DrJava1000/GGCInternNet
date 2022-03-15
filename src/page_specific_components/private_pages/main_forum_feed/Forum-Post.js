@@ -1,5 +1,4 @@
 import { Component, Fragment } from "react";
-import styles from './main-feed.module.css';
 
 class ForumPost extends Component {
     constructor(props) {
