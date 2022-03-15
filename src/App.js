@@ -6,9 +6,8 @@ import Signup from './page_specific_components/public_pages/signup/User-Provisio
 
 // Private Page Imports 
 import InternalPage from './page_specific_components/private_pages/InternalPage';
-
 import Profile from './page_specific_components/private_pages/user_profile/User-Profile';
-
+import ForumPost from './page_specific_components/private_pages/forum_post/ForumPost';
 import {Route, Routes} from 'react-router-dom'
 
 import './App.css';
@@ -29,6 +28,7 @@ function App() {
 
         {/* User Profile Page */}
         <Route exact path="/User_Profile" element={<Profile />}/> 
+        <Route exact path="/ForumPost" element={<ForumPost />}/> 
       </Routes>
     </main>
   );
