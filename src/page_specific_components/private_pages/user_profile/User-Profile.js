@@ -4,6 +4,7 @@ import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
 import { loadUserProfile } from '../../../firebase/ops/profile';
 import React, { Component, Fragment, } from "react";
+import { ggc_degrees } from './majors_and_concentrations';
 
 /**
  * @class Profile
@@ -30,6 +31,7 @@ class Profile extends Component{
       pic : "", 
       major : "",
       concentration : "",
+      concentrationList: [],
       resume : ""
     }
   }
@@ -45,7 +47,10 @@ class Profile extends Component{
   }
 
   onMajorChange(e) {
+
     this.setState({
+      major: e.target.value,
+      concentrationList: this.loadConcentrations(e.target.value)
     });
   }
 
@@ -63,6 +68,14 @@ class Profile extends Component{
     e.preventDefault(); 
   }
 
+  loadConcentrations(major){
+    for(let step = 0; step < ggc_degrees.length; step++){
+      if(ggc_degrees[step].major === major){
+          return ggc_degrees[step].concentrations;
+      }
+    }
+  }
+
   componentDidMount(){
     let userDetails = loadUserProfile('5RBuiAGBHwPzhRHbbllYOUTpadp2');
 
@@ -72,6 +85,7 @@ class Profile extends Component{
         pic: profile.pic,
         major: profile.major,
         concentration: profile.concentration,
+        concentrationList: this.loadConcentrations(profile.major),
         resume: profile.resume
       });
     })
@@ -94,28 +108,18 @@ class Profile extends Component{
                         <div ><b>Profile Pic</b></div>
                         <img alt="User's Profile Pic" src={this.state.pic} />
                         <div><b>Major</b></div>
-                        <select name="cars">
-                          <option value="Biology">Biology</option>
-                          <option value="Business Administration">Business Administration</option>
-                          <option value="Chemistry">Chemistry</option>
-                          <option value="Cinema and Media Arts Production">Cinema and Media Arts Production</option>
-                          <option value="Criminal Justice/Criminalology">Criminal Justice/Criminalology</option>
-                          <option value="Education">Education</option>
-                          <option value="English">English</option>
-                          <option value="Environmental Science">Environmental Science</option>
-                          <option value="Exercise Science">Exercise Science</option>
-                          <option value="Health Science">Health Science</option>
-                          <option value="History">History</option>
-                          <option value="Human Development and Aging Services">Human Development and Aging Services</option>
-                          <option value="Information Technology">Information Technology</option>
-                          <option value="Integrative Studies">Integrative Studies</option>
-                          <option value="Mathematics">Mathematics</option>
-                          <option value="Nursing">Nursing</option>
-                          <option value="Political Science">Political Science</option>
-                          <option value="Psychology">Psychology</option>
+                        <select name="majors" value={this.state.major} onChange={this.onMajorChange}>
+                          {
+                            ggc_degrees.map(degree => <option key={degree.id} value={degree.major}>{degree.major}</option>)
+                          }
                         </select><br/>
                         <div ><b>Concentration</b></div>
-                        <input type="text" placeholder={this.state.concentration} onChange={this.onConcentrationChange}/><br/>
+                        <select name="concentrations" value={this.state.concentration} onChange={this.onConcentrationChange}>
+                          {
+                            this.state.concentrationList.map(concentration => <option key={concentration.id} 
+                              value={concentration}>{concentration}</option>)
+                          }
+                        </select><br/>
                         <div><b>Resume Download Link</b></div>
                         <input type="text" placeholder={this.state.resume} onChange={this.onResumeUpload}/><br/>
                         <input type="submit" name="login" value="Login"/>
