@@ -61,7 +61,7 @@ class PostCreation extends Component {
                     <div className={bodyStyles.PageBody}>
                         <form onSubmit={this.onSubmit}>
                             <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
-                            <input type="text" placeholder="Add Description Here" onChange={this.onTitleChange}/><br/>
+                            <input type="text" placeholder="Add Description Here" onChange={this.onDescriptionChange}/><br/>
                             <input type="submit" name="Post" value="Post"/>
                         </form>
                     </div>
