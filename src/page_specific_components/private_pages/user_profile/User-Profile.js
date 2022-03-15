@@ -94,7 +94,26 @@ class Profile extends Component{
                         <div ><b>Profile Pic</b></div>
                         <img alt="User's Profile Pic" src={this.state.pic} />
                         <div><b>Major</b></div>
-                        <input type="text" placeholder={this.state.major} onChange={this.onMajorChange}/><br/>
+                        <select name="cars">
+                          <option value="Biology">Biology</option>
+                          <option value="Business Administration">Business Administration</option>
+                          <option value="Chemistry">Chemistry</option>
+                          <option value="Cinema and Media Arts Production">Cinema and Media Arts Production</option>
+                          <option value="Criminal Justice/Criminalology">Criminal Justice/Criminalology</option>
+                          <option value="Education">Education</option>
+                          <option value="English">English</option>
+                          <option value="Environmental Science">Environmental Science</option>
+                          <option value="Exercise Science">Exercise Science</option>
+                          <option value="Health Science">Health Science</option>
+                          <option value="History">History</option>
+                          <option value="Human Development and Aging Services">Human Development and Aging Services</option>
+                          <option value="Information Technology">Information Technology</option>
+                          <option value="Integrative Studies">Integrative Studies</option>
+                          <option value="Mathematics">Mathematics</option>
+                          <option value="Nursing">Nursing</option>
+                          <option value="Political Science">Political Science</option>
+                          <option value="Psychology">Psychology</option>
+                        </select><br/>
                         <div ><b>Concentration</b></div>
                         <input type="text" placeholder={this.state.concentration} onChange={this.onConcentrationChange}/><br/>
                         <div><b>Resume Download Link</b></div>
