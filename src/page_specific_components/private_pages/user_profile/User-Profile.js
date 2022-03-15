@@ -139,7 +139,7 @@ class Profile extends Component{
             />
             <div className={bodyStyles.ScrollingContent}>
             <div className={styles.profileBody}>
-            <Grid container alignItems="center" justify="center" direction="column" sx={{width:'70%'}}>
+            <Grid alignItems="center" justify="center" direction="column" sx={{minWidth:'32%'}}>
                 <form onSubmit={this.onSubmit}>
                   <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px', marginTop: '60px' }}>
                     <Typography
@@ -239,10 +239,10 @@ class Profile extends Component{
                       Upload Resume
                     </Typography>
                     <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
+                  </Grid>
                     {
                       this.state.updateButton ? <input type="submit" name="Update" value="Update"/> : <div></div>
                     }
-                  </Grid> <br></br>
                 </form>
                 </Grid>
             </div>
