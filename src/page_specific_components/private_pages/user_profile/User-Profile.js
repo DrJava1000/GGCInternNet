@@ -30,10 +30,13 @@ class Profile extends Component{
     this.state = {
       name : "",
       pic : "", 
+      picUrl: "",
       major : "",
       concentration : "",
       concentrationList: [],
       resume : "",
+      resumeUrl: "",
+      downloadResumePreview: false,
       updateButton : false
     }
   }
@@ -48,7 +51,8 @@ class Profile extends Component{
   onPicUpload(e) {
     this.onProfileModification();
     this.setState({
-      pic: e.target.files[0]
+      pic: e.target.files[0],
+      picUrl: URL.createObjectURL(e.target.files[0])
     });
   }
 
@@ -72,7 +76,9 @@ class Profile extends Component{
   onResumeUpload(e){
     this.onProfileModification();
     this.setState({
-      resume: e.target.files[0]
+      resume: e.target.files[0],
+      resumeUrl: URL.createObjectURL(e.target.files[0]),
+      downloadResumePreview: true
     });
   }
 
@@ -109,11 +115,11 @@ class Profile extends Component{
     userDetails.then((profile) => {
       this.setState({
         name: profile.name,
-        pic: profile.pic,
+        picUrl: profile.pic,
         major: profile.major,
         concentration: profile.concentration,
         concentrationList: this.loadConcentrations(profile.major),
-        resume: profile.resume
+        resumeUrl: profile.resume
       });
     })
   }
@@ -133,23 +139,26 @@ class Profile extends Component{
                   <div><b>Profile Name</b></div>
                   <input type="text" placeholder={this.state.name} onChange={this.onNameChange}/><br/>
                   <div ><b>Profile Pic</b></div>
-                  <img alt="User's Profile Pic" src={this.state.pic} /><br/>
+                  <img alt="User's Profile Pic" src={this.state.picUrl} /><br/>
                   <input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/>
                   <div><b>Major</b></div>
                   <select name="majors" value={this.state.major} onChange={this.onMajorChange}>
-                    {
-                      ggc_degrees.map(degree => <option key={degree.id} value={degree.major}>{degree.major}</option>)
-                    }
+                  {
+                    ggc_degrees.map(degree => <option key={degree.id} value={degree.major}>{degree.major}</option>)
+                  }
                   </select><br/>
                   <div ><b>Concentration</b></div>
                   <select name="concentrations" value={this.state.concentration} onChange={this.onConcentrationChange}>
-                    {
-                      this.state.concentrationList.map(concentration => <option key={concentration.id} 
-                        value={concentration}>{concentration}</option>)
-                    }
+                  {
+                    this.state.concentrationList.map(concentration => <option key={concentration.id} 
+                      value={concentration}>{concentration}</option>)
+                  }
                   </select><br/>
                   <div><b>Resume Download Link</b></div>
-                  <a href={this.state.resume}>Click here to download the resume.</a><br/>
+                  {
+                    this.state.downloadResumePreview ? <><a href={this.state.resumeUrl} download={this.state.resume.name}>Click here to download the resume.</a><br /></> :
+                    <><a href={this.state.resumeUrl}>Click here to download the resume.</a><br /></>
+                  }
                   <div><b>Resume Upload</b></div>
                   <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
                   {
