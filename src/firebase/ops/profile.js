@@ -11,26 +11,20 @@ export async function loadUserProfile(id){
         
         const firestoreProfInfo = docSnap.data(); 
         
-        console.log("Document data:", firestoreProfInfo);
-        
         const userDetails = {
             name: firestoreProfInfo.name,
             major: firestoreProfInfo.major,
-            concentration: firestoreProfInfo.concentration,
-            picFileName : firestoreProfInfo.picFileName,
-            resumeFileName: firestoreProfInfo.resumeFileName
+            concentration: firestoreProfInfo.concentration
         }
         
         const storage = getStorage();
         
-        // Get download link for profile pic
-        await getDownloadURL(ref(storage, 'profile_pics/' + id + '/' + userDetails.picFileName))
+        await getDownloadURL(ref(storage, 'profile_pics/' + id + '/' +firestoreProfInfo.picFileName))
             .then((url) => {
                 userDetails.pic = url; 
             })
         
-        // Get download link for 
-        await getDownloadURL(ref(storage, "resumes/" + id + "/" + userDetails.resumeFileName))
+        await getDownloadURL(ref(storage, "resumes/" + id + "/" + firestoreProfInfo.resumeFileName))
             .then((url) => {
                 userDetails.resume = url;
             })  
