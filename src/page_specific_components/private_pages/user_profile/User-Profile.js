@@ -48,14 +48,17 @@ class Profile extends Component{
 
   onMajorChange(e) {
 
+    let fetchedConcentrations = this.loadConcentrations(e.target.value);
     this.setState({
       major: e.target.value,
-      concentrationList: this.loadConcentrations(e.target.value)
+      concentrationList: fetchedConcentrations,
+      concentration: fetchedConcentrations[0]
     });
   }
 
   onConcentrationChange(e){
     this.setState({
+      concentration: e.target.value
     });
   }
 
