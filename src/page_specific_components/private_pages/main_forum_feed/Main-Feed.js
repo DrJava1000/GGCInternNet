@@ -3,45 +3,56 @@ import bodyStyles from '../../../shared_site_css/body_styles/internal-body.modul
 import styles from './main-feed.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
-import { Button } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
-import { List } from "@material-ui/core";
-import { ListItem } from "@material-ui/core";
-import { Divider } from "@material-ui/core";
-
-let forumposts = ['FP #1', 'FP #2', 'FP #3'];
-let listItems = forumposts.map((forumposts) => <li>{forumposts}</li>);
+import { fetchAllPosts, createPost } from '../../../firebase/ops/post';
+import ForumPost from './Forum-Post';
 
 class MainFeed extends Component {
     constructor(props) {
         super(props);
 
         //Bindings
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onTitleChange = this.onTitleChange.bind(this);
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
         this.state =
         {
-            textDescription: ''
+            title: '',
+            description: '',
+            feedPosts: []
         }
+    }
+
+    onTitleChange(e) {
+        this.setState({
+            title: e.target.value
+        });
     }
 
     onDescriptionChange(e) {
         this.setState({
-            textDescription: e.target.value
+            description: e.target.value
         });
     }
 
     onSubmit(e) {
         e.preventDefault();
 
-        //Placeholder "alert" function to test ForumPost object
-        alert('Text Description: ' + this.state.textDescription);
+        createPost({
+            poster: "rgambrell@ggc.edu",
+            title: this.state.title,
+            description: this.state.description
+        });
+    }
 
-        listItems.push(this.state.textDescription);
+    componentDidMount(){
+        let fetchPostsPromise = fetchAllPosts();
 
-        //Code to submit ForumPost object somewhere
-        //createForumPost(this.state.textDescription);
+        fetchPostsPromise.then((posts) => {
+            this.setState({
+                feedPosts: posts
+            });
+        })
     }
 
     render() {
@@ -53,48 +64,21 @@ class MainFeed extends Component {
                             {
                                 'text': "Home",
                                 'link': "/"
-                            }/*,
-              {
-                'text': "Admin Portal",
-                'link': "/Admin_Portal"
-              },*/
+                            }
                         ]
                     }
                 />
                 <div className={bodyStyles.ScrollingContent}>
-                    <div className={styles.bodyMain}>
-                        <div className={styles.bodyInput}>
-                            <form onSubmit={this.onSubmit}>
-                                Create a Forum Post:
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td style={{ fontWeight: 'bold' }}>Description:</td>
-                                            <td><TextField id="standard-basic" value={this.state.value}
-                                                onChange={this.onDescriptionChange} label="Enter description here"
-                                                variant="standard" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <Button type={"submit"} variant="outlined">
-                                    Post
-                                </Button>
-                            </form>
-                        </div>
-                        <div className={styles.bodyPostList}>
-                            This is where the Forum Posts will go, right below the Input box
-                            <List>
-                                <ListItem className={styles.PostListItem}>
-                                    Placeholder Item #1
-                                </ListItem>
-                                <ListItem className={styles.PostListItem}>
-                                    Placeholder Item #2
-                                </ListItem>
-                                <ListItem className={styles.PostListItem}>
-                                    <ul>{listItems}</ul>
-                                </ListItem>
-                            </List>
-                        </div>
+                    <div className={bodyStyles.PageBody}>
+                        <form onSubmit={this.onSubmit}>
+                            <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
+                            <input type="text" placeholder="Add Description Here" onChange={this.onTitleChange}/><br/>
+                            <input type="submit" name="Update" value="Update"/>
+                        </form>
+                        {
+                            this.state.feedPosts.map(post => <ForumPost poster={post.poster} title={post.title} 
+                                description={post.description}/>)
+                        }
                     </div>
                     <AppFooter />
                 </div>
