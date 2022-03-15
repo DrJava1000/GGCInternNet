@@ -2,7 +2,7 @@ import styles from './user_profile.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
-import { loadUserProfile } from '../../../firebase/ops/profile';
+import { loadUserProfile, updateUserProfile } from '../../../firebase/ops/profile';
 import React, { Component, Fragment, } from "react";
 import { ggc_degrees } from './majors_and_concentrations';
 
@@ -25,6 +25,7 @@ class Profile extends Component{
     this.onMajorChange = this.onMajorChange.bind(this);
     this.onConcentrationChange = this.onConcentrationChange.bind(this);
     this.onResumeUpload = this.onResumeUpload.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       name : "",
@@ -38,11 +39,14 @@ class Profile extends Component{
 
   onNameChange(e) {
     this.setState({
+      name: e.target.value
     });
   }
 
   onPicUpload(e) {
+    console.log(e.target.files[0]);
     this.setState({
+      pic: e.target.files[0]
     });
   }
 
@@ -62,13 +66,24 @@ class Profile extends Component{
     });
   }
 
-  onResumeUpload(){
+  onResumeUpload(e){
+    console.log(e.target.files[0]);
     this.setState({
+      resume: e.target.files[0]
     });
   }
 
   onSubmit(e){ 
     e.preventDefault(); 
+
+    updateUserProfile({
+      id: '5RBuiAGBHwPzhRHbbllYOUTpadp2',
+      name: this.state.name,
+      pic: this.state.pic,
+      major: this.state.major,
+      concentration: this.state.concentration,
+      resume: this.state.resume
+    }); 
   }
 
   loadConcentrations(major){
@@ -109,7 +124,8 @@ class Profile extends Component{
                         <div><b>Profile Name</b></div>
                         <input type="text" placeholder={this.state.name} onChange={this.onNameChange}/><br/>
                         <div ><b>Profile Pic</b></div>
-                        <img alt="User's Profile Pic" src={this.state.pic} />
+                        <img alt="User's Profile Pic" src={this.state.pic} /><br/>
+                        <input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/>
                         <div><b>Major</b></div>
                         <select name="majors" value={this.state.major} onChange={this.onMajorChange}>
                           {
@@ -124,9 +140,10 @@ class Profile extends Component{
                           }
                         </select><br/>
                         <div><b>Resume Download Link</b></div>
-                        <button></button>
-                        <a href={this.state.resume}>Click here to download the resume.</a>
-                        <input type="submit" name="login" value="Login"/>
+                        <a href={this.state.resume}>Click here to download the resume.</a><br/>
+                        <div><b>Resume Upload</b></div>
+                        <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
+                        <input type="submit" name="Update" value="Update"/>
                     </form>
                 </div>
             </div>
