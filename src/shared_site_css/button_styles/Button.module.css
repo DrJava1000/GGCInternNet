@@ -13,3 +13,21 @@
     color: #176748;
     cursor: pointer;
 }
+
+.title
+{
+    border: 3px outset #176748;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #176748;
+    color: white;
+}
+
+.resumeButton
+{
+    border: 3px outset #176748;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #176748;
+    color: white;
+}
