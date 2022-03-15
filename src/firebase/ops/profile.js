@@ -48,8 +48,6 @@ export async function updateUserProfile(userDetails){
         name: userDetails.name, 
         major: userDetails.major,
         concentration: userDetails.concentration,
-        picFileName : userDetails.pic.name,
-        resumeFileName: userDetails.resume.name
     }, { 
         merge: true 
     });
@@ -60,11 +58,27 @@ export async function updateUserProfile(userDetails){
     const picRef = ref(storage, 'profile_pics/' + userDetails.id + '/' + userDetails.pic.name);
     const resumeRef = ref(storage, "resumes/" + userDetails.id + "/" + userDetails.resume.name);
 
-    await uploadBytes(picRef, userDetails.pic).then((snapshot) => {
-        console.log('Uploaded a profile pic!');
-    });
+    if(userDetails.pic.name !== undefined){
+        await uploadBytes(picRef, userDetails.pic).then((snapshot) => {
+            console.log('Uploaded a profile pic!');
+        });
+        
+        await setDoc(profileRef, {
+            picFileName : userDetails.pic.name,
+        }, { 
+            merge: true 
+        });
+    }
 
-    await uploadBytes(resumeRef, userDetails.resume).then((snapshot) => {
-        console.log('Uploaded a resume!');
-    });
+    if(userDetails.resume.name !== undefined){
+        await uploadBytes(resumeRef, userDetails.resume).then((snapshot) => {
+            console.log('Uploaded a resume!');
+        });
+
+        await setDoc(profileRef, {
+            resumeFileName: userDetails.resume.name
+        }, { 
+            merge: true 
+        });
+    }
 }
