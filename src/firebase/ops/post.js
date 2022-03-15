@@ -9,6 +9,7 @@ export async function fetchAllPosts(){
     const posts = [];
     postsSnapshot.forEach((doc) => {
         posts.push({
+            id: doc.id,
             poster: doc.data().poster,
             title: doc.data().title, 
             description: doc.data().description,

@@ -3,7 +3,7 @@ import bodyStyles from '../../../shared_site_css/body_styles/internal-body.modul
 import styles from './main-feed.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
-import { fetchAllPosts, createPost } from '../../../firebase/ops/post';
+import { fetchAllPosts } from '../../../firebase/ops/post';
 import ForumPost from './Forum-Post';
 
 class MainFeed extends Component {
@@ -46,7 +46,7 @@ class MainFeed extends Component {
                 <div className={bodyStyles.ScrollingContent}>
                     <div className={bodyStyles.PageBody}>
                         {
-                            this.state.feedPosts.map(post => <ForumPost poster={post.poster} title={post.title} 
+                            this.state.feedPosts.map(post => <ForumPost key={post.id} poster={post.poster} title={post.title} 
                                 description={post.description}/>)
                         }
                     </div>
