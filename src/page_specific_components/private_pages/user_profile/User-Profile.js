@@ -144,13 +144,13 @@ class Profile extends Component{
                   <div><b>Major</b></div>
                   <select name="majors" value={this.state.major} onChange={this.onMajorChange}>
                   {
-                    ggc_degrees.map(degree => <option key={degree.id} value={degree.major}>{degree.major}</option>)
+                    ggc_degrees.map(degree => <option key={degree.major} value={degree.major}>{degree.major}</option>)
                   }
                   </select><br/>
                   <div ><b>Concentration</b></div>
                   <select name="concentrations" value={this.state.concentration} onChange={this.onConcentrationChange}>
                   {
-                    this.state.concentrationList.map(concentration => <option key={concentration.id} 
+                    this.state.concentrationList.map(concentration => <option key={concentration} 
                       value={concentration}>{concentration}</option>)
                   }
                   </select><br/>
