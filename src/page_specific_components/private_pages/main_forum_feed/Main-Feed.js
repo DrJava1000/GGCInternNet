@@ -1,18 +1,18 @@
 import { Component, Fragment } from "react";
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
-import styles from './forumpost.module.css';
+import styles from './main-feed.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
-import { Button } from "../../../../node_modules/@material-ui/core/index";
-import { TextField } from "../../../../node_modules/@material-ui/core/index";
-import { List } from "../../../../node_modules/@material-ui/core/index";
-import { ListItem } from "../../../../node_modules/@material-ui/core/index";
-import { Divider } from "../../../../node_modules/@material-ui/core/index";
+import { Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import { List } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 
 let forumposts = ['FP #1', 'FP #2', 'FP #3'];
 let listItems = forumposts.map((forumposts) => <li>{forumposts}</li>);
 
-class ForumPost extends Component {
+class MainFeed extends Component {
     constructor(props) {
         super(props);
 
@@ -105,4 +105,4 @@ class ForumPost extends Component {
     }
 }
 
-export default ForumPost;
+export default MainFeed;
