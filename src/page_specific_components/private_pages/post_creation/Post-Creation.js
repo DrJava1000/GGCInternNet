@@ -50,6 +50,10 @@ class PostCreation extends Component {
                 <AppHeader navBarContents=
                     {
                         [
+                            {
+                                'text': "Main Feed",
+                                'link': "/Main_Feed"
+                            }
                         ]
                     }
                 />
