@@ -10,39 +10,10 @@ class MainFeed extends Component {
     constructor(props) {
         super(props);
 
-        //Bindings
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onDescriptionChange = this.onDescriptionChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
         this.state =
         {
-            title: '',
-            description: '',
             feedPosts: []
         }
-    }
-
-    onTitleChange(e) {
-        this.setState({
-            title: e.target.value
-        });
-    }
-
-    onDescriptionChange(e) {
-        this.setState({
-            description: e.target.value
-        });
-    }
-
-    onSubmit(e) {
-        e.preventDefault();
-
-        createPost({
-            poster: "rgambrell@ggc.edu",
-            title: this.state.title,
-            description: this.state.description
-        });
     }
 
     componentDidMount(){
@@ -62,19 +33,18 @@ class MainFeed extends Component {
                     {
                         [
                             {
-                                'text': "Home",
-                                'link': "/"
-                            }
+                                'text': "Profile",
+                                'link': "/User_Profile"
+                            },
+                            {
+                                'text': "New Post",
+                                'link': "/Post_Creation"
+                            },
                         ]
                     }
                 />
                 <div className={bodyStyles.ScrollingContent}>
                     <div className={bodyStyles.PageBody}>
-                        <form onSubmit={this.onSubmit}>
-                            <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
-                            <input type="text" placeholder="Add Description Here" onChange={this.onTitleChange}/><br/>
-                            <input type="submit" name="Update" value="Update"/>
-                        </form>
                         {
                             this.state.feedPosts.map(post => <ForumPost poster={post.poster} title={post.title} 
                                 description={post.description}/>)
@@ -82,9 +52,7 @@ class MainFeed extends Component {
                     </div>
                     <AppFooter />
                 </div>
-
             </Fragment>
-
         );
     }
 }
