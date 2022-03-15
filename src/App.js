@@ -6,8 +6,9 @@ import Signup from './page_specific_components/public_pages/signup/User-Provisio
 
 // Private Page Imports 
 import InternalPage from './page_specific_components/private_pages/InternalPage';
+import MainFeed from './page_specific_components/private_pages/main_forum_feed/Main-Feed';
+import PostCreation from './page_specific_components/private_pages/post_creation/Post-Creation';
 import Profile from './page_specific_components/private_pages/user_profile/User-Profile';
-import ForumPost from './page_specific_components/private_pages/forum_post/ForumPost';
 import {Route, Routes} from 'react-router-dom'
 
 import './App.css';
@@ -20,15 +21,20 @@ function App() {
         <Route exact path="/" element={<Portal />}/>
         <Route exact path="/Portal" element={<Portal />}/> 
         
-        {/* Template Sign Up Page */ }
+        {/* Sign Up Page */ }
         <Route exact path="/Signup" element={<Signup />}/> 
 
         {/* Template Internal Page */ }
         <Route exact path="/InternalPage" element={<InternalPage />}/> 
 
+        {/* Main Feed Page */}
+        <Route exact path="/Main_Feed" element={<MainFeed />}/> 
+        
+        {/* Create Post Page */}
+        <Route exact path="/Post_Creation" element={<PostCreation />}/> 
+        
         {/* User Profile Page */}
         <Route exact path="/User_Profile" element={<Profile />}/> 
-        <Route exact path="/ForumPost" element={<ForumPost />}/> 
       </Routes>
     </main>
   );

@@ -129,11 +129,11 @@ class Profile extends Component{
         <Fragment>
             <AppHeader navBarContents={[{
                 'text': "Main Feed",
-                'link': "/"
+                'link': "/Main_Feed"
             }]}
             />
             <div className={bodyStyles.ScrollingContent}>
-            <div className={styles.profileBody}>
+            <div className={bodyStyles.PageBody}>
               <div>
                 <form onSubmit={this.onSubmit}>
                   <div><b>Profile Name</b></div>
