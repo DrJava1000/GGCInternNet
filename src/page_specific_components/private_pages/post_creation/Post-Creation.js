@@ -58,7 +58,7 @@ class PostCreation extends Component {
                         <form onSubmit={this.onSubmit}>
                             <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
                             <input type="text" placeholder="Add Description Here" onChange={this.onTitleChange}/><br/>
-                            <input type="submit" name="Update" value="Update"/>
+                            <input type="submit" name="Post" value="Post"/>
                         </form>
                     </div>
                     <AppFooter />
