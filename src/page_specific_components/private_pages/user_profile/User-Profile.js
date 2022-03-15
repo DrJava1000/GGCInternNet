@@ -121,7 +121,8 @@ class Profile extends Component{
                           }
                         </select><br/>
                         <div><b>Resume Download Link</b></div>
-                        <input type="text" placeholder={this.state.resume} onChange={this.onResumeUpload}/><br/>
+                        <button></button>
+                        <a href={this.state.resume}>Click here to download the resume.</a>
                         <input type="submit" name="login" value="Login"/>
                     </form>
                 </div>
