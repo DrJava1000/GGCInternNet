@@ -2,8 +2,9 @@ import styles from './user_profile.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
-import { loadUserProfile } from '../../../firebase/ops/profile';
+import { loadUserProfile, updateUserProfile } from '../../../firebase/ops/profile';
 import React, { Component, Fragment, } from "react";
+import { ggc_degrees } from './majors_and_concentrations';
 
 /**
  * @class Profile
@@ -24,43 +25,88 @@ class Profile extends Component{
     this.onMajorChange = this.onMajorChange.bind(this);
     this.onConcentrationChange = this.onConcentrationChange.bind(this);
     this.onResumeUpload = this.onResumeUpload.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       name : "",
       pic : "", 
+      picUrl: "",
       major : "",
       concentration : "",
-      resume : ""
+      concentrationList: [],
+      resume : "",
+      resumeUrl: "",
+      downloadResumePreview: false,
+      updateButton : false
     }
   }
 
   onNameChange(e) {
+    this.onProfileModification();
     this.setState({
+      name: e.target.value
     });
   }
 
   onPicUpload(e) {
+    this.onProfileModification();
     this.setState({
+      pic: e.target.files[0],
+      picUrl: URL.createObjectURL(e.target.files[0])
     });
   }
 
   onMajorChange(e) {
+    this.onProfileModification();
+    let fetchedConcentrations = this.loadConcentrations(e.target.value);
     this.setState({
+      major: e.target.value,
+      concentrationList: fetchedConcentrations,
+      concentration: fetchedConcentrations[0]
     });
   }
 
   onConcentrationChange(e){
+    this.onProfileModification();
     this.setState({
+      concentration: e.target.value
     });
   }
 
-  onResumeUpload(){
+  onResumeUpload(e){
+    this.onProfileModification();
     this.setState({
+      resume: e.target.files[0],
+      resumeUrl: URL.createObjectURL(e.target.files[0]),
+      downloadResumePreview: true
     });
   }
 
   onSubmit(e){ 
     e.preventDefault(); 
+
+    updateUserProfile({
+      id: '5RBuiAGBHwPzhRHbbllYOUTpadp2',
+      name: this.state.name,
+      pic: this.state.pic,
+      major: this.state.major,
+      concentration: this.state.concentration,
+      resume: this.state.resume
+    }); 
+  }
+
+  loadConcentrations(major){
+    for(let step = 0; step < ggc_degrees.length; step++){
+      if(ggc_degrees[step].major === major){
+          return ggc_degrees[step].concentrations;
+      }
+    }
+  }
+
+  onProfileModification(){
+    this.setState({
+      updateButton : true
+    });
   }
 
   componentDidMount(){
@@ -69,10 +115,11 @@ class Profile extends Component{
     userDetails.then((profile) => {
       this.setState({
         name: profile.name,
-        pic: profile.pic,
+        picUrl: profile.pic,
         major: profile.major,
         concentration: profile.concentration,
-        resume: profile.resume
+        concentrationList: this.loadConcentrations(profile.major),
+        resumeUrl: profile.resume
       });
     })
   }
@@ -87,21 +134,38 @@ class Profile extends Component{
             />
             <div className={bodyStyles.ScrollingContent}>
             <div className={styles.profileBody}>
-                <div>
-                    <form onSubmit={this.onSubmit}>
-                        <div><b>Profile Name</b></div>
-                        <input type="text" placeholder={this.state.name} onChange={this.onNameChange}/><br/>
-                        <div ><b>Profile Pic</b></div>
-                        <img alt="User's Profile Pic" src={this.state.pic} />
-                        <div><b>Major</b></div>
-                        <input type="text" placeholder={this.state.major} onChange={this.onMajorChange}/><br/>
-                        <div ><b>Concentration</b></div>
-                        <input type="text" placeholder={this.state.concentration} onChange={this.onConcentrationChange}/><br/>
-                        <div><b>Resume Download Link</b></div>
-                        <input type="text" placeholder={this.state.resume} onChange={this.onResumeUpload}/><br/>
-                        <input type="submit" name="login" value="Login"/>
-                    </form>
-                </div>
+              <div>
+                <form onSubmit={this.onSubmit}>
+                  <div><b>Profile Name</b></div>
+                  <input type="text" placeholder={this.state.name} onChange={this.onNameChange}/><br/>
+                  <div ><b>Profile Pic</b></div>
+                  <img alt="User's Profile Pic" src={this.state.picUrl} /><br/>
+                  <input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/>
+                  <div><b>Major</b></div>
+                  <select name="majors" value={this.state.major} onChange={this.onMajorChange}>
+                  {
+                    ggc_degrees.map(degree => <option key={degree.major} value={degree.major}>{degree.major}</option>)
+                  }
+                  </select><br/>
+                  <div ><b>Concentration</b></div>
+                  <select name="concentrations" value={this.state.concentration} onChange={this.onConcentrationChange}>
+                  {
+                    this.state.concentrationList.map(concentration => <option key={concentration} 
+                      value={concentration}>{concentration}</option>)
+                  }
+                  </select><br/>
+                  <div><b>Resume Download Link</b></div>
+                  {
+                    this.state.downloadResumePreview ? <><a href={this.state.resumeUrl} download={this.state.resume.name}>Click here to download the resume.</a><br /></> :
+                    <><a href={this.state.resumeUrl}>Click here to download the resume.</a><br /></>
+                  }
+                  <div><b>Resume Upload</b></div>
+                  <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
+                  {
+                    this.state.updateButton ? <input type="submit" name="Update" value="Update"/> : <div></div>
+                  }
+                </form>
+              </div>
             </div>
             <AppFooter />
             </div>
