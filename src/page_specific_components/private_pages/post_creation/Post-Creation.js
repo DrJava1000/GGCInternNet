@@ -72,7 +72,11 @@ class PostCreation extends Component {
                             <form onSubmit={this.onSubmit}>
                                 <input type="text" placeholder="Add Title Here" onChange={this.onTitleChange}/><br/>
                                 <input type="text" placeholder="Add Description Here" onChange={this.onDescriptionChange}/><br/>
-                                <input type="submit" name="Post" value="Post"/>
+                                {
+                                    this.state.title !== '' && this.state.description !== '' ? 
+                                        <input type="submit" name="Post" value="Post"/>
+                                        : <input type="submit" name="Post" value="Post" disabled/>
+                                }
                             </form>
                         </div>
                         <AppFooter />
