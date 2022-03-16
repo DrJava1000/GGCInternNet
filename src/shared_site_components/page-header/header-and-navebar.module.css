@@ -9,6 +9,7 @@
     float: right;
     margin-top: 45px;
     color: #ffffff;
+    background-color: #ffffff;
   }
   
   .AppNav ul 
@@ -64,8 +65,7 @@
     font-size: 25pt;
     font-weight: lighter;
     text-align: left;
-    padding-left: 2%;
-    position: fixed; 
+    position: static; 
     top: 0; 
     width: 100%; 
     background-color: white;
@@ -83,7 +83,8 @@
     height: 17.5vmin;
     width: 46vmin;
     pointer-events: none;
-    padding-top: 10px; 
+    padding-top: 10px;
+    padding-left: 50px;
   }
 
   .PageIdentifier
