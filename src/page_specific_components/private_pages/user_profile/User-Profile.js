@@ -246,10 +246,11 @@ class Profile extends Component{
                     >
                       Upload Resume
                     </Typography>
-                    <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
+                    <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/>
                   </Grid>
+                  <br></br>
                     {
-                      this.state.updateButton ? <input type="submit" name="Update" value="Update"/> : <div></div>
+                      this.state.updateButton ? <input className={titleStyle.createPostButton} type="submit" name="Update" value="Update"/> : <div></div>
                     }
                 </form>
                 </Grid>
