@@ -141,6 +141,9 @@ class Profile extends Component{
                 'text': "Main Forum",
                 'link': "/Main_Feed"
             },{
+                'text': "Profile",
+                'link': "/User_Profile"
+            },{
                 'text': "Logout",
                 'link': "Logout"
             }]}
