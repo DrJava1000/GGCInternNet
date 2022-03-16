@@ -1,4 +1,13 @@
 import './firebase/firebase_init';
+import 
+{
+    onAuthStateChanged,
+} from "firebase/auth";
+import { appAuthInstance } from './firebase/ops/auth.js';
+
+import React, {useState} from "react";
+
+import AuthContext from './context/AuthContext';
 
 // Public Page Imports
 import Portal from './page_specific_components/public_pages/login_portal/Portal';
@@ -14,29 +23,55 @@ import {Route, Routes} from 'react-router-dom'
 import './App.css';
 
 function App() {
+
+  // Use React hooks with App functional component to give App state functionality
+  // Used with AuthContext for Authentication 
+  var [currentUserID, setCurrentUserID] = useState('Hello'); //
+
+  onAuthStateChanged(appAuthInstance, (user) => 
+  {
+    setCurrentUserID(user.uid); 
+    if (appAuthInstance.currentUser) // if user is signed in
+      {
+          console.log("Currently Signed In: Current User's UID: " + user.uid); 
+      }else // if user isn't signed in
+      {
+          console.log("No user is currently signed in.");
+      }
+  });
+
   return (
-    <main className="App">
-      <Routes>
-        {/* Default Route is Login Portal*/}
-        <Route exact path="/" element={<Portal />}/>
-        <Route exact path="/Portal" element={<Portal />}/> 
-        
-        {/* Sign Up Page */ }
-        <Route exact path="/Signup" element={<Signup />}/> 
+    <AuthContext.Provider
+      value=
+      {
+        {
+          currentUserID : currentUserID
+        }
+      }
+    >
+      <main className="App">
+        <Routes>
+          {/* Default Route is Login Portal*/}
+          <Route exact path="/" element={<Portal />}/>
+          <Route exact path="/Portal" element={<Portal />}/> 
+          
+          {/* Sign Up Page */ }
+          <Route exact path="/Signup" element={<Signup />}/> 
 
-        {/* Template Internal Page */ }
-        <Route exact path="/InternalPage" element={<InternalPage />}/> 
+          {/* Template Internal Page */ }
+          <Route exact path="/InternalPage" element={<InternalPage />}/> 
 
-        {/* Main Feed Page */}
-        <Route exact path="/Main_Feed" element={<MainFeed />}/> 
-        
-        {/* Create Post Page */}
-        <Route exact path="/Post_Creation" element={<PostCreation />}/> 
-        
-        {/* User Profile Page */}
-        <Route exact path="/User_Profile" element={<Profile />}/> 
-      </Routes>
-    </main>
+          {/* Main Feed Page */}
+          <Route exact path="/Main_Feed" element={<MainFeed />}/> 
+          
+          {/* Create Post Page */}
+          <Route exact path="/Post_Creation" element={<PostCreation />}/> 
+          
+          {/* User Profile Page */}
+          <Route exact path="/User_Profile" element={<Profile />}/> 
+        </Routes>
+      </main>
+    </AuthContext.Provider>
   );
 }
 
