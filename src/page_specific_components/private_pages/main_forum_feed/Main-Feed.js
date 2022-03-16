@@ -33,12 +33,14 @@ class MainFeed extends Component {
                     {
                         [
                             {
-                                'text': "Profile",
-                                'link': "/User_Profile"
-                            },
-                            {
                                 'text': "Main Forum",
                                 'link': "/Main_Feed"
+                            },{
+                                'text': "Profile",
+                                'link': "/User_Profile"
+                            },{
+                                'text': "Logout",
+                                'link': "Logout"
                             }
                         ]
                     }

@@ -2,6 +2,8 @@ import styles from './header-and-navebar.module.css';
 import internNetLogo from '../../images/Grizzly InternNET Logo Banner.png';
 import React, { Component } from "react";
 import { Link } from '@material-ui/core';
+import { logout } from '../../firebase/ops/auth.js';
+
 /**
  * @class AppHeader
  * This component: acts as a functional component for the navigation bar
@@ -69,9 +71,17 @@ class AppHeader extends Component
  */
 const NavBarContent = function NavBarContent(props)
 {
-    return ( // for normal pages, create nav option here
-        <li><a href={props.navLink}>{props.navText}</a></li>
-    )
+    if(props.navLink === "Logout")
+    { // logout on click of logout option 
+        return (
+            <li><a href="/Portal" onClick={(e) => {logout(); return true}} >
+                {props.navText}</a></li>
+        )
+    }else{
+        return ( // for normal pages, create nav option here
+            <li><a href={props.navLink}>{props.navText}</a></li>
+        )
+    }
 }
 
 export default AppHeader;

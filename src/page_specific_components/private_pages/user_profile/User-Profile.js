@@ -137,16 +137,16 @@ class Profile extends Component{
   render(){
     return (
         <Fragment>
-            <AppHeader navBarContents={[
-                {
-                  'text': "Profile",
-                  'link': "/User_Profile"
-                },
-                {
-                  'text': "Main Forum",
-                  'link': "/Main_Feed"
-                }
-            ]}
+            <AppHeader navBarContents={[{
+                'text': "Main Forum",
+                'link': "/Main_Feed"
+            },{
+                'text': "Profile",
+                'link': "/User_Profile"
+            },{
+                'text': "Logout",
+                'link': "Logout"
+            }]}
             />
             <div className={bodyStyles.ScrollingContent}>
             <div className={styles.profileBody}>

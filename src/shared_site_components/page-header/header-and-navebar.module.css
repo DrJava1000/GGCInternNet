@@ -23,10 +23,11 @@
     display: inline-block;
     border: 3px outset #176748;
     background-color: #176748;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     padding-top: 2%;
     padding-bottom: 2%;
+    margin-top: 1%;
     margin-right: 5%;
     border-radius: 15px;
   }
