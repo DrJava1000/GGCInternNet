@@ -139,7 +139,7 @@ class Profile extends Component{
         <Fragment>
             <AppHeader navBarContents={[{
                 'text': "Main Forum",
-                'link': "/"
+                'link': "/Main_Feed"
             }]}
             />
             <div className={bodyStyles.ScrollingContent}>
