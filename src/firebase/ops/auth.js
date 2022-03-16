@@ -8,19 +8,7 @@ import
     signOut
 } from "firebase/auth";
 
-const appAuthInstance = getAuth();
-
-onAuthStateChanged(appAuthInstance, (user) => 
-{
-    if (appAuthInstance.currentUser) // if user is signed in
-    {
-        console.log("Currently Signed In: Current User's UID: " + user.uid); 
-    }else // if user isn't signed in
-    {
-        console.log("No user is currently signed in.");
-    }
-});
-
+export const appAuthInstance = getAuth();
 
 export async function createAccount(email, password, name)
 {

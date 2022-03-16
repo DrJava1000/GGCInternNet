@@ -10,12 +10,14 @@ import { TextField } from '../../../../node_modules/@mui/material/index';
 import { Typography } from '../../../../node_modules/@mui/material/index';
 import { Select } from '../../../../node_modules/@mui/material/index';
 import titleStyle from '../../../shared_site_css/button_styles/Button.module.css';
+import AuthContext from '../../../context/AuthContext';
 
 /**
  * @class Profile
  * React Component for the Profile Page
  */
 class Profile extends Component{
+  static contextType = AuthContext
   /**
    * @name Portal
    * Initialize Portal State Variables and Bind Methods
@@ -91,7 +93,7 @@ class Profile extends Component{
     e.preventDefault(); 
 
     updateUserProfile({
-      id: '5RBuiAGBHwPzhRHbbllYOUTpadp2',
+      id: this.context.currentUserID,
       name: this.state.name,
       pic: this.state.pic,
       major: this.state.major,
@@ -115,18 +117,21 @@ class Profile extends Component{
   }
 
   componentDidMount(){
-    let userDetails = loadUserProfile('5RBuiAGBHwPzhRHbbllYOUTpadp2');
-
-    userDetails.then((profile) => {
-      this.setState({
-        name: profile.name,
-        picUrl: profile.pic,
-        major: profile.major,
-        concentration: profile.concentration,
-        concentrationList: this.loadConcentrations(profile.major),
-        resumeUrl: profile.resume
-      });
-    })
+    let userDetails;
+    setTimeout(() => {
+      userDetails = loadUserProfile(this.context.currentUserID);
+      userDetails.then((profile) => {
+        this.setState({
+          name: profile.name,
+          picUrl: profile.pic,
+          major: profile.major,
+          concentration: profile.concentration,
+          concentrationList: this.loadConcentrations(profile.major),
+          resumeUrl: profile.resume
+        });
+      })
+    }, 
+    1000);
   }
  
   render(){
@@ -134,7 +139,7 @@ class Profile extends Component{
         <Fragment>
             <AppHeader navBarContents={[{
                 'text': "Main Forum",
-                'link': "/"
+                'link': "/Main_Feed"
             }]}
             />
             <div className={bodyStyles.ScrollingContent}>
