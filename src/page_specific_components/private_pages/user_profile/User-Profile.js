@@ -140,6 +140,9 @@ class Profile extends Component{
             <AppHeader navBarContents={[{
                 'text': "Main Forum",
                 'link': "/Main_Feed"
+            },{
+                'text': "Logout",
+                'link': "Logout"
             }]}
             />
             <div className={bodyStyles.ScrollingContent}>

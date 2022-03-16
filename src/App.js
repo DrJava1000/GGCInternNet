@@ -30,7 +30,8 @@ function App() {
 
   onAuthStateChanged(appAuthInstance, (user) => 
   {
-    setCurrentUserID(user.uid); 
+    if(user !== null)
+      setCurrentUserID(user.uid); 
     if (appAuthInstance.currentUser) // if user is signed in
       {
           console.log("Currently Signed In: Current User's UID: " + user.uid); 

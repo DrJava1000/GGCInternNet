@@ -35,6 +35,9 @@ class MainFeed extends Component {
                             {
                                 'text': "Profile",
                                 'link': "/User_Profile"
+                            },{
+                                'text': "Logout",
+                                'link': "Logout"
                             }
                         ]
                     }

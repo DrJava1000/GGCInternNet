@@ -63,6 +63,9 @@ class PostCreation extends Component {
                                 {
                                     'text': "Main Forum",
                                     'link': "/Main_Feed"
+                                },{
+                                    'text': "Logout",
+                                    'link': "Logout"
                                 }
                             ]
                         }
