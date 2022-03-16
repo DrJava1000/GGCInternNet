@@ -137,10 +137,16 @@ class Profile extends Component{
   render(){
     return (
         <Fragment>
-            <AppHeader navBarContents={[{
-                'text': "Main Forum",
-                'link': "/Main_Feed"
-            }]}
+            <AppHeader navBarContents={[
+                {
+                  'text': "Profile",
+                  'link': "/User_Profile"
+                },
+                {
+                  'text': "Main Forum",
+                  'link': "/Main_Feed"
+                }
+            ]}
             />
             <div className={bodyStyles.ScrollingContent}>
             <div className={styles.profileBody}>
@@ -243,10 +249,11 @@ class Profile extends Component{
                     >
                       Upload Resume
                     </Typography>
-                    <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/><br/>
+                    <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/>
                   </Grid>
+                  <br></br>
                     {
-                      this.state.updateButton ? <input type="submit" name="Update" value="Update"/> : <div></div>
+                      this.state.updateButton ? <input className={titleStyle.createPostButton} type="submit" name="Update" value="Update"/> : <div></div>
                     }
                 </form>
                 </Grid>

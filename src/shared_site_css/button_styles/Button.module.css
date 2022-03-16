@@ -23,6 +23,14 @@
     color: white;
 }
 
+.standaloneTitle
+{
+    border: 3px outset #176748;
+    border-radius: 10px;
+    background-color: #176748;
+    color: white;
+}
+
 .resumeButton
 {
     border: 3px outset #176748;
