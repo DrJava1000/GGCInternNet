@@ -6,7 +6,6 @@
     padding-right: 10%;
     padding-top: 2%;
     padding-bottom: 2%;
-    margin-top: 13px;
 }
 
 .requiredAsterisk{
@@ -63,5 +62,5 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding-top: 20vh; 
+  padding-bottom: 3vh;
 }

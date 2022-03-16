@@ -7,10 +7,19 @@
     padding-top: 20vh; 
 }
 
+.ForumBody
+{
+    background: linear-gradient(to left, #b5c8bd, #b5c8bd);
+    align-items: center;
+    color: black;
+    font-size: calc(10px + 2vmin);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 .ScrollingContent
 {
     display: flex;
-    min-height: 100vh; 
     flex-direction: column;
     justify-content: space-between;
 }

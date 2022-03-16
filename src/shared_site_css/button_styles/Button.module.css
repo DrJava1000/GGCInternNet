@@ -31,3 +31,25 @@
     background-color: #176748;
     color: white;
 }
+
+.createPostButton
+{
+    border: 3px outset #b5c8bd;
+    border-radius: 15px;
+    background-color: #176748;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.createPostButton:hover
+{
+    background-color: #ffffff;
+    font-weight: bold; 
+    color: #176748;
+    cursor: pointer;
+}
