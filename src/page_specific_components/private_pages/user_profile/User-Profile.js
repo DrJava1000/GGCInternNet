@@ -93,7 +93,7 @@ class Profile extends Component{
     e.preventDefault(); 
 
     updateUserProfile({
-      id: '5RBuiAGBHwPzhRHbbllYOUTpadp2',
+      id: this.context.currentUserID,
       name: this.state.name,
       pic: this.state.pic,
       major: this.state.major,
