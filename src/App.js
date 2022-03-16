@@ -14,7 +14,6 @@ import Portal from './page_specific_components/public_pages/login_portal/Portal'
 import Signup from './page_specific_components/public_pages/signup/User-Provisioning'; 
 
 // Private Page Imports 
-import InternalPage from './page_specific_components/private_pages/InternalPage';
 import MainFeed from './page_specific_components/private_pages/main_forum_feed/Main-Feed';
 import PostCreation from './page_specific_components/private_pages/post_creation/Post-Creation';
 import Profile from './page_specific_components/private_pages/user_profile/User-Profile';
@@ -58,9 +57,6 @@ function App() {
           
           {/* Sign Up Page */ }
           <Route exact path="/Signup" element={<Signup />}/> 
-
-          {/* Template Internal Page */ }
-          <Route exact path="/InternalPage" element={<InternalPage />}/> 
 
           {/* Main Feed Page */}
           <Route exact path="/Main_Feed" element={<MainFeed />}/> 

@@ -83,7 +83,7 @@ class Portal extends Component
   {
     if(this.state.redirectToInternal)
     {
-      return <Navigate to="/InternalPage" />;
+      return <Navigate to="/Main_Feed" />;
     }else
     {
       return (
