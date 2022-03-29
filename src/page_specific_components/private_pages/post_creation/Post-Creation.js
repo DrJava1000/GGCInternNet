@@ -8,6 +8,10 @@ import { Navigate } from "react-router-dom";
 import { Grid } from "../../../../node_modules/@mui/material/index";
 import { TextField } from '../../../../node_modules/@mui/material/index';
 import { Typography } from '../../../../node_modules/@mui/material/index';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import { Rating } from "../../../../node_modules/@mui/material/index";
 
 class PostCreation extends Component {
     constructor(props) {
@@ -16,12 +20,22 @@ class PostCreation extends Component {
         //Bindings
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
+
+        this.onStartDateChange = this.onStartDateChange.bind(this);
+        this.onEndDateChange = this.onEndDateChange.bind(this);
+        this.onRatingChange = this.onRatingChange.bind(this);
+
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state =
         {
             title: '',
             description: '',
+
+            startDate: null,
+            endDate: null,
+            rating: null,
+
             feedPosts: [],
             successfulPost: false
         }
@@ -39,13 +53,35 @@ class PostCreation extends Component {
         });
     }
 
+    onStartDateChange(e) {
+        this.setState({
+            startDate: e.target.value
+        });
+    }
+
+    onEndDateChange(e) {
+        this.setState({
+            endDate: e.target.value
+        });
+    }
+
+    onRatingChange(e) {
+        this.setState({
+            rating: e.target.value
+        });
+    }
+
     onSubmit(e) {
         e.preventDefault();
 
         createPost({
             poster: "rgambrell@ggc.edu",
             title: this.state.title,
-            description: this.state.description
+            description: this.state.description,
+
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            rating: this.state.rating
         });
 
         this.setState({
@@ -113,6 +149,13 @@ class PostCreation extends Component {
                                 onChange={this.onDescriptionChange}
                                 />
                             </Grid> <br></br>
+
+                            {/*This is where StartDate goes*/}
+
+                            {/*This is where EndDate goes*/}
+
+                            {/*This is where Rating goes*/}
+
                                 {
                                     this.state.title !== '' && this.state.description !== '' ? 
                                         <input className={titleStyle.createPostButton} type="submit" name="Post" value="Post"/>

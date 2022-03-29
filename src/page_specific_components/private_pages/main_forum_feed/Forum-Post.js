@@ -2,6 +2,10 @@ import { Component, Fragment } from "react";
 import { Grid, Paper } from "../../../../node_modules/@mui/material/index";
 import { FormControl } from "../../../../node_modules/@mui/material/index";
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import { Rating } from "../../../../node_modules/@mui/material/index";
 
 class ForumPost extends Component {
     constructor(props) {
@@ -11,7 +15,11 @@ class ForumPost extends Component {
         {
             poster: props.poster,
             title: props.title,
-            description: props.description
+            description: props.description,
+
+            startDate: props.startDate,
+            endDate: props.endDate,
+            rating: props.rating
         }
     }
 
@@ -30,6 +38,15 @@ class ForumPost extends Component {
                                     </FormControl>
                                     <FormControl>
                                         <p>{this.state.description}</p>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h3>{this.state.startDate}</h3>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h3>{this.state.endDate}</h3>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h3>{this.state.rating}</h3>
                                     </FormControl>
                                 </Grid>
                             </Paper>
