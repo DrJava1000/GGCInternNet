@@ -151,10 +151,34 @@ class PostCreation extends Component {
                             </Grid> <br></br>
 
                             {/*This is where StartDate goes*/}
+                            <Grid item>
+                                Start Date
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker 
+                                    label="Start Date"
+                                    onChange={this.onStartDateChange}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
 
                             {/*This is where EndDate goes*/}
+                            <Grid item>
+                                End Date
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker 
+                                    label="End Date"
+                                    onChange={this.onEndDateChange}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
 
                             {/*This is where Rating goes*/}
+                            <Grid item>
+                                Rate Your Experience
+                                <Rating
+                                onChange={this.state.onRatingChange}
+                                />
+                            </Grid> <br></br>
 
                                 {
                                     this.state.title !== '' && this.state.description !== '' ? 
