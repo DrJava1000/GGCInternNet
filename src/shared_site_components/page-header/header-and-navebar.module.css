@@ -9,6 +9,7 @@
     float: right;
     margin-top: 45px;
     color: #ffffff;
+    background-color: #ffffff;
   }
   
   .AppNav ul 
@@ -22,11 +23,12 @@
     display: inline-block;
     border: 3px outset #176748;
     background-color: #176748;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     padding-top: 2%;
     padding-bottom: 2%;
-    margin-right: 10%;
+    margin-top: 1%;
+    margin-right: 5%;
     border-radius: 15px;
   }
   
@@ -34,7 +36,7 @@
   {
     text-decoration: none;
     display: block;
-    font-size: 20pt; 
+    font-size: 15pt; 
     letter-spacing: .01em; 
   }
   
@@ -64,8 +66,7 @@
     font-size: 25pt;
     font-weight: lighter;
     text-align: left;
-    padding-left: 2%;
-    position: fixed; 
+    position: static; 
     top: 0; 
     width: 100%; 
     background-color: white;
@@ -83,7 +84,8 @@
     height: 17.5vmin;
     width: 46vmin;
     pointer-events: none;
-    padding-top: 10px; 
+    padding-top: 10px;
+    padding-left: 50px;
   }
 
   .PageIdentifier

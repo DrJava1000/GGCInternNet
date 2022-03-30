@@ -13,3 +13,51 @@
     color: #176748;
     cursor: pointer;
 }
+
+.title
+{
+    border: 3px outset #176748;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #176748;
+    color: white;
+}
+
+.standaloneTitle
+{
+    border: 3px outset #176748;
+    border-radius: 10px;
+    background-color: #176748;
+    color: white;
+}
+
+.resumeButton
+{
+    border: 3px outset #176748;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #176748;
+    color: white;
+}
+
+.createPostButton
+{
+    border: 3px outset #b5c8bd;
+    border-radius: 15px;
+    background-color: #176748;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.createPostButton:hover
+{
+    background-color: #ffffff;
+    font-weight: bold; 
+    color: #176748;
+    cursor: pointer;
+}

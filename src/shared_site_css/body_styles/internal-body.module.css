@@ -7,10 +7,37 @@
     padding-top: 20vh; 
 }
 
+.ForumBody
+{
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("../../images/Grizzly InternNET Background 1.png");
+    background-repeat: repeat-y;
+    background-position: center;
+    align-items: center;
+    color: black;
+    font-size: calc(10px + 2vmin);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.createPostBody {
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("../../images/Grizzly InternNET Background 2.png");
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: cover;
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    margin-top: 10px;
+}
+
 .ScrollingContent
 {
     display: flex;
-    min-height: 100vh; 
     flex-direction: column;
     justify-content: space-between;
 }

@@ -1,12 +1,14 @@
 .profileBody{
     background-color: white;
-    height: 70vh;
-    min-width: 100%;
+    height: 80vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: black;
-    padding-top: 20vh; 
+    padding-top: 20vh;
+    margin-top: 10px;
+    margin-bottom: 250px;
 }
