@@ -5,11 +5,28 @@ import AppHeader from "../../../shared_site_components/page-header/header-and-na
 import AppFooter from "../../../shared_site_components/page-footer/footer";
 import { createPost } from "../../../firebase/ops/post";
 import { Navigate } from "react-router-dom";
-import { Grid } from "../../../../node_modules/@mui/material/index";
-import { TextField } from "../../../../node_modules/@mui/material/index";
-import { Typography } from "../../../../node_modules/@mui/material/index";
+import AuthContext from "../../../context/AuthContext";
+import {
+  Grid,
+  TextField,
+  Typography,
+  Autocomplete,
+  Checkbox,
+  MenuItem,
+  Select,
+  InputLabel,
+} from "../../../../node_modules/@mui/material/index";
+import {
+  CheckBoxOutlineBlank,
+  CheckBox,
+} from "../../../../node_modules/@mui/icons-material/index";
+
+const icon = <CheckBoxOutlineBlank fontSize="small" />;
+const checkedIcon = <CheckBox fontSize="small" />;
 
 class PostCreation extends Component {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
 
@@ -25,6 +42,8 @@ class PostCreation extends Component {
       successfulPost: false,
       logoFile: null,
       logoUrl: "",
+      selectedCharacteristics: [],
+      payment: "",
     };
   }
 
@@ -47,6 +66,10 @@ class PostCreation extends Component {
       poster: "rgambrell@ggc.edu",
       title: this.state.title,
       description: this.state.description,
+      userId: this.context.currentUserID,
+      logoFile: this.state.logoFile,
+      characteristics: this.state.selectedCharacteristics,
+      paymentType: this.state.payment,
     });
 
     this.setState({
@@ -57,13 +80,22 @@ class PostCreation extends Component {
   onFileUpload = (e) => {
     // this.onProfileModification();
     this.setState({
-      pic: e.target.files[0],
-      picUrl: URL.createObjectURL(e.target.files[0]),
+      logoFile: e.target.files[0],
+      logoUrl: URL.createObjectURL(e.target.files[0]),
     });
   };
 
+  handleCharacteristicsChange = (e, value) => {
+    if (value.length <= 3) {
+      this.setState({ selectedCharacteristics: value });
+    }
+  };
+
+  handleChpaymentChange = (e, value) => {
+    this.setState({ payment: e.target.value });
+  };
   render() {
-    const { logoUrl } = this.state;
+    const { logoUrl, payment } = this.state;
     if (this.state.successfulPost) {
       return <Navigate to="/Main_Feed" />;
     } else {
@@ -107,6 +139,24 @@ class PostCreation extends Component {
                 <br></br>
                 <form onSubmit={this.onSubmit}>
                   <Grid item>
+                    Company Logo:{" "}
+                    <input
+                      type="file"
+                      name="Logo"
+                      onChange={this.onFileUpload}
+                    />
+                  </Grid>
+                  {logoUrl && (
+                    <img
+                      src={logoUrl}
+                      style={{
+                        paddingTop: "15px",
+                        height: "175px",
+                        width: "175px",
+                      }}
+                    />
+                  )}
+                  <Grid item>
                     <TextField
                       type="text"
                       inputProps={{
@@ -117,8 +167,70 @@ class PostCreation extends Component {
                       }}
                       onChange={this.onTitleChange}
                       label={"Job Title"}
+                      required
                     />
                   </Grid>{" "}
+                  <br></br>
+                  <Grid item>
+                    <Autocomplete
+                      multiple
+                      required
+                      onChange={this.handleCharacteristicsChange}
+                      options={[
+                        "Insightful Mentors",
+                        "Entry-Level Friendly",
+                        "Pleasant Work Culture",
+                        "Helpful Resources",
+                        "Competitive Pay",
+                        "Great Benefits",
+                        "Supportive Team Members",
+                        "Heavy Workload",
+                        "Expected Overtime",
+                        "Poor Management",
+                        "Insufficient Learning Opportunities",
+                      ]}
+                      value={this.state.selectedCharacteristics}
+                      disableCloseOnSelect
+                      getOptionLabel={(option) => option}
+                      renderOption={(props, option, { selected }) => (
+                        <li {...props}>
+                          <Checkbox
+                            icon={icon}
+                            checkedIcon={checkedIcon}
+                            style={{ marginRight: 8 }}
+                            checked={selected}
+                          />
+                          {option}
+                        </li>
+                      )}
+                      style={{ width: 500 }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Job Characteristics"
+                          placeholder="Select 3 characteristics"
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <br></br>
+                  <Grid>
+                    <InputLabel id="demo-simple-select-label">
+                      Payment Type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={payment}
+                      label="payment Type"
+                      onChange={this.handleChpaymentChange}
+                      required
+                    >
+                      <MenuItem value={"paid"}>Paid</MenuItem>
+                      <MenuItem value={"unpaid"}>Unpaid</MenuItem>
+                      <MenuItem value={"stipend"}>Stipend</MenuItem>
+                    </Select>
+                  </Grid>
                   <br></br>
                   <Grid item>
                     <TextField
@@ -131,21 +243,9 @@ class PostCreation extends Component {
                       }}
                       label={"Job Description"}
                       onChange={this.onDescriptionChange}
+                      required
                     />
                   </Grid>{" "}
-                  <br></br>
-                  {logoUrl && (
-                    <img
-                      src={logoUrl}
-                      style={{
-                        paddingTop: "15px",
-                        height: "175px",
-                        width: "175px",
-                      }}
-                    />
-                  )}
-                  Logo:{" "}
-                  <input type="file" name="Logo" onChange={this.onFileUpload} />
                   <br></br>
                   {this.state.title !== "" && this.state.description !== "" ? (
                     <input
