@@ -216,7 +216,7 @@ class PostCreation extends Component {
                   <br></br>
                   <Grid>
                     <InputLabel id="demo-simple-select-label">
-                      Payment Type
+                      Internship Payment Type
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
