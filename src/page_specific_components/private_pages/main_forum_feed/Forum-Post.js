@@ -20,7 +20,15 @@ class ForumPost extends Component {
 
             startDate: props.startDate,
             endDate: props.endDate,
-            rating: props.rating
+            rating: props.rating,
+
+            mondayTime: props.mondayTIme,
+            tuesdayTime: props.tuesdayTime,
+            wednesdayTime: props.wednesdayTime,
+            thursdayTime: props.thursdayTime,
+            fridayTime: props.fridayTime,
+            saturdayTime: props.saturdayTime,
+            sundayTime: props.sundayTime
         }
     }
 
@@ -45,6 +53,27 @@ class ForumPost extends Component {
                                     </FormControl>
                                     <FormControl>
                                         <h3>{this.state.endDate}</h3>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.mondayTime}</h5>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.tuesdayTime}</h5>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.wednesdayTime}</h5>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.thursdayTime}</h5>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.fridayTime}</h5>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.saturdayTime}</h5>
+                                    </FormControl>
+                                    <FormControl>
+                                        <h5>{this.state.sundayTime}</h5>
                                     </FormControl>
                                     <FormControl>
                                         <h3>{this.state.rating}</h3>

@@ -17,6 +17,14 @@ export async function fetchAllPosts(){
             startDate: doc.data().startDate,
             endDate: doc.data().endDate,
             ratinig: doc.data().rating,
+
+            mondayTime: doc.data().mondayTime,
+            tuesdayTime: doc.data().tuesdayTime,
+            wednesdayTime: doc.data().wednesdayTime,
+            thursdayTime: doc.data().thursdayTime,
+            fridayTime: doc.data().fridayTime,
+            saturdayTime: doc.data().saturdayTime,
+            sundayTime: doc.data().sundayTime,
         })
       });
     
@@ -32,6 +40,14 @@ export async function createPost(postDetails){
 
         startDate: postDetails.startDate,
         endDate: postDetails.endDate,
-        rating: postDetails,rating,
+        rating: postDetails.rating,
+
+        mondayTime: postDetails.mondayTime,
+        tuesdayTime: postDetails.tuesdayTime,
+        wednesdayTime: postDetails.wednesdayTime,
+        thursdayTime: postDetails.thursdayTime,
+        fridayTime: postDetails.fridayTime,
+        saturdayTime: postDetails.saturdayTime,
+        sundayTime: postDetails. sundayTime,
     });
 }

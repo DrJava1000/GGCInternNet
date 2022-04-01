@@ -27,6 +27,14 @@ class PostCreation extends Component {
         this.onEndDateChange = this.onEndDateChange.bind(this);
         this.onRatingChange = this.onRatingChange.bind(this);
 
+        this.onMondayTimeChange = this.onMondayTimeChange.bind(this);
+        this.onTuesdayTimeChange = this.onTuesdayTimeChange.bind(this);
+        this.onWednesdayTimeChange = this.onWednesdayTimeChange.bind(this);
+        this.onThursdayTimeChange = this.onThursdayTimeChange.bind(this);
+        this.onFridayTimeChange = this.onFridayTimeChange.bind(this);
+        this.onSaturdayTimeChange = this.onSaturdayTimeChange.bind(this);
+        this.onSundayTimeChange = this.onSundayTimeChange.bind(this);
+
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state =
@@ -37,6 +45,14 @@ class PostCreation extends Component {
             startDate: null,
             endDate: null,
             rating: null,
+
+            mondayTime: '',
+            tuesdayTime: '',
+            wednesdayTime: '',
+            thursdayTime: '',
+            fridayTime: '',
+            saturdayTime: '',
+            sundayTime: '',
 
             feedPosts: [],
             successfulPost: false
@@ -73,6 +89,48 @@ class PostCreation extends Component {
         });
     }
 
+    onMondayTimeChange(e) {
+        this.setState({
+            mondayTime: e.target.value
+        });
+    }
+
+    onTuesdayTimeChange(e) {
+        this.setState({
+            tuesdayTime: e.target.value
+        });
+    }
+
+    onWednesdayTimeChange(e) {
+        this.setState({
+            wednesdayTime: e.target.value
+        });
+    }
+
+    onThursdayTimeChange(e) {
+        this.setState({
+            thursdayTime: e.target.value
+        });
+    }
+
+    onFridayTimeChange(e) {
+        this.setState({
+            fridayTime: e.target.value
+        });
+    }
+
+    onSaturdayTimeChange(e) {
+        this.setState({
+            saturdayTime: e.target.value
+        });
+    }
+
+    onSundayTimeChange(e) {
+        this.setState({
+            sundayTime: e.target.value
+        });
+    }
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -83,7 +141,15 @@ class PostCreation extends Component {
 
             startDate: this.state.startDate,
             endDate: this.state.endDate,
-            rating: this.state.rating
+            rating: this.state.rating,
+
+            mondayTime: this.state.mondayTime,
+            tuesdayTime: this.state.tuesdayTime,
+            wednesdayTime: this.state.wednesdayTime,
+            thursdayTime: this.state.thursdayTime,
+            fridayTime: this.state.fridayTime,
+            saturdayTime: this.state.saturdayTime,
+            sundayTime: this.state.sundayTime
         });
 
         this.setState({
@@ -185,6 +251,111 @@ class PostCreation extends Component {
                                 </LocalizationProvider>
                                 */}
                             </Grid>
+
+                            {/*This is where Monday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Monday Hours'}
+                                onChange={this.onMondayTimeChange}
+                                />
+                            </Grid> <br></br>
+
+                            {/*This is where Tuesday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Tuesday Hours'}
+                                onChange={this.onTuesdayTimeChange}
+                                />
+                            </Grid> <br></br>
+
+                            {/*This is where Wednesday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Wednesday Hours'}
+                                onChange={this.onWednesdayTimeChange}
+                                />
+                            </Grid> <br></br>
+
+                            {/*This is where Thursday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Thursday Hours'}
+                                onChange={this.onThursdayTimeChange}
+                                />
+                            </Grid> <br></br>
+
+                            {/*This is where Friday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Friday Hours'}
+                                onChange={this.onFridayTimeChange}
+                                />
+                            </Grid> <br></br>
+
+                            {/*This is where Saturday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Saturday Hours'}
+                                onChange={this.onSaturdayTimeChange}
+                                />
+                            </Grid> <br></br>
+
+                            {/*This is where Sunday Time goes*/}
+                            <Grid item>
+                                <TextField
+                                type="text"
+                                inputProps={{
+                                    style: { textAlign: 'center'}
+                                }}
+                                sx={{
+                                    width: '100%'
+                                }}
+                                label={'Sunday Hours'}
+                                onChange={this.onSundayTimeChange}
+                                />
+                            </Grid> <br></br>
 
                             {/*This is where Rating goes*/}
                             <Grid item>
