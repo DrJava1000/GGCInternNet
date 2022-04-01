@@ -8,10 +8,12 @@ import { Navigate } from "react-router-dom";
 import { Grid } from "../../../../node_modules/@mui/material/index";
 import { TextField } from '../../../../node_modules/@mui/material/index';
 import { Typography } from '../../../../node_modules/@mui/material/index';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 import { Rating } from "../../../../node_modules/@mui/material/index";
+import DatePicker from "react-widgets/DatePicker";
+import "react-widgets/styles.css";
+//import AdapterDateFns from '@mui/lab/AdapterDateFns';
+//import LocalizationProvider from '@mui/lab/LocalizationProvider';
+//import DatePicker from '@mui/lab/DatePicker';
 
 class PostCreation extends Component {
     constructor(props) {
@@ -153,23 +155,35 @@ class PostCreation extends Component {
                             {/*This is where StartDate goes*/}
                             <Grid item>
                                 Start Date
+                                <DatePicker
+                                    defaultValue={new Date()}
+                                    onChange={this.state.onStartDateChange}
+                                />
+                                {/*
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DatePicker 
                                     label="Start Date"
                                     onChange={this.onStartDateChange}
                                     />
                                 </LocalizationProvider>
+                                */}
                             </Grid>
 
                             {/*This is where EndDate goes*/}
                             <Grid item>
                                 End Date
+                                <DatePicker
+                                    defaultValue={new Date()}
+                                    onChange={this.state.onEndDateChange}
+                                />
+                                {/*
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DatePicker 
                                     label="End Date"
                                     onChange={this.onEndDateChange}
                                     />
                                 </LocalizationProvider>
+                                */}
                             </Grid>
 
                             {/*This is where Rating goes*/}

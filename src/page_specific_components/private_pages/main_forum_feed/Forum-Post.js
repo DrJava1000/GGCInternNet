@@ -2,10 +2,11 @@ import { Component, Fragment } from "react";
 import { Grid, Paper } from "../../../../node_modules/@mui/material/index";
 import { FormControl } from "../../../../node_modules/@mui/material/index";
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 import { Rating } from "../../../../node_modules/@mui/material/index";
+import "react-widgets/styles.css";
+//import AdapterDateFns from '@mui/lab/AdapterDateFns';
+//import LocalizationProvider from '@mui/lab/LocalizationProvider';
+//import DatePicker from '@mui/lab/DatePicker';
 
 class ForumPost extends Component {
     constructor(props) {

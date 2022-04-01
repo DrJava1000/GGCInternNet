@@ -13,6 +13,10 @@ export async function fetchAllPosts(){
             poster: doc.data().poster,
             title: doc.data().title, 
             description: doc.data().description,
+
+            startDate: doc.data().startDate,
+            endDate: doc.data().endDate,
+            ratinig: doc.data().rating,
         })
       });
     
@@ -25,5 +29,9 @@ export async function createPost(postDetails){
         poster: postDetails.poster,
         title: postDetails.title, 
         description: postDetails.description,
+
+        startDate: postDetails.startDate,
+        endDate: postDetails.endDate,
+        rating: postDetails,rating,
     });
 }
