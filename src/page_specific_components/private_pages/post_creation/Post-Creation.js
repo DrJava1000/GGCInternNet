@@ -250,10 +250,11 @@ class PostCreation extends Component {
                                     />
                                 </LocalizationProvider>
                                 */}
-                            </Grid>
+                            </Grid> <br></br>
 
                             {/*This is where Monday Time goes*/}
                             <Grid item>
+                                Describe Your Average Work Week:
                                 <TextField
                                 type="text"
                                 inputProps={{
@@ -265,7 +266,7 @@ class PostCreation extends Component {
                                 label={'Monday Hours'}
                                 onChange={this.onMondayTimeChange}
                                 />
-                            </Grid> <br></br>
+                            </Grid>
 
                             {/*This is where Tuesday Time goes*/}
                             <Grid item>
@@ -280,7 +281,7 @@ class PostCreation extends Component {
                                 label={'Tuesday Hours'}
                                 onChange={this.onTuesdayTimeChange}
                                 />
-                            </Grid> <br></br>
+                            </Grid>
 
                             {/*This is where Wednesday Time goes*/}
                             <Grid item>
@@ -295,7 +296,7 @@ class PostCreation extends Component {
                                 label={'Wednesday Hours'}
                                 onChange={this.onWednesdayTimeChange}
                                 />
-                            </Grid> <br></br>
+                            </Grid>
 
                             {/*This is where Thursday Time goes*/}
                             <Grid item>
@@ -310,7 +311,7 @@ class PostCreation extends Component {
                                 label={'Thursday Hours'}
                                 onChange={this.onThursdayTimeChange}
                                 />
-                            </Grid> <br></br>
+                            </Grid>
 
                             {/*This is where Friday Time goes*/}
                             <Grid item>
@@ -325,7 +326,7 @@ class PostCreation extends Component {
                                 label={'Friday Hours'}
                                 onChange={this.onFridayTimeChange}
                                 />
-                            </Grid> <br></br>
+                            </Grid>
 
                             {/*This is where Saturday Time goes*/}
                             <Grid item>
@@ -340,7 +341,7 @@ class PostCreation extends Component {
                                 label={'Saturday Hours'}
                                 onChange={this.onSaturdayTimeChange}
                                 />
-                            </Grid> <br></br>
+                            </Grid>
 
                             {/*This is where Sunday Time goes*/}
                             <Grid item>
