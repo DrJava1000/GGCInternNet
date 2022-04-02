@@ -1,12 +1,11 @@
 import 
 {
     getAuth, 
-    onAuthStateChanged,
     createUserWithEmailAndPassword, 
-    updateProfile,
     signInWithEmailAndPassword, 
     signOut
 } from "firebase/auth";
+import { createUserProfile } from "./profile";
 
 export const appAuthInstance = getAuth();
 
@@ -14,14 +13,12 @@ export async function createAccount(email, password, name)
 {
     createUserWithEmailAndPassword(appAuthInstance, email, password)
     .then((userCredential) => {
-        updateProfile(appAuthInstance.currentUser, {
-            displayName: name,
-        }).then(() => {
-            console.log("User " + appAuthInstance.currentUser.displayName + " has been created successfully."); 
-        }).catch((error) => {
-            console.log("User account couldn't be named. See below.");
-            console.log(error);
-        });
+        createUserProfile({
+            id: userCredential.user.uid,
+            name: name,
+            major: "Information Technology",
+            concentration: "Data Science & Analytics",
+        })
         console.log("User " + appAuthInstance.currentUser.email + " has been created successfully."); 
     })
     .catch((error) => {
