@@ -2,18 +2,9 @@ import { Component, Fragment } from "react";
 import { Grid, Paper } from "../../../../node_modules/@mui/material/index";
 import { FormControl } from "../../../../node_modules/@mui/material/index";
 import bodyStyles from "../../../shared_site_css/body_styles/internal-body.module.css";
+import { Link } from "react-router-dom";
 
 class ForumPost extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      poster: props.poster,
-      title: props.title,
-      description: props.description,
-    };
-  }
-
   render() {
     return (
       <Fragment>
@@ -33,10 +24,10 @@ class ForumPost extends Component {
                 sx={{ width: "850px", padding: "30px", marginBottom: "30px" }}
               >
                 <FormControl>
-                  <h3>{this.props.title}</h3>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.poster}</h5>
+                  <Link to="/User_Profile"
+                    state= {{ userId: this.props.userId }}
+                  ><h5>{this.props.posterName}</h5>
+                  </Link>
                 </FormControl>
                 <FormControl>
                   <img width={100} height={100} src={this.props.logoUrl} />
