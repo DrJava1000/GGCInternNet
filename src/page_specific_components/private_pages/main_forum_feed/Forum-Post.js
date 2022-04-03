@@ -76,7 +76,7 @@ class ForumPost extends Component {
                                         <h5>{this.state.sundayTime}</h5>
                                     </FormControl>
                                     <FormControl>
-                                        <h3>{this.state.rating}</h3>
+                                        <h3><Rating value={this.state.rating} readOnly/></h3>
                                     </FormControl>
                                 </Grid>
                             </Paper>
