@@ -1,24 +1,37 @@
 import { db } from "../firebase_init";
 
-import { doc, collection, getDocs, setDoc } from "firebase/firestore";
+import { doc, collection, getDocs, setDoc, getDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
+// MAIN FEED: FETCH ALL POSTS
 export async function fetchAllPosts() {
   const postsSnapshot = await getDocs(collection(db, "posts"));
-  /*console.log("map==>>", postsSnapshot.map, "doc==>>", postsSnapshot.docs);
   const posts = [];
-  postsSnapshot.forEach((doc) => {
-    posts.push({
-      id: doc.id,
-      poster: doc.data().poster,
-      title: doc.data().title,
-      description: doc.data().description,
-    });
-  });*/
+  
+  // get all posts 
+  for(const post of postsSnapshot.docs) {
+    // get poster's name from the ID stored in the post
+    const profileRef = doc(db, "profiles", "" + post.data().userId);
+    const profileSnap = await getDoc(profileRef);
+    var name;
 
-  return postsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    if (profileSnap.exists()) {
+      name = profileSnap.data().name;
+    } else {
+      console.log("No such document!");
+    }
+
+    // add each post to a list
+    posts.push({
+      ...post.data(), posterName: name, id: post.id
+    });
+  };
+
+  // return list of posts
+  return posts;
 }
 
+// POST CREATION: CREATE A POST
 export async function createPost({ logoFile, ...postDetails }) {
   const postRef = doc(collection(db, "posts"));
 

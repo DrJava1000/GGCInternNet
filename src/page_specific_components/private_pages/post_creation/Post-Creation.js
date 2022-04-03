@@ -63,7 +63,6 @@ class PostCreation extends Component {
     e.preventDefault();
 
     createPost({
-      poster: "rgambrell@ggc.edu",
       title: this.state.title,
       description: this.state.description,
       userId: this.context.currentUserID,
