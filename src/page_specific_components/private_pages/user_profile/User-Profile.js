@@ -44,7 +44,8 @@ class Profile extends Component{
       resume : "",
       resumeUrl: "",
       downloadResumePreview: false,
-      updateButton : false
+      updateButton : false,
+      locationState: this.props.location.state
     }
   }
 
@@ -119,7 +120,11 @@ class Profile extends Component{
   componentDidMount(){
     let userDetails;
     setTimeout(() => {
-      userDetails = loadUserProfile(this.context.currentUserID);
+      if(this.state.locationState)
+        userDetails = loadUserProfile(this.state.locationState.userId);
+      else
+        userDetails = loadUserProfile(this.context.currentUserID);
+      
       userDetails.then((profile) => {
         this.setState({
           name: profile.name,
@@ -131,23 +136,35 @@ class Profile extends Component{
         });
       })
     }, 
-    1000);
+    5000);
   }
  
   render(){
     return (
         <Fragment>
-            <AppHeader navBarContents={[{
+            {
+              !this.state.locationState ? <>
+              <AppHeader navBarContents={[{
                 'text': "Main Forum",
                 'link': "/Main_Feed"
-            },{
-                'text': "Profile",
-                'link': "/User_Profile"
-            },{
-                'text': "Logout",
-                'link': "Logout"
-            }]}
-            />
+                },{
+                    'text': "Profile",
+                    'link': "/User_Profile"
+                },{
+                    'text': "Logout",
+                    'link': "Logout"
+              }]}/>
+              </> : 
+              <>
+              <AppHeader navBarContents={[{
+                'text': "Main Forum",
+                'link': "/Main_Feed"
+                },{
+                    'text': "Logout",
+                    'link': "Logout"
+              }]}/>
+              </>
+            }
             <div className={bodyStyles.ScrollingContent}>
             <div className={styles.profileBody}>
             <Grid alignItems="center" justify="center" direction="column" sx={{minWidth:'32%'}}>
@@ -160,7 +177,10 @@ class Profile extends Component{
                       Profile Picture
                     </Typography>
                     <img src={this.state.picUrl} style={{paddingTop:"15px", height:"175px", width:"175px"}} /><br/>
-                    <input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/>
+                    {
+                      !this.state.locationState ? <><input type="file" name="Profile Picture Upload" onChange={this.onPicUpload}/></> :
+                      <><div></div></>
+                    }
                   </Grid> <br></br>
 
                   <Grid item>
@@ -170,17 +190,34 @@ class Profile extends Component{
                     >
                       Full Name
                     </Typography>
-                    <TextField
-                      type="text"
-                      inputProps={{
-                        style: { textAlign: 'center' }
-                      }}
-                      sx={{
-                        width: '100%'
-                      }}
-                      value={this.state.name}
-                      onChange={this.onNameChange}
-                    />
+                    {
+                    !this.state.locationState ? <>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: { textAlign: 'center' },
+                        }}
+                        sx={{
+                          width: '100%'
+                        }}
+                        value={this.state.name}
+                        onChange={this.onNameChange}
+                      />
+                    </>
+                    : <>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: { textAlign: 'center' },
+                          readOnly: true
+                        }}
+                        sx={{
+                          width: '100%'
+                        }}
+                        value={this.state.name}
+                      />
+                    </>
+                  }
                   </Grid> <br></br>
             
                   <Grid item>
@@ -190,17 +227,32 @@ class Profile extends Component{
                     >
                       Major
                     </Typography>
-                    <Select
-                      value={this.state.major}
-                      onChange={this.onMajorChange}
-                      sx={{
-                        width: '100%'
-                      }}
-                    >
-                      {
-                        ggc_degrees.map(degree => <MenuItem key={degree.major} value={degree.major}>{degree.major}</MenuItem>)
-                      }
-                    </Select>
+                    {
+                    !this.state.locationState ? <>
+                      <Select
+                        value={this.state.major}
+                        onChange={this.onMajorChange}
+                        sx={{
+                          width: '100%'
+                        }}>
+                        {
+                          ggc_degrees.map(degree => <MenuItem key={degree.major} value={degree.major}>{degree.major}</MenuItem>)
+                        }
+                      </Select>
+                    </>
+                    : <>
+                      <Select
+                        value={this.state.major}
+                        inputProps={{ readOnly: true }}
+                        sx={{
+                          width: '100%'
+                        }}>
+                        {
+                          ggc_degrees.map(degree => <MenuItem key={degree.major} value={degree.major}>{degree.major}</MenuItem>)
+                        }
+                      </Select>
+                    </>
+                  }
                   </Grid> <br></br>
                   
                   <Grid item>
@@ -210,17 +262,32 @@ class Profile extends Component{
                     >
                       Concentration
                     </Typography>
-                    <Select
-                      value={this.state.concentration}
-                      onChange={this.onConcentrationChange}
-                      sx={{
-                        width: '100%'
-                      }}
-                    >
-                      {
-                        this.state.concentrationList.map(concentration => <MenuItem key={concentration} value={concentration}>{concentration}</MenuItem>)
-                      }
-                    </Select>
+                    {
+                    !this.state.locationState ? <>
+                      <Select
+                        value={this.state.concentration}
+                        onChange={this.onConcentrationChange}
+                        sx={{
+                          width: '100%'
+                        }}>
+                        {
+                          this.state.concentrationList.map(concentration => <MenuItem key={concentration} value={concentration}>{concentration}</MenuItem>)
+                        }
+                      </Select>
+                    </>
+                    : <>
+                      <Select
+                        value={this.state.concentration}
+                        inputProps={{ readOnly: true }}
+                        sx={{
+                          width: '100%'
+                        }}>
+                        {
+                          this.state.concentrationList.map(concentration => <MenuItem key={concentration} value={concentration}>{concentration}</MenuItem>)
+                        }
+                      </Select>
+                    </>
+                  }
                   </Grid> <br></br>
        
                   <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2}}>
@@ -241,16 +308,22 @@ class Profile extends Component{
                       }
                     </Button>
                   </Grid> <br></br>
-
-                  <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px'}}>
-                  <Typography
-                    variant="h6"
-                    className={titleStyle.title}
-                    >
-                      Upload Resume
-                    </Typography>
-                    <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/>
-                  </Grid>
+                  {
+                    !this.state.locationState ? <>
+                      <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px'}}>
+                        <Typography
+                          variant="h6"
+                          className={titleStyle.title}
+                          >
+                            Upload Resume
+                        </Typography>
+                        <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/>
+                      </Grid> 
+                    </>
+                    : <>
+                      <div></div>
+                    </>
+                  }
                   <br></br>
                     {
                       this.state.updateButton ? <input className={titleStyle.createPostButton} type="submit" name="Update" value="Update"/> : <div></div>
