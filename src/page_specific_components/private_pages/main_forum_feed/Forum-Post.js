@@ -29,13 +29,19 @@ class ForumPost extends Component {
                 sx={{ width: "850px", padding: "30px", marginBottom: "30px" }}
               >
                 <FormControl>
+                  <img width={100} height={100} src={this.props.logoUrl} />
+                </FormControl>
+                <FormControl>
+                  <h3>{this.props.company}</h3>
+                </FormControl>
+                <FormControl>
+                  <h3>{this.props.jobTitle}</h3>
+                </FormControl>
+                <FormControl>
                   <Link to="/User_Profile"
                     state= {{ userId: this.props.userId }}
                   ><h5>{this.props.posterName}</h5>
                   </Link>
-                </FormControl>
-                <FormControl>
-                  <img width={100} height={100} src={this.props.logoUrl} />
                 </FormControl>
                 <FormControl>
                   <ul>
