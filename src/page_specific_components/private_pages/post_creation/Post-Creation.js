@@ -37,8 +37,9 @@ class PostCreation extends Component {
     super(props);
 
     //Bindings
-    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onJobTitleChange = this.onJobTitleChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
+    this.onCompanyChange = this.onCompanyChange.bind(this);
     this.onStartDateChange = this.onStartDateChange.bind(this);
     this.onEndDateChange = this.onEndDateChange.bind(this);
     this.onRatingChange = this.onRatingChange.bind(this);
@@ -52,8 +53,9 @@ class PostCreation extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      title: "",
+      jobTitle: "",
       description: "",
+      company: "",
       feedPosts: [],
       successfulPost: false,
       logoFile: null,
@@ -73,9 +75,15 @@ class PostCreation extends Component {
     };
   }
 
-  onTitleChange(e) {
+  onJobTitleChange(e) {
     this.setState({
-      title: e.target.value,
+      jobTitle: e.target.value,
+    });
+  }
+
+  onCompanyChange(e) {
+    this.setState({
+      company: e.target.value,
     });
   }
 
@@ -85,15 +93,15 @@ class PostCreation extends Component {
     });
   }
 
-  onStartDateChange(e) {
+  onStartDateChange(e, date) {
     this.setState({
-        startDate: e.target.value
+        startDate: date
     });
   }
 
-  onEndDateChange(e) {
+  onEndDateChange(e, date) {
     this.setState({
-        endDate: e.target.value
+        endDate: date
     });
   }
 
@@ -149,10 +157,11 @@ class PostCreation extends Component {
     e.preventDefault();
 
     createPost({
-      title: this.state.title,
-      description: this.state.description,
       userId: this.context.currentUserID,
+      jobTitle: this.state.jobTitle,
+      description: this.state.description,
       logoFile: this.state.logoFile,
+      company: this.state.company,
       characteristics: this.state.selectedCharacteristics,
       paymentType: this.state.payment,
       startDate: this.state.startDate,
@@ -226,7 +235,6 @@ class PostCreation extends Component {
                   paddingRight: "40px",
                   paddingTop: "40px",
                   paddingBottom: "40px",
-                  borderRadius: "15px",
                 }}
               >
                 <Typography variant="h6" className={titleStyle.standaloneTitle}>
@@ -234,6 +242,20 @@ class PostCreation extends Component {
                 </Typography>
                 <br></br>
                 <form onSubmit={this.onSubmit}>
+                  <Grid item>
+                    <TextField
+                      type="text"
+                      inputProps={{
+                        style: { textAlign: "center" },
+                      }}
+                      sx={{
+                        width: "100%",
+                      }}
+                      onChange={this.onCompanyChange}
+                      label={"Company"}
+                      required
+                    />
+                  </Grid>{" "}
                   <Grid item>
                     Company Logo:{" "}
                     <input
@@ -261,7 +283,7 @@ class PostCreation extends Component {
                       sx={{
                         width: "100%",
                       }}
-                      onChange={this.onTitleChange}
+                      onChange={this.onJobTitleChange}
                       label={"Job Title"}
                       required
                     />
@@ -348,7 +370,7 @@ class PostCreation extends Component {
                     Start Date
                     <DatePicker
                         defaultValue={new Date()}
-                        onChange={this.state.onStartDateChange}
+                        onChange={this.onStartDateChange}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -365,7 +387,7 @@ class PostCreation extends Component {
                     End Date
                     <DatePicker
                         defaultValue={new Date()}
-                        onChange={this.state.onEndDateChange}
+                        onChange={this.onEndDateChange}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -487,7 +509,7 @@ class PostCreation extends Component {
                   <Grid item>
                     Rate Your Experience
                     <Rating
-                    onChange={this.state.onRatingChange}
+                    onChange={this.onRatingChange}
                     />
                   </Grid>
                   <br></br>
