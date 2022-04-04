@@ -1,6 +1,11 @@
 import { Component, Fragment } from "react";
 import { Grid, Paper } from "../../../../node_modules/@mui/material/index";
 import { FormControl } from "../../../../node_modules/@mui/material/index";
+import { Rating } from "../../../../node_modules/@mui/material/index";
+import "react-widgets/styles.css";
+//import AdapterDateFns from '@mui/lab/AdapterDateFns';
+//import LocalizationProvider from '@mui/lab/LocalizationProvider';
+//import DatePicker from '@mui/lab/DatePicker';
 import bodyStyles from "../../../shared_site_css/body_styles/internal-body.module.css";
 import { Link } from "react-router-dom";
 
@@ -24,13 +29,19 @@ class ForumPost extends Component {
                 sx={{ width: "850px", padding: "30px", marginBottom: "30px" }}
               >
                 <FormControl>
+                  <img width={100} height={100} src={this.props.logoUrl} />
+                </FormControl>
+                <FormControl>
+                  <h3>{this.props.company}</h3>
+                </FormControl>
+                <FormControl>
+                  <h3>{this.props.jobTitle}</h3>
+                </FormControl>
+                <FormControl>
                   <Link to="/User_Profile"
                     state= {{ userId: this.props.userId }}
                   ><h5>{this.props.posterName}</h5>
                   </Link>
-                </FormControl>
-                <FormControl>
-                  <img width={100} height={100} src={this.props.logoUrl} />
                 </FormControl>
                 <FormControl>
                   <ul>
@@ -44,6 +55,36 @@ class ForumPost extends Component {
                 </FormControl>
                 <FormControl>
                   <p>{this.props.description}</p>
+                </FormControl>
+                <FormControl>
+                  <h3>{this.props.startDate}</h3>
+                </FormControl>
+                <FormControl>
+                  <h3>{this.props.endDate}</h3>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.mondayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.tuesdayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.wednesdayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.thursdayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.fridayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.saturdayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h5>{this.props.sundayTime}</h5>
+                </FormControl>
+                <FormControl>
+                  <h3><Rating value={this.props.rating} readOnly/></h3>
                 </FormControl>
               </Grid>
             </Paper>
