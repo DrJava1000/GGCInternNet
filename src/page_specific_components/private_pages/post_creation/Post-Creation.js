@@ -65,13 +65,13 @@ class PostCreation extends Component {
       startDate: null,
       endDate: null,
       rating: null,
-      mondayTime: '',
-      tuesdayTime: '',
-      wednesdayTime: '',
-      thursdayTime: '',
-      fridayTime: '',
-      saturdayTime: '',
-      sundayTime: '',
+      mondayTime: "N/A",
+      tuesdayTime: "N/A",
+      wednesdayTime: "N/A",
+      thursdayTime: "N/A",
+      fridayTime: "N/A",
+      saturdayTime: "N/A",
+      sundayTime: "N/A",
     };
   }
 
@@ -344,9 +344,9 @@ class PostCreation extends Component {
                       onChange={this.handleChpaymentChange}
                       required
                     >
-                      <MenuItem value={"paid"}>Paid</MenuItem>
-                      <MenuItem value={"unpaid"}>Unpaid</MenuItem>
-                      <MenuItem value={"stipend"}>Stipend</MenuItem>
+                      <MenuItem value={"Paid"}>Paid</MenuItem>
+                      <MenuItem value={"Unpaid"}>Unpaid</MenuItem>
+                      <MenuItem value={"Stipend-Based"}>Stipend-Based</MenuItem>
                     </Select>
                   </Grid>
                   <br></br>
