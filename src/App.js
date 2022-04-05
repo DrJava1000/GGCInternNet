@@ -65,7 +65,7 @@ function App() {
           
           {/* Post Modification is used for both post creation and editing/deletion of posts*/}
           {/* Create Post Page */}
-          <Route exact path="/Post_Creation" element={<PostModification operation={'create'}/>}/> 
+          <Route exact path="/Post_Creation" element={<PostModification operation={'create'} location={useLocation()}/>}/> 
           {/* Edit/Delete Post Page */}
           <Route exact path="/Post_Edit" element={<PostModification operation={'edit_and_delete'} location={useLocation()}/>}/> 
           
