@@ -37,12 +37,20 @@ class ForumPost extends Component {
                 <FormControl>
                   <h3>{this.props.jobTitle}</h3>
                 </FormControl>
-                <FormControl>
-                  <Link to="/User_Profile"
-                    state= {{ userId: this.props.userId }}
-                  ><h5>{this.props.posterName}</h5>
-                  </Link>
-                </FormControl>
+                {
+                  this.props.myPost ? <>
+                    <div></div>
+                  </>: <>
+                    <h5>
+                      <FormControl>
+                        <Link to="/User_Profile"
+                          state= {{ userId: this.props.userId }}
+                        ><h5>{this.props.posterName}</h5>
+                        </Link>
+                      </FormControl>
+                    </h5>
+                  </>
+                }
                 <FormControl>
                   <ul>
                     {(this.props.characteristics || []).map((item) => (
@@ -88,18 +96,12 @@ class ForumPost extends Component {
                 </FormControl>
                 {
                   this.props.myPost ? <>
-                  <h5>
-                    <a
-                      
-                      href="/Edit_Posts"
-                    >
-                      Create New Post
-                    </a>
-                  </h5>
-                </>
-                : <>
-                  <div></div>
-                </>
+                    <h5>
+                      <a href="/Post_Edit">Edit Post</a>
+                    </h5>
+                  </>: <>
+                    <div></div>
+                  </>
                 }
               </Grid>
             </Paper>

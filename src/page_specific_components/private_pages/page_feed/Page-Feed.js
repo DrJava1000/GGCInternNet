@@ -75,10 +75,16 @@ class PageFeed extends Component {
                 <div></div>
               </>
             }
-
-            {this.state.feedPosts.map((post) => (
-              <ForumPost key={post.id} {...post} />
-            ))}
+            {
+              this.props.feedType === "main_posts" ? 
+                this.state.feedPosts.map((post) => (
+                  <ForumPost key={post.id} {...post} />
+                )) 
+              :
+                this.state.feedPosts.map((post) => (
+                  <ForumPost key={post.id} {...post} myPost={true}/>
+                ))
+            }
           </div>
           <AppFooter />
         </div>
