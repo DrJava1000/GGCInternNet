@@ -59,7 +59,7 @@ class PostCreation extends Component {
       feedPosts: [],
       successfulPost: false,
       logoFile: null,
-      logoUrl: "",
+      logoUrl: this.props.location.state ? this.props.location.state.postDetails.logoUrl : "",
       selectedCharacteristics: [],
       payment: "",
       startDate: null,
@@ -201,7 +201,7 @@ class PostCreation extends Component {
   };
 
   render() {
-    const { logoUrl, payment } = this.state;
+    const { logoUrl } = this.state;
     if (this.state.successfulPost) {
       return <Navigate to="/Main_Feed" />;
     } else {
@@ -250,7 +250,6 @@ class PostCreation extends Component {
                   }
                 </Typography>
                 <br></br>
-                {console.log(this.state.locationState)}
                 <form onSubmit={this.onSubmit}>
                   <Grid item>
                     <TextField
@@ -319,7 +318,7 @@ class PostCreation extends Component {
                         "Poor Management",
                         "Insufficient Learning Opportunities",
                       ]}
-                      value={this.state.selectedCharacteristics}
+                      value={this.state.locationState ? this.state.locationState.postDetails.characteristics : []}
                       disableCloseOnSelect
                       getOptionLabel={(option) => option}
                       renderOption={(props, option, { selected }) => (
@@ -351,7 +350,7 @@ class PostCreation extends Component {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={payment}
+                      value={this.state.locationState ? this.state.locationState.postDetails.paymentType : "Paid"}
                       label="payment Type"
                       onChange={this.handleChpaymentChange}
                       required
