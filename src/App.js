@@ -15,6 +15,7 @@ import Signup from './page_specific_components/public_pages/signup/User-Provisio
 
 // Private Page Imports 
 import MainFeed from './page_specific_components/private_pages/main_forum_feed/Main-Feed';
+import MyPostsFeed from './page_specific_components/private_pages/my_posts_feed/My-Posts-Feed';
 import PostCreation from './page_specific_components/private_pages/post_creation/Post-Creation';
 import Profile from './page_specific_components/private_pages/user_profile/User-Profile';
 import {Route, Routes, useLocation} from 'react-router-dom'
@@ -60,6 +61,9 @@ function App() {
 
           {/* Main Feed Page */}
           <Route exact path="/Main_Feed" element={<MainFeed />}/> 
+          
+          {/* My Posts Feed Page */}
+          <Route exact path="/My_Posts" element={<MyPostsFeed />}/> 
           
           {/* Create Post Page */}
           <Route exact path="/Post_Creation" element={<PostCreation />}/> 

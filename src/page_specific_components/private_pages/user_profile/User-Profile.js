@@ -1,4 +1,3 @@
-import styles from './user_profile.module.css';
 import AppHeader from '../../../shared_site_components/page-header/header-and-navebar';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
@@ -151,6 +150,9 @@ class Profile extends Component{
                     'text': "Profile",
                     'link': "/User_Profile"
                 },{
+                    'text': "My Posts",
+                    'link': "/My_Posts",
+                },{
                     'text': "Logout",
                     'link': "Logout"
               }]}/>
@@ -166,7 +168,7 @@ class Profile extends Component{
               </>
             }
             <div className={bodyStyles.ScrollingContent}>
-            <div className={styles.profileBody}>
+            <div className={bodyStyles.profileBody}>
             <Grid alignItems="center" justify="center" direction="column" sx={{minWidth:'32%'}}>
                 <form onSubmit={this.onSubmit}>
                   <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px', marginTop: '60px' }}>

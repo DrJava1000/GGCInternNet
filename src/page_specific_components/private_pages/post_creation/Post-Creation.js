@@ -217,6 +217,10 @@ class PostCreation extends Component {
                 link: "/User_Profile",
               },
               {
+                text: "My Posts",
+                link: "/My_Posts",
+              },
+              {
                 text: "Logout",
                 link: "Logout",
               },
