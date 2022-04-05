@@ -1,12 +1,12 @@
 import { Component, Fragment } from "react";
-import { Grid, Paper } from "../../../../node_modules/@mui/material/index";
-import { FormControl } from "../../../../node_modules/@mui/material/index";
-import { Rating } from "../../../../node_modules/@mui/material/index";
+import { Grid, Paper } from "../../../node_modules/@mui/material/index";
+import { FormControl } from "../../../node_modules/@mui/material/index";
+import { Rating } from "../../../node_modules/@mui/material/index";
 import "react-widgets/styles.css";
 //import AdapterDateFns from '@mui/lab/AdapterDateFns';
 //import LocalizationProvider from '@mui/lab/LocalizationProvider';
 //import DatePicker from '@mui/lab/DatePicker';
-import bodyStyles from "../../../shared_site_css/body_styles/internal-body.module.css";
+import bodyStyles from "../../shared_site_css/body_styles/internal-body.module.css";
 import { Link } from "react-router-dom";
 
 class ForumPost extends Component {
@@ -37,12 +37,20 @@ class ForumPost extends Component {
                 <FormControl>
                   <h3>{this.props.jobTitle}</h3>
                 </FormControl>
-                <FormControl>
-                  <Link to="/User_Profile"
-                    state= {{ userId: this.props.userId }}
-                  ><h5>{this.props.posterName}</h5>
-                  </Link>
-                </FormControl>
+                {
+                  this.props.myPost ? <>
+                    <div></div>
+                  </>: <>
+                    <h5>
+                      <FormControl>
+                        <Link to="/User_Profile"
+                          state= {{ userId: this.props.userId }}
+                        ><h5>{this.props.posterName}</h5>
+                        </Link>
+                      </FormControl>
+                    </h5>
+                  </>
+                }
                 <FormControl>
                   <ul>
                     {(this.props.characteristics || []).map((item) => (
@@ -86,6 +94,20 @@ class ForumPost extends Component {
                 <FormControl>
                   <h3><Rating value={this.props.rating} readOnly/></h3>
                 </FormControl>
+                {
+                  this.props.myPost ? <>
+                    <h5>
+                      <FormControl>
+                        <Link to="/Post_Edit"
+                          state= {{ postDetails: this.props }}
+                        ><h5>Edit Post</h5>
+                        </Link>
+                      </FormControl>
+                    </h5>
+                  </>: <>
+                    <div></div>
+                  </>
+                }
               </Grid>
             </Paper>
           </Grid>
