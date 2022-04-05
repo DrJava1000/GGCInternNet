@@ -1,12 +1,12 @@
 import { Component, Fragment } from "react";
-import { Grid, Paper } from "../../../../node_modules/@mui/material/index";
-import { FormControl } from "../../../../node_modules/@mui/material/index";
-import { Rating } from "../../../../node_modules/@mui/material/index";
+import { Grid, Paper } from "../../../node_modules/@mui/material/index";
+import { FormControl } from "../../../node_modules/@mui/material/index";
+import { Rating } from "../../../node_modules/@mui/material/index";
 import "react-widgets/styles.css";
 //import AdapterDateFns from '@mui/lab/AdapterDateFns';
 //import LocalizationProvider from '@mui/lab/LocalizationProvider';
 //import DatePicker from '@mui/lab/DatePicker';
-import bodyStyles from "../../../shared_site_css/body_styles/internal-body.module.css";
+import bodyStyles from "../../shared_site_css/body_styles/internal-body.module.css";
 import { Link } from "react-router-dom";
 
 class ForumPost extends Component {
@@ -86,6 +86,21 @@ class ForumPost extends Component {
                 <FormControl>
                   <h3><Rating value={this.props.rating} readOnly/></h3>
                 </FormControl>
+                {
+                  this.props.myPost ? <>
+                  <h5>
+                    <a
+                      
+                      href="/Edit_Posts"
+                    >
+                      Create New Post
+                    </a>
+                  </h5>
+                </>
+                : <>
+                  <div></div>
+                </>
+                }
               </Grid>
             </Paper>
           </Grid>
