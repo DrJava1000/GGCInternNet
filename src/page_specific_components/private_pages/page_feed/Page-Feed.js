@@ -2,11 +2,13 @@ import { Component, Fragment } from "react";
 import bodyStyles from "../../../shared_site_css/body_styles/internal-body.module.css";
 import AppHeader from "../../../shared_site_components/page-header/header-and-navebar";
 import AppFooter from "../../../shared_site_components/page-footer/footer";
-import { fetchAllPosts } from "../../../firebase/ops/post";
+import { fetchAllPosts, fetchMyPosts } from "../../../firebase/ops/post";
 import ForumPost from "../../../shared_site_components/forum-post/Forum-Post";
 import buttonStyles from "../../../shared_site_css/button_styles/Button.module.css";
+import AuthContext from '../../../context/AuthContext';
 
-class MainFeed extends Component {
+class PageFeed extends Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
 
@@ -16,13 +18,22 @@ class MainFeed extends Component {
   }
 
   componentDidMount() {
-    let fetchPostsPromise = fetchAllPosts();
-
-    fetchPostsPromise.then((posts) => {
-      this.setState({
-        feedPosts: posts,
+    if(this.props.feedType === "main_posts"){
+      let fetchPostsPromise = fetchAllPosts();
+      fetchPostsPromise.then((posts) => {
+        this.setState({
+          feedPosts: posts,
+        });
       });
-    });
+    }else{
+      setTimeout(() => {
+        fetchMyPosts(this.context.currentUserID).then((posts) => {
+          this.setState({
+            feedPosts: posts,
+          });
+        })},
+      3000);
+    }
   }
 
   render() {
@@ -40,7 +51,7 @@ class MainFeed extends Component {
             },
             {
               text: "My Posts",
-              link: "/My_Posts",
+              link: "/My_Posts_Feed",
             },
             {
               text: "Logout",
@@ -50,14 +61,20 @@ class MainFeed extends Component {
         />
         <div className={bodyStyles.ScrollingContent}>
           <div className={bodyStyles.ForumBody}>
-            <h5>
-              <a
-                className={buttonStyles.createPostButton}
-                href="/Post_Creation"
-              >
-                Create New Post
-              </a>
-            </h5>
+            {
+              this.props.feedType === "main_posts" ? <>
+                <h5>
+                  <a
+                  className={buttonStyles.createPostButton}
+                  href="/Post_Creation"
+                  >
+                    Create New Post
+                  </a>
+                </h5>
+              </>: <>
+                <div></div>
+              </>
+            }
 
             {this.state.feedPosts.map((post) => (
               <ForumPost key={post.id} {...post} />
@@ -70,4 +87,4 @@ class MainFeed extends Component {
   }
 }
 
-export default MainFeed;
+export default PageFeed;
