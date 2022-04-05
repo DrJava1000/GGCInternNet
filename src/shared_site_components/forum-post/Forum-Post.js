@@ -97,7 +97,12 @@ class ForumPost extends Component {
                 {
                   this.props.myPost ? <>
                     <h5>
-                      <a href="/Post_Edit">Edit Post</a>
+                      <FormControl>
+                        <Link to="/Post_Edit"
+                          state= {{ postDetails: this.props }}
+                        ><h5>Edit Post</h5>
+                        </Link>
+                      </FormControl>
                     </h5>
                   </>: <>
                     <div></div>
