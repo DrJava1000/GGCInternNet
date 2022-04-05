@@ -1,8 +1,8 @@
 import styles from './header-and-navebar.module.css';
 import internNetLogo from '../../images/Grizzly InternNET Logo Banner.png';
 import React, { Component } from "react";
-import { Link } from '@material-ui/core';
 import { logout } from '../../firebase/ops/auth.js';
+/* import { Link } from '@material-ui/core';
 
 /**
  * @class AppHeader
@@ -37,11 +37,9 @@ class AppHeader extends Component
             <header className={styles.PageHeader}>
 
                 {/*Grizzly InternNet Logo*/}
-                <Link href="/">
                     <div className={styles.IconAndPageIdentifier}>
                         <img src={internNetLogo} className={styles.NgfLogo} alt="Grizzly InternNet"/>
                     </div>
-                </Link>
 
 
                 {/* App Navigation Bar*/}
