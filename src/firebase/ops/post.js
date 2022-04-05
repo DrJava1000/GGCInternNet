@@ -1,6 +1,6 @@
 import { db } from "../firebase_init";
 
-import { doc, collection, getDocs, setDoc, getDoc } from "firebase/firestore";
+import { doc, collection, getDocs, setDoc, getDoc, where, query } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 // MAIN FEED: FETCH ALL POSTS
@@ -29,6 +29,27 @@ export async function fetchAllPosts() {
 
   // return list of posts
   return posts;
+}
+
+// MY POSTS FEED: FETCH CURRENT USER'S POSTS
+export async function fetchMyPosts(userId) {
+  const postsRef = collection(db, "posts");
+  const myPosts = [];
+
+  // Create a post query that searches for posts tagged with the current
+  // user's id
+  const myPostsQuery = query(postsRef, where("userId", "==", userId)); 
+
+  const myPostsQuerySnapshot = await getDocs(myPostsQuery);
+  myPostsQuerySnapshot.forEach((post) => {
+    // add each matching post to a list
+    myPosts.push({
+      ...post.data(), id: post.id
+    });
+  });
+  
+  // return list of my posts
+  return myPosts;
 }
 
 // POST CREATION: CREATE A POST
