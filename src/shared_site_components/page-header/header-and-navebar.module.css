@@ -4,7 +4,7 @@
     font-weight: bold;
     text-align: right;
     font-size: 10pt;
-    width: 50%;
+    width: 70%;
     height: 8%;
     float: right;
     margin-top: 45px;
@@ -23,12 +23,12 @@
     display: inline-block;
     border: 3px outset #176748;
     background-color: #176748;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    margin-top: 1%;
-    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    margin-top: 0.5%;
+    margin-right: 4%;
     border-radius: 15px;
   }
   
@@ -74,7 +74,7 @@
 
   .IconAndPageIdentifier
   {
-    width: 40%;
+    width: 30%;
     display:inline-block;
     height: 100%;
   }
