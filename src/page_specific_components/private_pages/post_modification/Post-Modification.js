@@ -72,6 +72,7 @@ class PostCreation extends Component {
       fridayTime: "N/A",
       saturdayTime: "N/A",
       sundayTime: "N/A",
+      locationState: this.props.location.state
     };
   }
 
@@ -242,9 +243,14 @@ class PostCreation extends Component {
                 }}
               >
                 <Typography variant="h6" className={titleStyle.standaloneTitle}>
-                  Create a Forum Post
+                  {
+                    this.props.operation === "create" ?
+                      <span>Create a Forum Post</span> :
+                      <span>Edit Your Forum Post</span>
+                  }
                 </Typography>
                 <br></br>
+                {console.log(this.state.locationState)}
                 <form onSubmit={this.onSubmit}>
                   <Grid item>
                     <TextField
@@ -257,6 +263,7 @@ class PostCreation extends Component {
                       }}
                       onChange={this.onCompanyChange}
                       label={"Company"}
+                      defaultValue={this.state.locationState ? this.state.locationState.postDetails.company : ""}
                       required
                     />
                   </Grid>{" "}
@@ -288,6 +295,7 @@ class PostCreation extends Component {
                         width: "100%",
                       }}
                       onChange={this.onJobTitleChange}
+                      defaultValue={this.state.locationState ? this.state.locationState.postDetails.jobTitle : ""}
                       label={"Job Title"}
                       required
                     />
@@ -364,6 +372,7 @@ class PostCreation extends Component {
                         width: "100%",
                       }}
                       label={"Job Description"}
+                      defaultValue={this.state.locationState ? this.state.locationState.postDetails.description : ""}
                       onChange={this.onDescriptionChange}
                       required
                     />
@@ -373,7 +382,7 @@ class PostCreation extends Component {
                   <Grid item>
                     Start Date
                     <DatePicker
-                        defaultValue={new Date()}
+                        defaultValue={this.state.locationState ? new Date(this.state.locationState.postDetails.startDate) : new Date()}
                         onChange={this.onStartDateChange}
                     />
                     {/*
@@ -390,7 +399,7 @@ class PostCreation extends Component {
                   <Grid item>
                     End Date
                     <DatePicker
-                        defaultValue={new Date()}
+                        defaultValue={this.state.locationState ? new Date(this.state.locationState.postDetails.endDate) : new Date()}
                         onChange={this.onEndDateChange}
                     />
                     {/*
@@ -416,6 +425,7 @@ class PostCreation extends Component {
                     }}
                     label={'Monday Hours'}
                     onChange={this.onMondayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.mondayTime : ''}
                     />
                   </Grid>
                   <br></br>
@@ -431,6 +441,7 @@ class PostCreation extends Component {
                     }}
                     label={'Tuesday Hours'}
                     onChange={this.onTuesdayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.tuesdayTime : ''}
                     />
                   </Grid>
                   <br></br>
@@ -446,6 +457,7 @@ class PostCreation extends Component {
                     }}
                     label={'Wednesday Hours'}
                     onChange={this.onWednesdayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.wednesdayTime : ''}
                     />
                   </Grid>
                   <br></br>
@@ -461,6 +473,7 @@ class PostCreation extends Component {
                     }}
                     label={'Thursday Hours'}
                     onChange={this.onThursdayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.thursdayTime : ''}
                     />
                   </Grid>
                   <br></br>
@@ -476,6 +489,7 @@ class PostCreation extends Component {
                     }}
                     label={'Friday Hours'}
                     onChange={this.onFridayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.fridayTime : ''}
                     />
                   </Grid>
                   <br></br>
@@ -491,6 +505,7 @@ class PostCreation extends Component {
                     }}
                     label={'Saturday Hours'}
                     onChange={this.onSaturdayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.saturdayTime : ''}
                     />
                   </Grid>
                   <br></br>
@@ -506,6 +521,7 @@ class PostCreation extends Component {
                     }}
                     label={'Sunday Hours'}
                     onChange={this.onSundayTimeChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.sundayTime : ''}
                     />
                   </Grid> 
                   <br></br>
@@ -514,10 +530,12 @@ class PostCreation extends Component {
                     Rate Your Experience
                     <Rating
                     onChange={this.onRatingChange}
+                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.rating : 0}
                     />
                   </Grid>
                   <br></br>
-                  {this.state.title !== "" && this.state.description !== "" ? (
+                  {
+                    this.props.operation === "create" ? (
                     <input
                       className={titleStyle.createPostButton}
                       type="submit"
@@ -525,13 +543,20 @@ class PostCreation extends Component {
                       value="Post"
                     />
                   ) : (
-                    <input
-                      className={titleStyle.createPostButton}
-                      type="submit"
-                      name="Post"
-                      value="Post"
-                      disabled
-                    />
+                    <Fragment>
+                      <input
+                        className={titleStyle.createPostButton}
+                        type="submit"
+                        name="Edit and Save"
+                        value="Edit and Save"
+                      />
+                      <input
+                        className={titleStyle.createPostButton}
+                        type="submit"
+                        name="Delete"
+                        value="Delete"
+                      />
+                    </Fragment>
                   )}
                 </form>
               </Grid>

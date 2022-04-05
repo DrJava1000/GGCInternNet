@@ -65,9 +65,9 @@ function App() {
           
           {/* Post Modification is used for both post creation and editing/deletion of posts*/}
           {/* Create Post Page */}
-          <Route exact path="/Post_Creation" element={<PostModification accessLevel={'create'}/>}/> 
+          <Route exact path="/Post_Creation" element={<PostModification operation={'create'}/>}/> 
           {/* Edit/Delete Post Page */}
-          <Route exact path="/Post_Edit" element={<PostModification accessLevel={'edit_and_delete'} />}/> 
+          <Route exact path="/Post_Edit" element={<PostModification operation={'edit_and_delete'} location={useLocation()}/>}/> 
           
           {/* User Profile Page */}
           <Route exact path="/User_Profile" element={<Profile location={useLocation()}/>}/> 
