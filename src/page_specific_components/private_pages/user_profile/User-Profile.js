@@ -151,7 +151,7 @@ class Profile extends Component{
                     'link': "/User_Profile"
                 },{
                     'text': "My Posts",
-                    'link': "/My_Posts",
+                    'link': "/My_Posts_Feed",
                 },{
                     'text': "Logout",
                     'link': "Logout"

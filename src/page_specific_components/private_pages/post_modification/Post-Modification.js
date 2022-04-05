@@ -219,7 +219,7 @@ class PostCreation extends Component {
               },
               {
                 text: "My Posts",
-                link: "/My_Posts",
+                link: "/My_Posts_Feed",
               },
               {
                 text: "Logout",
