@@ -182,10 +182,10 @@ class PostCreation extends Component {
       fridayTime: this.state.fridayTime,
       saturdayTime: this.state.saturdayTime,
       sundayTime: this.state.sundayTime
-    });
-
-    this.setState({
-      editingFinished: true,
+    }).then(() => {
+      this.setState({
+        editingFinished: true,
+      });
     });
   }
 
@@ -208,9 +208,10 @@ class PostCreation extends Component {
   };
 
   onPostDeletionConfirmation(){
-    deletePost(this.state.id);
-    this.setState({
-      editingFinished: true
+    deletePost(this.state.id).then(() => {
+      this.setState({
+        editingFinished: true
+      });
     });
   }
 
