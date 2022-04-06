@@ -27,9 +27,7 @@ import {
 } from "../../../../node_modules/@mui/icons-material/index";
 import DatePicker from "react-widgets/DatePicker";
 import "react-widgets/styles.css";
-//import AdapterDateFns from '@mui/lab/AdapterDateFns';
-//import LocalizationProvider from '@mui/lab/LocalizationProvider';
-//import DatePicker from '@mui/lab/DatePicker';
+
 
 const icon = <CheckBoxOutlineBlank fontSize="small" />;
 const checkedIcon = <CheckBox fontSize="small" />;
@@ -268,6 +266,9 @@ class PostCreation extends Component {
                   paddingRight: "40px",
                   paddingTop: "40px",
                   paddingBottom: "40px",
+                  marginTop:"30px",
+                  marginBottom:"30px",
+                  borderRadius: "5px"
                 }}
               >
                 <Typography variant="h6" className={titleStyle.standaloneTitle}>
@@ -277,8 +278,31 @@ class PostCreation extends Component {
                       <span>Edit Your Forum Post</span>
                   }
                 </Typography>
-                <br></br>
+
+                <div style={{height: "15px"}}></div>
+
                 <form onSubmit={this.onSubmit}>
+                <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
+                    <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Company Logo *</p>
+                    <input
+                      type="file"
+                      name="Logo"
+                      onChange={this.onFileUpload}
+                    />
+                  {logoUrl && (
+                    <img
+                      src={logoUrl}
+                      style={{
+                        paddingTop: "15px",
+                        height: "175px",
+                        width: "175px",
+                      }}
+                    />
+                  )}
+                </Grid>
+
+                <br></br>
+
                   <Grid item>
                     <TextField
                       type="text"
@@ -293,25 +317,8 @@ class PostCreation extends Component {
                       value={this.state.company}
                       required
                     />
-                  </Grid>{" "}
-                  <Grid item>
-                    Company Logo:{" "}
-                    <input
-                      type="file"
-                      name="Logo"
-                      onChange={this.onFileUpload}
-                    />
-                  </Grid>
-                  {logoUrl && (
-                    <img
-                      src={logoUrl}
-                      style={{
-                        paddingTop: "15px",
-                        height: "175px",
-                        width: "175px",
-                      }}
-                    />
-                  )}
+                  </Grid><br></br>
+                  
                   <Grid item>
                     <TextField
                       type="text"
@@ -360,21 +367,18 @@ class PostCreation extends Component {
                           {option}
                         </li>
                       )}
-                      style={{ width: 500 }}
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          label="Job Characteristics"
-                          placeholder="Select 3 characteristics"
+                          label="Job Characteristics *"
+                          placeholder="Select 3 Characteristics"
                         />
                       )}
                     />
                   </Grid>
                   <br></br>
-                  <Grid>
-                    <InputLabel id="demo-simple-select-label">
-                      Internship Payment Type
-                    </InputLabel>
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
+                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Internship Payment Type *</p>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -382,10 +386,12 @@ class PostCreation extends Component {
                       label="payment Type"
                       onChange={this.handleChpaymentChange}
                       required
+                      style ={{width: "97.25%"}}
                     >
                       <MenuItem value={"Paid"}>Paid</MenuItem>
                       <MenuItem value={"Unpaid"}>Unpaid</MenuItem>
                       <MenuItem value={"Stipend-Based"}>Stipend-Based</MenuItem>
+                      <MenuItem value={"N/A"}>N/A</MenuItem>
                     </Select>
                   </Grid>
                   <br></br>
@@ -406,11 +412,12 @@ class PostCreation extends Component {
                   </Grid>{" "}
                   <br></br>
                   {/*This is where StartDate goes*/}
-                  <Grid item>
-                    Start Date
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
+                    <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Start Date *</p>
                     <DatePicker
                         onChange={this.onStartDateChange}
                         defaultValue={this.state.startDate}
+                        style={{width: "97.25%", color:"#666666", fontSize:"17px", fontFamily:"Arial"}}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -423,11 +430,12 @@ class PostCreation extends Component {
                   </Grid>
                   <br></br>
                   {/*This is where EndDate goes*/}
-                  <Grid item>
-                    End Date
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
+                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>End Date *</p>
                     <DatePicker
                         onChange={this.onEndDateChange}
                         defaultValue={this.state.endDate}
+                        style={{width: "97.25%", color:"#666666", fontSize:"17px", fontFamily:"Arial"}}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -439,16 +447,35 @@ class PostCreation extends Component {
                     */}
                   </Grid> 
                   <br></br>
-                  {/*This is where Monday Time goes*/}
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', paddingRight: '15px', marginTop: '15px', textAlign: 'left'}}>
+                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Describe Your Average Work Week *</p>
+                  <p style={{fontSize:"13px", color: "#9e9e9e", fontFamily:"Arial"}}>i.e. 8:00 AM - 4:00 PM or N/A</p>
+                  <div style={{height: "15px"}}></div>
+                  {/*This is where Sunday Time goes*/}
                   <Grid item>
-                    Describe Your Average Work Week:
                     <TextField
                     type="text"
                     inputProps={{
-                        style: { textAlign: 'center'}
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
                     }}
                     sx={{
                         width: '100%'
+                    }}
+                    label={'Sunday Hours'}
+                    onChange={this.onSundayTimeChange}
+                    value={this.state.sundayTime}
+                    />
+                  </Grid>
+                  <br></br>
+                  {/*This is where Monday Time goes*/}
+                  <Grid item>
+                    <TextField
+                    type="text"
+                    inputProps={{
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
+                    }}
+                    sx={{
+                        width: '100%',
                     }}
                     label={'Monday Hours'}
                     onChange={this.onMondayTimeChange}
@@ -461,7 +488,7 @@ class PostCreation extends Component {
                     <TextField
                     type="text"
                     inputProps={{
-                        style: { textAlign: 'center'}
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
                     }}
                     sx={{
                         width: '100%'
@@ -477,7 +504,7 @@ class PostCreation extends Component {
                     <TextField
                     type="text"
                     inputProps={{
-                        style: { textAlign: 'center'}
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
                     }}
                     sx={{
                         width: '100%'
@@ -493,7 +520,7 @@ class PostCreation extends Component {
                     <TextField
                     type="text"
                     inputProps={{
-                        style: { textAlign: 'center'}
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
                     }}
                     sx={{
                         width: '100%'
@@ -509,7 +536,7 @@ class PostCreation extends Component {
                     <TextField
                     type="text"
                     inputProps={{
-                        style: { textAlign: 'center'}
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
                     }}
                     sx={{
                         width: '100%'
@@ -525,7 +552,7 @@ class PostCreation extends Component {
                     <TextField
                     type="text"
                     inputProps={{
-                        style: { textAlign: 'center'}
+                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
                     }}
                     sx={{
                         width: '100%'
@@ -535,26 +562,11 @@ class PostCreation extends Component {
                     value={this.state.saturdayTime}
                     />
                   </Grid>
-                  <br></br>
-                  {/*This is where Sunday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                        style: { textAlign: 'center'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Sunday Hours'}
-                    onChange={this.onSundayTimeChange}
-                    value={this.state.sundayTime}
-                    />
-                  </Grid> 
+                  </Grid>
                   <br></br>
                   {/*This is where Rating goes*/}
-                  <Grid item>
-                    Rate Your Experience
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '13px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
+                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Rate Your Experience *</p>
                     <Rating
                     onChange={this.onRatingChange}
                     value={this.state.rating}
@@ -574,28 +586,34 @@ class PostCreation extends Component {
                       <input
                         className={titleStyle.createPostButton}
                         type="submit"
-                        name="Edit and Save"
-                        value="Edit and Save"
+                        name="Save"
+                        value="Save"
                       />
+                      <div style={{height: "10px"}}></div>
+
                       {/* Post Deletion Dialog*/}
                       <div>
-                        <Button variant="outlined" onClick={this.onDeletePostDialogClick}>
-                            Delete Post
-                        </Button>
+                        <input
+                          type="button"
+                          name="Delete"
+                          value="Delete"
+                          className={titleStyle.createPostButton} 
+                          onClick={this.onDeletePostDialogClick}
+                        />
                         <Dialog
                           open={this.state.openDeletionConfirmation}
                           onClose={this.onDeletePostDialogClick}
                           aria-labelledby="alert-dialog-title"
                           aria-describedby="alert-dialog-description"
                         >
-                          <DialogTitle id="alert-dialog-title">
-                            Delete this Post?
+                          <DialogTitle id="alert-dialog-title" style={{backgroundColor:"#176748", fontFamily:"Arial", color:"white", fontWeight:"bold"}}>
+                            Are you sure you want to DELETE this post?
                           </DialogTitle>
-                          <DialogActions>
-                            <Button onClick={this.onPostDeletionConfirmation} autoFocus>
+                          <DialogActions style={{backgroundColor:"#f2f8f5", fontFamily:"Arial"}} alignItems="center">
+                            <Button onClick={this.onPostDeletionConfirmation} style={{fontFamily:"Arial"}} autoFocus>
                               Yes
                             </Button>
-                            <Button onClick={this.onDeletePostDialogClick}>No</Button>
+                            <Button onClick={this.onDeletePostDialogClick} style={{fontFamily:"Arial"}}>No</Button>
                           </DialogActions>
                         </Dialog>
                       </div>

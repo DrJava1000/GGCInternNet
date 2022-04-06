@@ -37,19 +37,35 @@
     margin-top: 10px;
 }
 
+.profileBackground
+{
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("../../images/Grizzly InternNET Background 2.png");
+    background-repeat: repeat-y;
+    background-position: center;
+    align-items: center;
+    color: black;
+    font-size: calc(10px + 2vmin);
+    height: auto;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 .profileBody{
     background-color: white;
-    height: 80vh;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: black;
-    padding-top: 20vh;
-    margin-top: 10px;
-    margin-bottom: 250px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 5px;
 }
 
 .ScrollingContent

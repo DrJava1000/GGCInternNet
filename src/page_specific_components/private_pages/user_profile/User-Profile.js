@@ -162,16 +162,23 @@ class Profile extends Component{
                 'text': "Main Forum",
                 'link': "/Main_Feed"
                 },{
+                    'text': "Profile",
+                    'link': "/User_Profile"
+                },{
+                    'text': "My Posts",
+                    'link': "/My_Posts_Feed",
+                },{
                     'text': "Logout",
                     'link': "Logout"
               }]}/>
               </>
             }
             <div className={bodyStyles.ScrollingContent}>
+            <div className={bodyStyles.profileBackground}>
             <div className={bodyStyles.profileBody}>
-            <Grid alignItems="center" justify="center" direction="column" sx={{minWidth:'32%'}}>
+            <Grid alignItems="center" justify="center" direction="column" sx={{minWidth:'50%'}}>
                 <form onSubmit={this.onSubmit}>
-                  <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px', marginTop: '60px' }}>
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px'}}>
                     <Typography
                     variant="h6"
                     className={titleStyle.title}
@@ -211,7 +218,8 @@ class Profile extends Component{
                         type="text"
                         inputProps={{
                           style: { textAlign: 'center' },
-                          readOnly: true
+                          readOnly: true,
+                          disabled: true
                         }}
                         sx={{
                           width: '100%'
@@ -243,16 +251,18 @@ class Profile extends Component{
                       </Select>
                     </>
                     : <>
-                      <Select
-                        value={this.state.major}
-                        inputProps={{ readOnly: true }}
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: { textAlign: 'center' },
+                          readOnly: true,
+                          disabled: true
+                        }}
                         sx={{
                           width: '100%'
-                        }}>
-                        {
-                          ggc_degrees.map(degree => <MenuItem key={degree.major} value={degree.major}>{degree.major}</MenuItem>)
-                        }
-                      </Select>
+                        }}
+                        value={this.state.major}
+                      />
                     </>
                   }
                   </Grid> <br></br>
@@ -278,21 +288,23 @@ class Profile extends Component{
                       </Select>
                     </>
                     : <>
-                      <Select
-                        value={this.state.concentration}
-                        inputProps={{ readOnly: true }}
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: { textAlign: 'center' },
+                          readOnly: true,
+                          disabled: true
+                        }}
                         sx={{
                           width: '100%'
-                        }}>
-                        {
-                          this.state.concentrationList.map(concentration => <MenuItem key={concentration} value={concentration}>{concentration}</MenuItem>)
-                        }
-                      </Select>
+                        }}
+                        value={this.state.concentration}
+                      />
                     </>
                   }
                   </Grid> <br></br>
        
-                  <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2}}>
+                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2}}>
                   <Typography
                     variant="h6"
                     className={titleStyle.title}
@@ -306,20 +318,20 @@ class Profile extends Component{
                     >
                       {
                         this.state.downloadResumePreview ? <><a href={this.state.resumeUrl} download={this.state.resume.name}>Click to Download Resume</a><br /></> :
-                        <><a href={this.state.resumeUrl} style={{textDecoration:'none'}}>Click to Download Resume</a><br /></>
+                        <><a href={this.state.resumeUrl} style={{textDecoration:'none', paddingTop: '5px', paddingBottom: '5px'}}>Click to Download Resume</a><br /></>
                       }
                     </Button>
                   </Grid> <br></br>
                   {
                     !this.state.locationState ? <>
-                      <Grid item sx={{border: 1, borderColor: 'grey.300', borderRadius: 2, paddingBottom: '15px'}}>
+                      <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px'}}>
                         <Typography
                           variant="h6"
                           className={titleStyle.title}
                           >
                             Upload Resume
                         </Typography>
-                        <input type="file" name="Resume Upload" onChange={this.onResumeUpload}/>
+                        <input style={{paddingTop: '15px'}} type="file" name="Resume Upload" onChange={this.onResumeUpload}/>
                       </Grid> 
                     </>
                     : <>
@@ -332,6 +344,7 @@ class Profile extends Component{
                     }
                 </form>
                 </Grid>
+            </div>
             </div>
             <AppFooter />
             </div>

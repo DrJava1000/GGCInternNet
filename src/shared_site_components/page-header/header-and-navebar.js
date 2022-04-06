@@ -2,6 +2,7 @@ import styles from './header-and-navebar.module.css';
 import internNetLogo from '../../images/Grizzly InternNET Logo Banner.png';
 import React, { Component } from "react";
 import { logout } from '../../firebase/ops/auth.js';
+import { Avatar } from '../../../node_modules/@mui/material/index';
 /* import { Link } from '@material-ui/core';
 
 /**
@@ -38,7 +39,7 @@ class AppHeader extends Component
 
                 {/*Grizzly InternNet Logo*/}
                     <div className={styles.IconAndPageIdentifier}>
-                        <img src={internNetLogo} className={styles.NgfLogo} alt="Grizzly InternNet"/>
+                        <img src={internNetLogo} className={styles.NgfLogo} alt="Grizzly InternNet" style={{userSelect:'none'}}/>
                     </div>
 
 

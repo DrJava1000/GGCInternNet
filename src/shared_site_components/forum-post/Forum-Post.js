@@ -18,14 +18,14 @@ class ForumPost extends Component {
           alignItems="center"
           justify="center"
           direction="column"
-          sx={{ marginTop: "0px" }}
+          sx={{ marginTop: "0px", paddingTop: "20px" }}
         >
           <Grid item xs={2} sm={2} md={2} lg={2} sx={{ marginTop: "10px" }}>
             <Paper>
               <Grid
                 container
                 direction="column"
-                sx={{ width: "550px", padding: "30px", marginBottom: "30px"}}
+                sx={{ width: "650px", padding: "30px", marginBottom: "30px"}}
               >
                   <img src={this.props.logoUrl} style={{paddingTop:"15px", paddingBottom:"40px", paddingLeft:"10px", paddingRight:"10px",  width:"150px", alignSelf:"center"}}/>
 
@@ -53,7 +53,7 @@ class ForumPost extends Component {
                     </Typography>
                     <p className={titleStyle.postItem}>{this.props.jobTitle}</p>
 
-                  <Typography variant="p" className={titleStyle.postTitle} style={{width: "75%"}}>
+                  <Typography variant="p" className={titleStyle.postTitle} style={{width: "73.50%"}}>
                     Job Characteristics
                   </Typography>
                   <ul className={titleStyle.postItem} style={{textAlign:"left", width: "66.75%", backgroundColor: "#dff0e9"}} >
@@ -131,8 +131,9 @@ class ForumPost extends Component {
                     <h5>
                       
                         <Link to="/Post_Edit"
-                          state= {{ postDetails: this.props }}
-                        ><h5>Edit Post</h5>
+                          state= {{ postDetails: this.props }} 
+                          className={titleStyle.createPostButton}
+                        >Edit Post
                         </Link>
                       
                     </h5>
