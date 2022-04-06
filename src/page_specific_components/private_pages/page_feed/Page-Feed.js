@@ -60,7 +60,7 @@ class PageFeed extends Component {
           ]}
         />
         <div className={bodyStyles.ScrollingContent}>
-          <div className={bodyStyles.ForumBody}>
+          <div className={bodyStyles.ForumBody} style={{paddingTop:"30px", paddingBottom:"30px"}}>
             {
               this.props.feedType === "main_posts" ? <>
                 <h5>
