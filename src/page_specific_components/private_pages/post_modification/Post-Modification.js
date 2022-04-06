@@ -3,10 +3,14 @@ import bodyStyles from "../../../shared_site_css/body_styles/internal-body.modul
 import titleStyle from "../../../shared_site_css/button_styles/Button.module.css";
 import AppHeader from "../../../shared_site_components/page-header/header-and-navebar";
 import AppFooter from "../../../shared_site_components/page-footer/footer";
-import { createOrEditPost } from "../../../firebase/ops/post";
+import { createOrEditPost, deletePost } from "../../../firebase/ops/post";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
 import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   Grid,
   TextField,
   Typography,
@@ -50,14 +54,14 @@ class PostCreation extends Component {
     this.onFridayTimeChange = this.onFridayTimeChange.bind(this);
     this.onSaturdayTimeChange = this.onSaturdayTimeChange.bind(this);
     this.onSundayTimeChange = this.onSundayTimeChange.bind(this);
+    this.onPostDeletionConfirmation = this.onPostDeletionConfirmation.bind(this);
+    this.onDeletePostDialogClick = this.onDeletePostDialogClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       jobTitle: this.props.location.state ? this.props.location.state.postDetails.jobTitle : "",
       description: this.props.location.state ? this.props.location.state.postDetails.description : "",
       company: this.props.location.state ? this.props.location.state.postDetails.company : "",
-      feedPosts: [],
-      successfulPost: false,
       logoFile: null,
       logoUrl: this.props.location.state ? this.props.location.state.postDetails.logoUrl : "",
       selectedCharacteristics: this.props.location.state ? this.props.location.state.postDetails.characteristics : [],
@@ -72,7 +76,9 @@ class PostCreation extends Component {
       fridayTime: this.props.location.state ? this.props.location.state.postDetails.fridayTime : "N/A",
       saturdayTime: this.props.location.state ? this.props.location.state.postDetails.saturdayTime : "N/A",
       sundayTime: this.props.location.state ? this.props.location.state.postDetails.sundayTime : "N/A",
-      id: "",
+      id: this.props.location.state ? this.props.location.state.postDetails.id : "",
+      openDeletionConfirmation: false,
+      editingFinished: false,
     };
   }
 
@@ -179,7 +185,7 @@ class PostCreation extends Component {
     });
 
     this.setState({
-      successfulPost: true,
+      editingFinished: true,
     });
   }
 
@@ -201,6 +207,19 @@ class PostCreation extends Component {
     this.setState({ payment: e.target.value });
   };
 
+  onPostDeletionConfirmation(){
+    deletePost(this.state.id);
+    this.setState({
+      editingFinished: true
+    });
+  }
+
+  onDeletePostDialogClick(){
+    this.setState({
+      openDeletionConfirmation: !this.state.openDeletionConfirmation
+    })
+  }
+
   componentDidMount(){
     if(this.props.operation === "edit_and_delete"){
       this.setState({
@@ -211,7 +230,7 @@ class PostCreation extends Component {
 
   render() {
     const { logoUrl } = this.state;
-    if (this.state.successfulPost) {
+    if (this.state.editingFinished) {
       return <Navigate to="/Main_Feed" />;
     } else {
       return (
@@ -558,12 +577,28 @@ class PostCreation extends Component {
                         name="Edit and Save"
                         value="Edit and Save"
                       />
-                      <input
-                        className={titleStyle.createPostButton}
-                        type="submit"
-                        name="Delete"
-                        value="Delete"
-                      />
+                      {/* Post Deletion Dialog*/}
+                      <div>
+                        <Button variant="outlined" onClick={this.onDeletePostDialogClick}>
+                            Delete Post
+                        </Button>
+                        <Dialog
+                          open={this.state.openDeletionConfirmation}
+                          onClose={this.onDeletePostDialogClick}
+                          aria-labelledby="alert-dialog-title"
+                          aria-describedby="alert-dialog-description"
+                        >
+                          <DialogTitle id="alert-dialog-title">
+                            Delete this Post?
+                          </DialogTitle>
+                          <DialogActions>
+                            <Button onClick={this.onPostDeletionConfirmation} autoFocus>
+                              Yes
+                            </Button>
+                            <Button onClick={this.onDeletePostDialogClick}>No</Button>
+                          </DialogActions>
+                        </Dialog>
+                      </div>
                     </Fragment>
                   )}
                 </form>
