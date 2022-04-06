@@ -1,6 +1,15 @@
 import { db } from "../firebase_init";
 
-import { doc, collection, getDocs, setDoc, getDoc, where, query } from "firebase/firestore";
+import { 
+  doc, 
+  collection, 
+  getDocs, 
+  setDoc, 
+  getDoc, 
+  where, 
+  query, 
+  deleteDoc 
+} from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 // MAIN FEED: FETCH ALL POSTS
@@ -78,4 +87,15 @@ export async function createOrEditPost({ logoFile, ...postDetails }) {
   }
 
   await setDoc(postRef, postDetails, { merge: true });
+}
+
+// POST DELETION: DELETE AN EXISTING POST
+export async function deletePost(postID) {
+  var postRef = doc(db, "posts", postID); 
+
+  await deleteDoc(postRef).then((success) => {
+    console.log(success);
+  }).catch((error) => {
+    console.log(error)
+  });
 }
