@@ -52,17 +52,22 @@ export async function fetchMyPosts(userId) {
   return myPosts;
 }
 
-// POST CREATION: CREATE A POST
-export async function createPost({ logoFile, ...postDetails }) {
-  const postRef = doc(collection(db, "posts"));
+// POST MODIFICATION: CREATE A POST OR EDIT A EXISTING ONE
+export async function createOrEditPost({ logoFile, ...postDetails }) {
+  var postRef; 
+
+  if(postDetails.id){
+    postRef = doc(db, "posts", postDetails.id);
+  }else{
+    postRef = doc(collection(db, "posts"));
+  }
 
   const storage = getStorage();
-  const fileName = logoFile.name;
-  if (fileName) {
+  if (logoFile) {
     try {
       const logoRef = ref(
         storage,
-        "logos/" + postDetails.userId + "/" + fileName
+        "logos/" + postDetails.userId + "/" + logoFile.name
       );
       await uploadBytes(logoRef, logoFile);
       const uploadUrl = await getDownloadURL(logoRef);
@@ -72,5 +77,5 @@ export async function createPost({ logoFile, ...postDetails }) {
     }
   }
 
-  await setDoc(postRef, postDetails);
+  await setDoc(postRef, postDetails, { merge: true });
 }
