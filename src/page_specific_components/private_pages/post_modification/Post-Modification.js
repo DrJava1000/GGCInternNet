@@ -3,7 +3,7 @@ import bodyStyles from "../../../shared_site_css/body_styles/internal-body.modul
 import titleStyle from "../../../shared_site_css/button_styles/Button.module.css";
 import AppHeader from "../../../shared_site_components/page-header/header-and-navebar";
 import AppFooter from "../../../shared_site_components/page-footer/footer";
-import { createPost } from "../../../firebase/ops/post";
+import { createOrEditPost } from "../../../firebase/ops/post";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
 import {
@@ -53,26 +53,26 @@ class PostCreation extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      jobTitle: "",
-      description: "",
-      company: "",
+      jobTitle: this.props.location.state ? this.props.location.state.postDetails.jobTitle : "",
+      description: this.props.location.state ? this.props.location.state.postDetails.description : "",
+      company: this.props.location.state ? this.props.location.state.postDetails.company : "",
       feedPosts: [],
       successfulPost: false,
       logoFile: null,
       logoUrl: this.props.location.state ? this.props.location.state.postDetails.logoUrl : "",
-      selectedCharacteristics: [],
-      payment: "",
-      startDate: null,
-      endDate: null,
-      rating: null,
-      mondayTime: "N/A",
-      tuesdayTime: "N/A",
-      wednesdayTime: "N/A",
-      thursdayTime: "N/A",
-      fridayTime: "N/A",
-      saturdayTime: "N/A",
-      sundayTime: "N/A",
-      locationState: this.props.location.state
+      selectedCharacteristics: this.props.location.state ? this.props.location.state.postDetails.characteristics : [],
+      payment: this.props.location.state ? this.props.location.state.postDetails.paymentType : "Paid",
+      startDate: this.props.location.state ? new Date(this.props.location.state.postDetails.startDate) : new Date(),
+      endDate: this.props.location.state ? new Date(this.props.location.state.postDetails.endDate) : new Date(),
+      rating: this.props.location.state ? this.props.location.state.postDetails.rating : 0,
+      mondayTime: this.props.location.state ? this.props.location.state.postDetails.mondayTime : "N/A",
+      tuesdayTime: this.props.location.state ? this.props.location.state.postDetails.tuesdayTime : "N/A",
+      wednesdayTime: this.props.location.state ? this.props.location.state.postDetails.wednesdayTime : "N/A",
+      thursdayTime: this.props.location.state ? this.props.location.state.postDetails.thursdayTime : "N/A",
+      fridayTime: this.props.location.state ? this.props.location.state.postDetails.fridayTime : "N/A",
+      saturdayTime: this.props.location.state ? this.props.location.state.postDetails.saturdayTime : "N/A",
+      sundayTime: this.props.location.state ? this.props.location.state.postDetails.sundayTime : "N/A",
+      id: "",
     };
   }
 
@@ -157,7 +157,8 @@ class PostCreation extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    createPost({
+    createOrEditPost({
+      id: this.state.id,
       userId: this.context.currentUserID,
       jobTitle: this.state.jobTitle,
       description: this.state.description,
@@ -165,8 +166,8 @@ class PostCreation extends Component {
       company: this.state.company,
       characteristics: this.state.selectedCharacteristics,
       paymentType: this.state.payment,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
+      startDate: new Date(this.state.startDate).toISOString().substring(0, 10),
+      endDate: new Date(this.state.endDate).toISOString().substring(0, 10),
       rating: this.state.rating,
       mondayTime: this.state.mondayTime,
       tuesdayTime: this.state.tuesdayTime,
@@ -199,6 +200,14 @@ class PostCreation extends Component {
   handleChpaymentChange = (e, value) => {
     this.setState({ payment: e.target.value });
   };
+
+  componentDidMount(){
+    if(this.props.operation === "edit_and_delete"){
+      this.setState({
+        id: this.props.location.state.postDetails.id
+      });
+    }
+  }
 
   render() {
     const { logoUrl } = this.state;
@@ -262,7 +271,7 @@ class PostCreation extends Component {
                       }}
                       onChange={this.onCompanyChange}
                       label={"Company"}
-                      defaultValue={this.state.locationState ? this.state.locationState.postDetails.company : ""}
+                      value={this.state.company}
                       required
                     />
                   </Grid>{" "}
@@ -294,7 +303,7 @@ class PostCreation extends Component {
                         width: "100%",
                       }}
                       onChange={this.onJobTitleChange}
-                      defaultValue={this.state.locationState ? this.state.locationState.postDetails.jobTitle : ""}
+                      value={this.state.jobTitle}
                       label={"Job Title"}
                       required
                     />
@@ -318,7 +327,7 @@ class PostCreation extends Component {
                         "Poor Management",
                         "Insufficient Learning Opportunities",
                       ]}
-                      value={this.state.locationState ? this.state.locationState.postDetails.characteristics : []}
+                      value={this.state.selectedCharacteristics}
                       disableCloseOnSelect
                       getOptionLabel={(option) => option}
                       renderOption={(props, option, { selected }) => (
@@ -350,7 +359,7 @@ class PostCreation extends Component {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={this.state.locationState ? this.state.locationState.postDetails.paymentType : "Paid"}
+                      value={this.state.payment}
                       label="payment Type"
                       onChange={this.handleChpaymentChange}
                       required
@@ -371,7 +380,7 @@ class PostCreation extends Component {
                         width: "100%",
                       }}
                       label={"Job Description"}
-                      defaultValue={this.state.locationState ? this.state.locationState.postDetails.description : ""}
+                      value={this.state.description}
                       onChange={this.onDescriptionChange}
                       required
                     />
@@ -381,8 +390,8 @@ class PostCreation extends Component {
                   <Grid item>
                     Start Date
                     <DatePicker
-                        defaultValue={this.state.locationState ? new Date(this.state.locationState.postDetails.startDate) : new Date()}
                         onChange={this.onStartDateChange}
+                        defaultValue={this.state.startDate}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -398,8 +407,8 @@ class PostCreation extends Component {
                   <Grid item>
                     End Date
                     <DatePicker
-                        defaultValue={this.state.locationState ? new Date(this.state.locationState.postDetails.endDate) : new Date()}
                         onChange={this.onEndDateChange}
+                        defaultValue={this.state.endDate}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -424,7 +433,7 @@ class PostCreation extends Component {
                     }}
                     label={'Monday Hours'}
                     onChange={this.onMondayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.mondayTime : ''}
+                    value={this.state.mondayTime}
                     />
                   </Grid>
                   <br></br>
@@ -440,7 +449,7 @@ class PostCreation extends Component {
                     }}
                     label={'Tuesday Hours'}
                     onChange={this.onTuesdayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.tuesdayTime : ''}
+                    value={this.state.tuesdayTime}
                     />
                   </Grid>
                   <br></br>
@@ -456,7 +465,7 @@ class PostCreation extends Component {
                     }}
                     label={'Wednesday Hours'}
                     onChange={this.onWednesdayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.wednesdayTime : ''}
+                    value={this.state.wednesdayTime}
                     />
                   </Grid>
                   <br></br>
@@ -472,7 +481,7 @@ class PostCreation extends Component {
                     }}
                     label={'Thursday Hours'}
                     onChange={this.onThursdayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.thursdayTime : ''}
+                    value={this.state.thursdayTime}
                     />
                   </Grid>
                   <br></br>
@@ -488,7 +497,7 @@ class PostCreation extends Component {
                     }}
                     label={'Friday Hours'}
                     onChange={this.onFridayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.fridayTime : ''}
+                    value={this.state.fridayTime}
                     />
                   </Grid>
                   <br></br>
@@ -504,7 +513,7 @@ class PostCreation extends Component {
                     }}
                     label={'Saturday Hours'}
                     onChange={this.onSaturdayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.saturdayTime : ''}
+                    value={this.state.saturdayTime}
                     />
                   </Grid>
                   <br></br>
@@ -520,7 +529,7 @@ class PostCreation extends Component {
                     }}
                     label={'Sunday Hours'}
                     onChange={this.onSundayTimeChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.sundayTime : ''}
+                    value={this.state.sundayTime}
                     />
                   </Grid> 
                   <br></br>
@@ -529,7 +538,7 @@ class PostCreation extends Component {
                     Rate Your Experience
                     <Rating
                     onChange={this.onRatingChange}
-                    defaultValue={this.state.locationState ? this.state.locationState.postDetails.rating : 0}
+                    value={this.state.rating}
                     />
                   </Grid>
                   <br></br>
