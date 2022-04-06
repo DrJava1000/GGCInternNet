@@ -3,11 +3,10 @@ import { Grid, Paper } from "../../../node_modules/@mui/material/index";
 import { FormControl } from "../../../node_modules/@mui/material/index";
 import { Rating } from "../../../node_modules/@mui/material/index";
 import "react-widgets/styles.css";
-//import AdapterDateFns from '@mui/lab/AdapterDateFns';
-//import LocalizationProvider from '@mui/lab/LocalizationProvider';
-//import DatePicker from '@mui/lab/DatePicker';
 import bodyStyles from "../../shared_site_css/body_styles/internal-body.module.css";
+import titleStyle from '../../shared_site_css/button_styles/Button.module.css';
 import { Link } from "react-router-dom";
+import { Typography } from "../../../node_modules/@mui/material/index";
 
 class ForumPost extends Component {
   render() {
@@ -21,88 +20,121 @@ class ForumPost extends Component {
           direction="column"
           sx={{ marginTop: "0px" }}
         >
-          <Grid item xs={1} sm={1} md={1} lg={1} sx={{ marginTop: "10px" }}>
-            <Paper sx={{ marginTop: "0px" }}>
+          <Grid item xs={2} sm={2} md={2} lg={2} sx={{ marginTop: "10px" }}>
+            <Paper>
               <Grid
                 container
                 direction="column"
-                sx={{ width: "850px", padding: "30px", marginBottom: "30px" }}
+                sx={{ width: "550px", padding: "30px", marginBottom: "30px"}}
               >
-                <FormControl>
-                  <img width={100} height={100} src={this.props.logoUrl} />
-                </FormControl>
-                <FormControl>
-                  <h3>{this.props.company}</h3>
-                </FormControl>
-                <FormControl>
-                  <h3>{this.props.jobTitle}</h3>
-                </FormControl>
+                  <img src={this.props.logoUrl} style={{paddingTop:"15px", paddingBottom:"40px", paddingLeft:"10px", paddingRight:"10px",  width:"150px", alignSelf:"center"}}/>
+
+                    <Typography variant="p" className={titleStyle.postTitle}>
+                      Company Name
+                    </Typography>
+                  <p className={titleStyle.postItem}>{this.props.company}</p>
+
                 {
                   this.props.myPost ? <>
                     <div></div>
                   </>: <>
-                    <h5>
-                      <FormControl>
+                      <Typography variant="p" className={titleStyle.postTitle}>
+                        Student Name
+                      </Typography>
                         <Link to="/User_Profile"
-                          state= {{ userId: this.props.userId }}
-                        ><h5>{this.props.posterName}</h5>
+                          state= {{ userId: this.props.userId }} className={titleStyle.postItem} style={{backgroundColor: "#dff0e9"}}
+                        ><p>{this.props.posterName}</p>
                         </Link>
-                      </FormControl>
-                    </h5>
                   </>
                 }
-                <FormControl>
-                  <ul>
+
+                  <Typography variant="p" className={titleStyle.postTitle}>
+                      Job Title
+                    </Typography>
+                    <p className={titleStyle.postItem}>{this.props.jobTitle}</p>
+
+                  <Typography variant="p" className={titleStyle.postTitle} style={{width: "75%"}}>
+                    Job Characteristics
+                  </Typography>
+                  <ul className={titleStyle.postItem} style={{textAlign:"left", width: "66.75%", backgroundColor: "#dff0e9"}} >
                     {(this.props.characteristics || []).map((item) => (
                       <li>{item}</li>
                     ))}
                   </ul>
-                </FormControl>
-                <FormControl>
-                  <h3>{this.props.paymentType}</h3>
-                </FormControl>
-                <FormControl>
-                  <p>{this.props.description}</p>
-                </FormControl>
-                <FormControl>
-                  <h3>{this.props.startDate}</h3>
-                </FormControl>
-                <FormControl>
-                  <h3>{this.props.endDate}</h3>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.mondayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.tuesdayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.wednesdayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.thursdayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.fridayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.saturdayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h5>{this.props.sundayTime}</h5>
-                </FormControl>
-                <FormControl>
-                  <h3><Rating value={this.props.rating} readOnly/></h3>
-                </FormControl>
+
+                  <Typography variant="p" className={titleStyle.postTitle}>
+                    Payment Type
+                  </Typography>
+                  <p className={titleStyle.postItem}>{this.props.paymentType}</p>
+
+                  <Typography variant="p" className={titleStyle.postTitle}>
+                    Experience Description
+                  </Typography>
+                  <p className={titleStyle.postItem} style={{backgroundColor: "#dff0e9"}}>{this.props.description}</p>
+
+
+                  <table style={{borderCollapse:"collapse", width:"80%", alignSelf:"center"}}>
+                    <tr>
+                      <td><p className={titleStyle.datesTitle}>Start Date</p></td>
+                      <td><p className={titleStyle.datesTitle}>End Date</p></td>
+                    </tr>
+                    <tr>
+                      <td><p className={titleStyle.datesItem}>{this.props.startDate}</p></td>
+                      <td><p className={titleStyle.datesItem}>{this.props.endDate}</p></td>
+                    </tr>
+                  </table>
+
+
+                  <table style={{borderCollapse:"collapse", width:"85%", alignSelf:"center", marginBottom:"15px"}}>
+                    <tr>
+                    <td colSpan={2}><p className={titleStyle.daysSection}>Daily Work Hours</p></td>
+                    </tr>
+                    <tr>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysTitle}>Sunday</p></td>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysTitle}>Monday</p></td>
+                    </tr>
+                    <tr>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysItem}>{this.props.sundayTime}</p></td>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysItem}>{this.props.mondayTime}</p></td>
+                    </tr>
+                    <tr>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysTitle}>Tuesday</p></td>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysTitle}>Wednesday</p></td>
+                    </tr>
+                    <tr>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysItem}>{this.props.tuesdayTime}</p></td>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysItem}>{this.props.wednesdayTime}</p></td>
+                    </tr>
+                    <tr>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysTitle}>Thursday</p></td>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysTitle}>Friday</p></td>
+                    </tr>
+                    <tr>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysItem}>{this.props.thursdayTime}</p></td>
+                      <td style={{width: "calc(100%/2)"}}><p className={titleStyle.daysItem}>{this.props.fridayTime}</p></td>
+                    </tr>
+                    <tr>
+                      <td colSpan={2}><p className={titleStyle.daysTitle}>Saturday</p></td>
+                    </tr>
+                    <tr>
+                      <td colSpan={2}><p className={titleStyle.daysItem}>{this.props.saturdayTime}</p></td>
+                    </tr>
+                  </table>
+
+                  <Typography variant="p" className={titleStyle.postTitle}>
+                    Rating
+                  </Typography>
+                  <div className={titleStyle.postItem} style={{paddingTop:"15px"}}><Rating value={this.props.rating} readOnly/></div>
+
                 {
                   this.props.myPost ? <>
                     <h5>
-                      <FormControl>
+                      
                         <Link to="/Post_Edit"
                           state= {{ postDetails: this.props }}
                         ><h5>Edit Post</h5>
                         </Link>
-                      </FormControl>
+                      
                     </h5>
                   </>: <>
                     <div></div>

@@ -23,6 +23,117 @@
     color: white;
 }
 
+.postTitle
+{
+    border: 1.5px outset #176748;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #176748;
+    color: white;
+    font-weight: bold;
+    width: 70%;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.postItem
+{
+    border: 1.5px outset #176748;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #f2f8f5;
+    color: black;
+    width: 70%;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.datesItem
+{
+    border: 1.5px outset #176748;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #f2f8f5;
+    color: black;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.datesTitle
+{
+    border: 1.5px outset #176748;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #176748;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.daysItem
+{
+    border: 1.5px outset #176748;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #dff0e9;
+    color: black;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.daysTitle
+{
+    border: 1.5px outset #176748;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #318061;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.daysSection
+{
+    border: 1.5px outset #176748;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #176748;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .standaloneTitle
 {
     border: 3px outset #176748;
