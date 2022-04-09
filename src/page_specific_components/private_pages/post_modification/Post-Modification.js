@@ -52,6 +52,7 @@ class PostCreation extends Component {
     this.onFridayTimeChange = this.onFridayTimeChange.bind(this);
     this.onSaturdayTimeChange = this.onSaturdayTimeChange.bind(this);
     this.onSundayTimeChange = this.onSundayTimeChange.bind(this);
+    this.onLikeChange = this.onLikeChange.bind(this);
     this.onPostDeletionConfirmation = this.onPostDeletionConfirmation.bind(this);
     this.onDeletePostDialogClick = this.onDeletePostDialogClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -74,6 +75,7 @@ class PostCreation extends Component {
       fridayTime: this.props.location.state ? this.props.location.state.postDetails.fridayTime : "N/A",
       saturdayTime: this.props.location.state ? this.props.location.state.postDetails.saturdayTime : "N/A",
       sundayTime: this.props.location.state ? this.props.location.state.postDetails.sundayTime : "N/A",
+      like: this.props.location.state ? this.props.location.state.postDetails.like : 0,
       id: this.props.location.state ? this.props.location.state.postDetails.id : "",
       openDeletionConfirmation: false,
       editingFinished: false,
@@ -158,6 +160,12 @@ class PostCreation extends Component {
     });
   }
 
+  onLikeChange() {
+    this.setState({
+      like: this.state.like + 1
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -179,7 +187,8 @@ class PostCreation extends Component {
       thursdayTime: this.state.thursdayTime,
       fridayTime: this.state.fridayTime,
       saturdayTime: this.state.saturdayTime,
-      sundayTime: this.state.sundayTime
+      sundayTime: this.state.sundayTime,
+      like: this.state.like
     }).then(() => {
       this.setState({
         editingFinished: true,
@@ -572,6 +581,13 @@ class PostCreation extends Component {
                     onChange={this.onRatingChange}
                     value={this.state.rating}
                     />
+                  </Grid>
+                  <br></br>
+                  <Grid item>
+                    <Button variant="contained" color="success" onClick={this.onLikeChange}>
+                      Like
+                      </Button>
+                      Likes: {this.state.like}
                   </Grid>
                   <br></br>
                   {
