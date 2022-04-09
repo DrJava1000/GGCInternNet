@@ -126,6 +126,10 @@ class ForumPost extends Component {
                   </Typography>
                   <div className={titleStyle.postItem} style={{paddingTop:"15px"}}><Rating value={this.props.rating} readOnly/></div>
 
+                  <Typography variant="p" className={titleStyle.postTitle}>
+                    Likes: {this.props.like}
+                  </Typography>
+                  
                 {
                   this.props.myPost ? <>
                     <h5>
