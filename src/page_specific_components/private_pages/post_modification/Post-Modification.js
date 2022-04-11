@@ -19,11 +19,13 @@ import {
   MenuItem,
   Select,
   InputLabel,
-  Rating
+  Rating,
+  ToggleButton
 } from "../../../../node_modules/@mui/material/index";
 import {
   CheckBoxOutlineBlank,
   CheckBox,
+  DisabledByDefault,
 } from "../../../../node_modules/@mui/icons-material/index";
 import DatePicker from "react-widgets/DatePicker";
 import "react-widgets/styles.css";
@@ -583,6 +585,7 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
+                  {/*Like/Upvote Button*/}
                   <Grid item>
                     <Button variant="contained" color="success" onClick={this.onLikeChange}>
                       Like

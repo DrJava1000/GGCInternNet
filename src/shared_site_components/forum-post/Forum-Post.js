@@ -7,6 +7,7 @@ import bodyStyles from "../../shared_site_css/body_styles/internal-body.module.c
 import titleStyle from '../../shared_site_css/button_styles/Button.module.css';
 import { Link } from "react-router-dom";
 import { Typography } from "../../../node_modules/@mui/material/index";
+import { Button } from "../../../node_modules/@mui/material/index";
 
 class ForumPost extends Component {
   render() {
@@ -129,6 +130,10 @@ class ForumPost extends Component {
                   <Typography variant="p" className={titleStyle.postTitle}>
                     Likes: {this.props.like}
                   </Typography>
+
+                  <Button variant="contained" color="success" onClick={this.onLikeChange}>
+                      Like
+                      </Button>
                   
                 {
                   this.props.myPost ? <>
