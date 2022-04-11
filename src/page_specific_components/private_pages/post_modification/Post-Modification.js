@@ -587,6 +587,16 @@ class PostCreation extends Component {
                   <br></br>
                   {/*Like/Upvote Button*/}
                   <Grid item>
+                    {/*
+                    <ToggleButton
+                    value="check"
+                    selected={hide}
+                    onChange={() => {
+                      setSelected(!hide);
+                    }}>
+                      <CheckIcon />
+                    </ToggleButton>
+                    */}
                     <Button variant="contained" color="success" onClick={this.onLikeChange}>
                       Like
                       </Button>
