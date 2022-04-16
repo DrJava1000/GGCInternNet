@@ -20,7 +20,7 @@ import {
   Select,
   InputLabel,
   Rating,
-  ToggleButton
+  ToggleButton,
 } from "../../../../node_modules/@mui/material/index";
 import {
   CheckBoxOutlineBlank,
@@ -29,7 +29,6 @@ import {
 } from "../../../../node_modules/@mui/icons-material/index";
 import DatePicker from "react-widgets/DatePicker";
 import "react-widgets/styles.css";
-
 
 const icon = <CheckBoxOutlineBlank fontSize="small" />;
 const checkedIcon = <CheckBox fontSize="small" />;
@@ -55,30 +54,67 @@ class PostCreation extends Component {
     this.onSaturdayTimeChange = this.onSaturdayTimeChange.bind(this);
     this.onSundayTimeChange = this.onSundayTimeChange.bind(this);
     this.onLikeChange = this.onLikeChange.bind(this);
-    this.onPostDeletionConfirmation = this.onPostDeletionConfirmation.bind(this);
+    this.onPostDeletionConfirmation =
+      this.onPostDeletionConfirmation.bind(this);
     this.onDeletePostDialogClick = this.onDeletePostDialogClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      jobTitle: this.props.location.state ? this.props.location.state.postDetails.jobTitle : "",
-      description: this.props.location.state ? this.props.location.state.postDetails.description : "",
-      company: this.props.location.state ? this.props.location.state.postDetails.company : "",
+      jobTitle: this.props.location.state
+        ? this.props.location.state.postDetails.jobTitle
+        : "",
+      description: this.props.location.state
+        ? this.props.location.state.postDetails.description
+        : "",
+      company: this.props.location.state
+        ? this.props.location.state.postDetails.company
+        : "",
       logoFile: null,
-      logoUrl: this.props.location.state ? this.props.location.state.postDetails.logoUrl : "",
-      selectedCharacteristics: this.props.location.state ? this.props.location.state.postDetails.characteristics : [],
-      payment: this.props.location.state ? this.props.location.state.postDetails.paymentType : "Paid",
-      startDate: this.props.location.state ? new Date(this.props.location.state.postDetails.startDate) : new Date(),
-      endDate: this.props.location.state ? new Date(this.props.location.state.postDetails.endDate) : new Date(),
-      rating: this.props.location.state ? this.props.location.state.postDetails.rating : 0,
-      mondayTime: this.props.location.state ? this.props.location.state.postDetails.mondayTime : "N/A",
-      tuesdayTime: this.props.location.state ? this.props.location.state.postDetails.tuesdayTime : "N/A",
-      wednesdayTime: this.props.location.state ? this.props.location.state.postDetails.wednesdayTime : "N/A",
-      thursdayTime: this.props.location.state ? this.props.location.state.postDetails.thursdayTime : "N/A",
-      fridayTime: this.props.location.state ? this.props.location.state.postDetails.fridayTime : "N/A",
-      saturdayTime: this.props.location.state ? this.props.location.state.postDetails.saturdayTime : "N/A",
-      sundayTime: this.props.location.state ? this.props.location.state.postDetails.sundayTime : "N/A",
-      like: this.props.location.state ? this.props.location.state.postDetails.like : 0,
-      id: this.props.location.state ? this.props.location.state.postDetails.id : "",
+      logoUrl: this.props.location.state
+        ? this.props.location.state.postDetails.logoUrl
+        : "",
+      selectedCharacteristics: this.props.location.state
+        ? this.props.location.state.postDetails.characteristics
+        : [],
+      payment: this.props.location.state
+        ? this.props.location.state.postDetails.paymentType
+        : "Paid",
+      startDate: this.props.location.state
+        ? new Date(this.props.location.state.postDetails.startDate)
+        : new Date(),
+      endDate: this.props.location.state
+        ? new Date(this.props.location.state.postDetails.endDate)
+        : new Date(),
+      rating: this.props.location.state
+        ? this.props.location.state.postDetails.rating
+        : 0,
+      mondayTime: this.props.location.state
+        ? this.props.location.state.postDetails.mondayTime
+        : "N/A",
+      tuesdayTime: this.props.location.state
+        ? this.props.location.state.postDetails.tuesdayTime
+        : "N/A",
+      wednesdayTime: this.props.location.state
+        ? this.props.location.state.postDetails.wednesdayTime
+        : "N/A",
+      thursdayTime: this.props.location.state
+        ? this.props.location.state.postDetails.thursdayTime
+        : "N/A",
+      fridayTime: this.props.location.state
+        ? this.props.location.state.postDetails.fridayTime
+        : "N/A",
+      saturdayTime: this.props.location.state
+        ? this.props.location.state.postDetails.saturdayTime
+        : "N/A",
+      sundayTime: this.props.location.state
+        ? this.props.location.state.postDetails.sundayTime
+        : "N/A",
+      like: this.props.location.state
+        ? this.props.location.state.postDetails.like
+        : 0,
+      id: this.props.location.state
+        ? this.props.location.state.postDetails.id
+        : "",
       openDeletionConfirmation: false,
       editingFinished: false,
     };
@@ -104,67 +140,67 @@ class PostCreation extends Component {
 
   onStartDateChange(e, date) {
     this.setState({
-        startDate: date
+      startDate: date,
     });
   }
 
   onEndDateChange(e, date) {
     this.setState({
-        endDate: date
+      endDate: date,
     });
   }
 
   onRatingChange(e) {
     this.setState({
-        rating: e.target.value
+      rating: e.target.value,
     });
   }
 
   onMondayTimeChange(e) {
     this.setState({
-        mondayTime: e.target.value
+      mondayTime: e.target.value,
     });
   }
 
   onTuesdayTimeChange(e) {
     this.setState({
-        tuesdayTime: e.target.value
+      tuesdayTime: e.target.value,
     });
   }
 
   onWednesdayTimeChange(e) {
     this.setState({
-        wednesdayTime: e.target.value
+      wednesdayTime: e.target.value,
     });
   }
 
   onThursdayTimeChange(e) {
     this.setState({
-        thursdayTime: e.target.value
+      thursdayTime: e.target.value,
     });
   }
 
   onFridayTimeChange(e) {
     this.setState({
-        fridayTime: e.target.value
+      fridayTime: e.target.value,
     });
   }
 
   onSaturdayTimeChange(e) {
     this.setState({
-        saturdayTime: e.target.value
+      saturdayTime: e.target.value,
     });
   }
 
   onSundayTimeChange(e) {
     this.setState({
-        sundayTime: e.target.value
+      sundayTime: e.target.value,
     });
   }
 
   onLikeChange() {
     this.setState({
-      like: this.state.like + 1
+      like: this.state.like + 1,
     });
   }
 
@@ -190,7 +226,7 @@ class PostCreation extends Component {
       fridayTime: this.state.fridayTime,
       saturdayTime: this.state.saturdayTime,
       sundayTime: this.state.sundayTime,
-      like: this.state.like
+      like: this.state.like,
     }).then(() => {
       this.setState({
         editingFinished: true,
@@ -216,24 +252,24 @@ class PostCreation extends Component {
     this.setState({ payment: e.target.value });
   };
 
-  onPostDeletionConfirmation(){
+  onPostDeletionConfirmation() {
     deletePost(this.state.id).then(() => {
       this.setState({
-        editingFinished: true
+        editingFinished: true,
       });
     });
   }
 
-  onDeletePostDialogClick(){
+  onDeletePostDialogClick() {
     this.setState({
-      openDeletionConfirmation: !this.state.openDeletionConfirmation
-    })
+      openDeletionConfirmation: !this.state.openDeletionConfirmation,
+    });
   }
 
-  componentDidMount(){
-    if(this.props.operation === "edit_and_delete"){
+  componentDidMount() {
+    if (this.props.operation === "edit_and_delete") {
       this.setState({
-        id: this.props.location.state.postDetails.id
+        id: this.props.location.state.postDetails.id,
       });
     }
   }
@@ -278,43 +314,62 @@ class PostCreation extends Component {
                   paddingRight: "40px",
                   paddingTop: "40px",
                   paddingBottom: "40px",
-                  marginTop:"30px",
-                  marginBottom:"30px",
-                  borderRadius: "5px"
+                  marginTop: "30px",
+                  marginBottom: "30px",
+                  borderRadius: "5px",
                 }}
               >
                 <Typography variant="h6" className={titleStyle.standaloneTitle}>
-                  {
-                    this.props.operation === "create" ?
-                      <span>Create a Forum Post</span> :
-                      <span>Edit Your Forum Post</span>
-                  }
+                  {this.props.operation === "create" ? (
+                    <span>Create a Forum Post</span>
+                  ) : (
+                    <span>Edit Your Forum Post</span>
+                  )}
                 </Typography>
 
-                <div style={{height: "15px"}}></div>
+                <div style={{ height: "15px" }}></div>
 
                 <form onSubmit={this.onSubmit}>
-                <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
-                    <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Company Logo *</p>
+                  <Grid
+                    item
+                    sx={{
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "15px",
+                      paddingLeft: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      Company Logo *
+                    </p>
+                    {/* form input to upload a new logo file */}
                     <input
                       type="file"
                       name="Logo"
                       onChange={this.onFileUpload}
                     />
-                  {logoUrl && (
-                    <img
-                      src={logoUrl}
-                      style={{
-                        paddingTop: "15px",
-                        height: "175px",
-                        width: "175px",
-                      }}
-                    />
-                  )}
-                </Grid>
-
-                <br></br>
-
+                    {/* if a logo is selected, display it */}
+                    {logoUrl && (
+                      <img
+                        src={logoUrl}
+                        style={{
+                          paddingTop: "15px",
+                          height: "175px",
+                          width: "175px",
+                        }}
+                      />
+                    )}
+                  </Grid>
+                  <br></br>
                   <Grid item>
                     <TextField
                       type="text"
@@ -329,8 +384,8 @@ class PostCreation extends Component {
                       value={this.state.company}
                       required
                     />
-                  </Grid><br></br>
-                  
+                  </Grid>
+                  <br></br>
                   <Grid item>
                     <TextField
                       type="text"
@@ -348,6 +403,7 @@ class PostCreation extends Component {
                   </Grid>{" "}
                   <br></br>
                   <Grid item>
+                    {/* autocomplete input that allows us to select multiple characteristics */}
                     <Autocomplete
                       multiple
                       required
@@ -389,8 +445,28 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
-                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
-                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Internship Payment Type *</p>
+                  <Grid
+                    item
+                    sx={{
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "15px",
+                      paddingLeft: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      Internship Payment Type *
+                    </p>
+                    {/* select internship payment type using material ui select input */}
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -398,7 +474,7 @@ class PostCreation extends Component {
                       label="payment Type"
                       onChange={this.handleChpaymentChange}
                       required
-                      style ={{width: "97.25%"}}
+                      style={{ width: "97.25%" }}
                     >
                       <MenuItem value={"Paid"}>Paid</MenuItem>
                       <MenuItem value={"Unpaid"}>Unpaid</MenuItem>
@@ -424,12 +500,36 @@ class PostCreation extends Component {
                   </Grid>{" "}
                   <br></br>
                   {/*This is where StartDate goes*/}
-                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
-                    <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Start Date *</p>
+                  <Grid
+                    item
+                    sx={{
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "15px",
+                      paddingLeft: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      Start Date *
+                    </p>
                     <DatePicker
-                        onChange={this.onStartDateChange}
-                        defaultValue={this.state.startDate}
-                        style={{width: "97.25%", color:"#666666", fontSize:"17px", fontFamily:"Arial"}}
+                      onChange={this.onStartDateChange}
+                      defaultValue={this.state.startDate}
+                      style={{
+                        width: "97.25%",
+                        color: "#666666",
+                        fontSize: "17px",
+                        fontFamily: "Arial",
+                      }}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -442,12 +542,36 @@ class PostCreation extends Component {
                   </Grid>
                   <br></br>
                   {/*This is where EndDate goes*/}
-                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
-                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>End Date *</p>
+                  <Grid
+                    item
+                    sx={{
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "15px",
+                      paddingLeft: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      End Date *
+                    </p>
                     <DatePicker
-                        onChange={this.onEndDateChange}
-                        defaultValue={this.state.endDate}
-                        style={{width: "97.25%", color:"#666666", fontSize:"17px", fontFamily:"Arial"}}
+                      onChange={this.onEndDateChange}
+                      defaultValue={this.state.endDate}
+                      style={{
+                        width: "97.25%",
+                        color: "#666666",
+                        fontSize: "17px",
+                        fontFamily: "Arial",
+                      }}
                     />
                     {/*
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -457,131 +581,206 @@ class PostCreation extends Component {
                         />
                     </LocalizationProvider>
                     */}
-                  </Grid> 
-                  <br></br>
-                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '15px', paddingLeft: '15px', paddingRight: '15px', marginTop: '15px', textAlign: 'left'}}>
-                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Describe Your Average Work Week *</p>
-                  <p style={{fontSize:"13px", color: "#9e9e9e", fontFamily:"Arial"}}>i.e. 8:00 AM - 4:00 PM or N/A</p>
-                  <div style={{height: "15px"}}></div>
-                  {/*This is where Sunday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Sunday Hours'}
-                    onChange={this.onSundayTimeChange}
-                    value={this.state.sundayTime}
-                    />
                   </Grid>
                   <br></br>
-                  {/*This is where Monday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
+                  <Grid
+                    item
                     sx={{
-                        width: '100%',
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "15px",
+                      paddingLeft: "15px",
+                      paddingRight: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
                     }}
-                    label={'Monday Hours'}
-                    onChange={this.onMondayTimeChange}
-                    value={this.state.mondayTime}
-                    />
-                  </Grid>
-                  <br></br>
-                  {/*This is where Tuesday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Tuesday Hours'}
-                    onChange={this.onTuesdayTimeChange}
-                    value={this.state.tuesdayTime}
-                    />
-                  </Grid>
-                  <br></br>
-                  {/*This is where Wednesday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Wednesday Hours'}
-                    onChange={this.onWednesdayTimeChange}
-                    value={this.state.wednesdayTime}
-                    />
-                  </Grid>
-                  <br></br>
-                  {/*This is where Thursday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Thursday Hours'}
-                    onChange={this.onThursdayTimeChange}
-                    value={this.state.thursdayTime}
-                    />
-                  </Grid>
-                  <br></br>
-                  {/*This is where Friday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Friday Hours'}
-                    onChange={this.onFridayTimeChange}
-                    value={this.state.fridayTime}
-                    />
-                  </Grid>
-                  <br></br>
-                  {/*This is where Saturday Time goes*/}
-                  <Grid item>
-                    <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: 'center', fontSize: '14px', color:'#666666'}
-                    }}
-                    sx={{
-                        width: '100%'
-                    }}
-                    label={'Saturday Hours'}
-                    onChange={this.onSaturdayTimeChange}
-                    value={this.state.saturdayTime}
-                    />
-                  </Grid>
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      Describe Your Average Work Week *
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "#9e9e9e",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      i.e. 8:00 AM - 4:00 PM or N/A
+                    </p>
+                    <div style={{ height: "15px" }}></div>
+                    {/*This is where Sunday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Sunday Hours"}
+                        onChange={this.onSundayTimeChange}
+                        value={this.state.sundayTime}
+                      />
+                    </Grid>
+                    <br></br>
+                    {/*This is where Monday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Monday Hours"}
+                        onChange={this.onMondayTimeChange}
+                        value={this.state.mondayTime}
+                      />
+                    </Grid>
+                    <br></br>
+                    {/*This is where Tuesday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Tuesday Hours"}
+                        onChange={this.onTuesdayTimeChange}
+                        value={this.state.tuesdayTime}
+                      />
+                    </Grid>
+                    <br></br>
+                    {/*This is where Wednesday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Wednesday Hours"}
+                        onChange={this.onWednesdayTimeChange}
+                        value={this.state.wednesdayTime}
+                      />
+                    </Grid>
+                    <br></br>
+                    {/*This is where Thursday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Thursday Hours"}
+                        onChange={this.onThursdayTimeChange}
+                        value={this.state.thursdayTime}
+                      />
+                    </Grid>
+                    <br></br>
+                    {/*This is where Friday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Friday Hours"}
+                        onChange={this.onFridayTimeChange}
+                        value={this.state.fridayTime}
+                      />
+                    </Grid>
+                    <br></br>
+                    {/*This is where Saturday Time goes*/}
+                    <Grid item>
+                      <TextField
+                        type="text"
+                        inputProps={{
+                          style: {
+                            textAlign: "center",
+                            fontSize: "14px",
+                            color: "#666666",
+                          },
+                        }}
+                        sx={{
+                          width: "100%",
+                        }}
+                        label={"Saturday Hours"}
+                        onChange={this.onSaturdayTimeChange}
+                        value={this.state.saturdayTime}
+                      />
+                    </Grid>
                   </Grid>
                   <br></br>
                   {/*This is where Rating goes*/}
-                  <Grid item sx={{border: 1, borderColor: '#c4c4c4', borderRadius: 2, paddingBottom: '13px', paddingLeft: '15px', marginTop: '15px', textAlign: 'left'}}>
-                  <p style={{fontSize:"15.5px", color: "#666666", fontFamily:"Arial"}}>Rate Your Experience *</p>
+                  <Grid
+                    item
+                    sx={{
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "13px",
+                      paddingLeft: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      Rate Your Experience *
+                    </p>
                     <Rating
-                    onChange={this.onRatingChange}
-                    value={this.state.rating}
+                      onChange={this.onRatingChange}
+                      value={this.state.rating}
                     />
                   </Grid>
                   <br></br>
@@ -597,14 +796,17 @@ class PostCreation extends Component {
                       <CheckIcon />
                     </ToggleButton>
                     */}
-                    <Button variant="contained" color="success" onClick={this.onLikeChange}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={this.onLikeChange}
+                    >
                       Like
-                      </Button>
-                      Likes: {this.state.like}
+                    </Button>
+                    Likes: {this.state.like}
                   </Grid>
                   <br></br>
-                  {
-                    this.props.operation === "create" ? (
+                  {this.props.operation === "create" ? (
                     <input
                       className={titleStyle.createPostButton}
                       type="submit"
@@ -619,7 +821,7 @@ class PostCreation extends Component {
                         name="Save"
                         value="Save"
                       />
-                      <div style={{height: "10px"}}></div>
+                      <div style={{ height: "10px" }}></div>
 
                       {/* Post Deletion Dialog*/}
                       <div>
@@ -627,7 +829,7 @@ class PostCreation extends Component {
                           type="button"
                           name="Delete"
                           value="Delete"
-                          className={titleStyle.createPostButton} 
+                          className={titleStyle.createPostButton}
                           onClick={this.onDeletePostDialogClick}
                         />
                         <Dialog
@@ -636,14 +838,37 @@ class PostCreation extends Component {
                           aria-labelledby="alert-dialog-title"
                           aria-describedby="alert-dialog-description"
                         >
-                          <DialogTitle id="alert-dialog-title" style={{backgroundColor:"#176748", fontFamily:"Arial", color:"white", fontWeight:"bold"}}>
+                          <DialogTitle
+                            id="alert-dialog-title"
+                            style={{
+                              backgroundColor: "#176748",
+                              fontFamily: "Arial",
+                              color: "white",
+                              fontWeight: "bold",
+                            }}
+                          >
                             Are you sure you want to DELETE this post?
                           </DialogTitle>
-                          <DialogActions style={{backgroundColor:"#f2f8f5", fontFamily:"Arial"}} alignItems="center">
-                            <Button onClick={this.onPostDeletionConfirmation} style={{fontFamily:"Arial"}} autoFocus>
+                          <DialogActions
+                            style={{
+                              backgroundColor: "#f2f8f5",
+                              fontFamily: "Arial",
+                            }}
+                            alignItems="center"
+                          >
+                            <Button
+                              onClick={this.onPostDeletionConfirmation}
+                              style={{ fontFamily: "Arial" }}
+                              autoFocus
+                            >
                               Yes
                             </Button>
-                            <Button onClick={this.onDeletePostDialogClick} style={{fontFamily:"Arial"}}>No</Button>
+                            <Button
+                              onClick={this.onDeletePostDialogClick}
+                              style={{ fontFamily: "Arial" }}
+                            >
+                              No
+                            </Button>
                           </DialogActions>
                         </Dialog>
                       </div>

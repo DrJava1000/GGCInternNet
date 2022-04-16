@@ -36,6 +36,11 @@ class PageFeed extends Component {
     }
   }
 
+  /*
+    fires when the dropdown option is changed, it sorts the forum posts based
+    on the number of likes for each of the posts. the sorting could be done in ascending
+    or descending order
+  */
   handleLikesOrderChange = (e) => {
     if (e.target.value === "desc") {
       this.setState({
