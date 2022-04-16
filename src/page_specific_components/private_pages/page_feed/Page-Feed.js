@@ -5,7 +5,7 @@ import AppFooter from "../../../shared_site_components/page-footer/footer";
 import { fetchAllPosts, fetchMyPosts } from "../../../firebase/ops/post";
 import ForumPost from "../../../shared_site_components/forum-post/Forum-Post";
 import buttonStyles from "../../../shared_site_css/button_styles/Button.module.css";
-import AuthContext from '../../../context/AuthContext';
+import AuthContext from "../../../context/AuthContext";
 
 class PageFeed extends Component {
   static contextType = AuthContext;
@@ -18,23 +18,39 @@ class PageFeed extends Component {
   }
 
   componentDidMount() {
-    if(this.props.feedType === "main_posts"){
+    if (this.props.feedType === "main_posts") {
       let fetchPostsPromise = fetchAllPosts();
       fetchPostsPromise.then((posts) => {
         this.setState({
           feedPosts: posts,
         });
       });
-    }else{
+    } else {
       setTimeout(() => {
         fetchMyPosts(this.context.currentUserID).then((posts) => {
           this.setState({
             feedPosts: posts,
           });
-        })},
-      3000);
+        });
+      }, 3000);
     }
   }
+
+  handleLikesOrderChange = (e) => {
+    if (e.target.value === "desc") {
+      this.setState({
+        feedPosts: this.state.feedPosts.sort((a, b) =>
+          parseInt(a.like) < parseInt(b.like) ? 1 : -1
+        ),
+      });
+    } else {
+      this.setState({
+        feedPosts: this.state.feedPosts.sort((a, b) =>
+          parseInt(a.like) > parseInt(b.like) ? 1 : -1
+        ),
+      });
+    }
+  };
 
   render() {
     return (
@@ -60,31 +76,38 @@ class PageFeed extends Component {
           ]}
         />
         <div className={bodyStyles.ScrollingContent}>
-          <div className={bodyStyles.ForumBody} style={{paddingTop:"30px", paddingBottom:"30px"}}>
-            {
-              this.props.feedType === "main_posts" ? <>
+          <div
+            className={bodyStyles.ForumBody}
+            style={{ paddingTop: "30px", paddingBottom: "30px" }}
+          >
+            {this.props.feedType === "main_posts" ? (
+              <>
                 <h5>
                   <a
-                  className={buttonStyles.createPostButton}
-                  href="/Post_Creation"
+                    className={buttonStyles.createPostButton}
+                    href="/Post_Creation"
                   >
                     Create New Post
                   </a>
                 </h5>
-              </>: <>
+              </>
+            ) : (
+              <>
                 <div></div>
               </>
-            }
-            {
-              this.props.feedType === "main_posts" ? 
-                this.state.feedPosts.map((post) => (
+            )}
+            <select onChange={this.handleLikesOrderChange}>
+              <option value="">Select Likes Order</option>
+              <option value="desc">Descending</option>
+              <option value="asc">Ascending</option>
+            </select>
+            {this.props.feedType === "main_posts"
+              ? this.state.feedPosts.map((post) => (
                   <ForumPost key={post.id} {...post} />
-                )) 
-              :
-                this.state.feedPosts.map((post) => (
-                  <ForumPost key={post.id} {...post} myPost={true}/>
                 ))
-            }
+              : this.state.feedPosts.map((post) => (
+                  <ForumPost key={post.id} {...post} myPost={true} />
+                ))}
           </div>
           <AppFooter />
         </div>
