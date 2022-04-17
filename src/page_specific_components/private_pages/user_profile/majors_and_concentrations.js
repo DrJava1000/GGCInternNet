@@ -46,6 +46,11 @@ const ggc_degrees = [
             "Liberal Arts"
         ]
     },{
+        major: "Cybersecurity Certificate", 
+        concentrations: [
+            "Cybersecurity Certificate"
+        ]
+    },{
         major: "Education", 
         concentrations: [
             "Early Childhood Education",
@@ -128,6 +133,10 @@ const ggc_degrees = [
     },{
         major: "Nexus Degree", 
         concentrations: [
+            "Motion Picture Set Lighting",
+            "Production Design",
+            "Production for Film & Television",
+            "Professional Editing Film & Television",
             "Professional Sound Design for Film & Television"
         ]
     },{
