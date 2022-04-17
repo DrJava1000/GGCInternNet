@@ -10,6 +10,12 @@ import { Typography } from "../../../node_modules/@mui/material/index";
 import { Button } from "../../../node_modules/@mui/material/index";
 
 class ForumPost extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  
+
   render() {
     return (
       <Fragment>
@@ -131,7 +137,6 @@ class ForumPost extends Component {
                     Likes: {this.props.like}
                   </Typography>
 
-                  {/* OnClick should redirect to that post's edit page, but with the 'operation' param set to 'like' */}
                   <Button variant="contained" color="success" onClick={this.onLikeChange}>
                       Like
                       </Button>
