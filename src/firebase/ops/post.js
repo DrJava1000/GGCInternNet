@@ -99,3 +99,6 @@ export async function deletePost(postID) {
     console.log(error)
   });
 }
+
+export async function changeLike(postID) {
+}

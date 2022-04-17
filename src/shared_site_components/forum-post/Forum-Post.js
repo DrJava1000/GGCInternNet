@@ -131,10 +131,10 @@ class ForumPost extends Component {
                     Likes: {this.props.like}
                   </Typography>
 
+                  {/* OnClick should redirect to that post's edit page, but with the 'operation' param set to 'like' */}
                   <Button variant="contained" color="success" onClick={this.onLikeChange}>
                       Like
                       </Button>
-                  
                 {
                   this.props.myPost ? <>
                     <h5>
