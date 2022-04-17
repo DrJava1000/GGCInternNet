@@ -101,10 +101,10 @@ class PageFeed extends Component {
                 <div></div>
               </>
             )}
-            <select onChange={this.handleLikesOrderChange}>
-              <option value="">Select Likes Order</option>
-              <option value="desc">Descending</option>
-              <option value="asc">Ascending</option>
+            <select className={buttonStyles.likeSortButton} onChange={this.handleLikesOrderChange}>
+              <option className={buttonStyles.likeSortOptions} value="">Select Likes Order</option>
+              <option className={buttonStyles.likeSortOptions} value="desc">Descending</option>
+              <option className={buttonStyles.likeSortOptions} value="asc">Ascending</option>
             </select>
             {this.props.feedType === "main_posts"
               ? this.state.feedPosts.map((post) => (
