@@ -101,8 +101,12 @@ class PageFeed extends Component {
                 <div></div>
               </>
             )}
+            {/*}
+            <a className={buttonStyles.likeSortButton}>
+            Order By Likes:
+            </a>*/}
             <select className={buttonStyles.likeSortButton} onChange={this.handleLikesOrderChange}>
-              <option className={buttonStyles.likeSortOptions} value="">Select Likes Order</option>
+              <option className={buttonStyles.likeSortOptions} value="">Order By Likes</option>
               <option className={buttonStyles.likeSortOptions} value="desc">Descending</option>
               <option className={buttonStyles.likeSortOptions} value="asc">Ascending</option>
             </select>

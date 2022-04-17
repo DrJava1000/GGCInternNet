@@ -181,10 +181,12 @@
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
     text-align: center;
     text-decoration: none;
+    font-size: 19px;
+    font-weight: bold;  
 }
 
 .likeSortButton:hover
@@ -196,7 +198,9 @@
 }
 
 .likeSortOptions
-{   padding-left: 50px;
-    padding-right: 50px;
+{   padding-left: 10px;
+    padding-right: 10px;
     text-align:center;
+    font-size: 17px;
+    font-weight: bold;
 }
