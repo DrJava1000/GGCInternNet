@@ -8,13 +8,17 @@ import titleStyle from '../../shared_site_css/button_styles/Button.module.css';
 import { Link } from "react-router-dom";
 import { Typography } from "../../../node_modules/@mui/material/index";
 import { Button } from "../../../node_modules/@mui/material/index";
+import { changeLike } from "../../firebase/ops/post";
 
 class ForumPost extends Component {
   constructor(props) {
     super(props);
   }
 
-  
+  handleLike(likeCount, postID) {
+    console.log("Entered 'handleLike' method within Forum-Post.js: " + postID);
+    changeLike(likeCount, postID);
+  }
 
   render() {
     return (
@@ -137,7 +141,7 @@ class ForumPost extends Component {
                     Likes: {this.props.like}
                   </Typography>
 
-                  <Button variant="contained" color="success" onClick={this.onLikeChange}>
+                  <Button variant="contained" color="success" onClick={this.handleLike(this.props.like, this.props.postID)}>
                       Like
                       </Button>
                 {
