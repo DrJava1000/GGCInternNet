@@ -172,3 +172,35 @@
     color: #176748;
     cursor: pointer;
 }
+
+.likeSortButton
+{
+    border: 3px outset #b5c8bd;
+    border-radius: 15px;
+    background-color: #176748;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 19px;
+    font-weight: bold;  
+}
+
+.likeSortButton:hover
+{
+    background-color: #ffffff;
+    font-weight: bold; 
+    color: #176748;
+    cursor: pointer;
+}
+
+.likeSortOptions
+{   padding-left: 10px;
+    padding-right: 10px;
+    text-align:center;
+    font-size: 17px;
+    font-weight: bold;
+}
