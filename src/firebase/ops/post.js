@@ -99,3 +99,13 @@ export async function deletePost(postID) {
     console.log(error)
   });
 }
+
+export async function changeLike(like, id) {
+  console.log("Entered 'changeLike' method within post.js: " + id + " " + like);
+  
+  var postRef = doc(db, "posts", id);
+
+  var postDetails = {like: like + 1};
+
+  await setDoc(postRef, postDetails, { merge: true });
+}
