@@ -3,7 +3,7 @@ import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
 import { loadUserProfile, updateUserProfile } from '../../../firebase/ops/profile';
 import React, { Component, Fragment, } from "react";
-import { ggc_degrees } from './majors_and_concentrations';
+import { ggc_degrees } from '../../../shared_js_modules/majors_and_concentrations';
 import { Button, Grid, MenuItem } from '../../../../node_modules/@mui/material/index';
 import { TextField } from '../../../../node_modules/@mui/material/index';
 import { Typography } from '../../../../node_modules/@mui/material/index';
