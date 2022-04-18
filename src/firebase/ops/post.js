@@ -100,10 +100,12 @@ export async function deletePost(postID) {
   });
 }
 
-export async function changeLike(likeCount, postID) {
-  console.log("Entered 'changeLike' method within post.js: " + postID + " " + likeCount);
+export async function changeLike(like, id) {
+  console.log("Entered 'changeLike' method within post.js: " + id + " " + like);
   
-  var postRef = doc(db, "posts", postID);
+  var postRef = doc(db, "posts", id);
 
-  await setDoc(postRef, likeCount + 1, postID);
+  var postDetails = {like: like + 1};
+
+  await setDoc(postRef, postDetails, { merge: true });
 }

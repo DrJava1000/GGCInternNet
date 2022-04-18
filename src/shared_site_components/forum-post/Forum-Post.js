@@ -13,11 +13,19 @@ import { changeLike } from "../../firebase/ops/post";
 class ForumPost extends Component {
   constructor(props) {
     super(props);
+
+    //Local like counter
+    this.handleLike = this.handleLike.bind(this);
+
+    this.state = {
+      hide: false
+    };
   }
 
-  handleLike(likeCount, postID) {
-    console.log("Entered 'handleLike' method within Forum-Post.js: " + postID);
-    changeLike(likeCount, postID);
+  handleLike() {
+    console.log("Entered 'handleLike' method within Forum-Post.js");
+    this.setState({hide: true});
+    changeLike(this.props.like, this.props.id);
   }
 
   render() {
@@ -141,7 +149,7 @@ class ForumPost extends Component {
                     Likes: {this.props.like}
                   </Typography>
 
-                  <Button variant="contained" color="success" onClick={this.handleLike(this.props.like, this.props.postID)}>
+                  <Button variant="contained" color="success" onClick={this.handleLike} disabled={this.state.hide}>
                       Like
                       </Button>
                 {
