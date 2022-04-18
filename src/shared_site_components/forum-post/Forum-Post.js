@@ -24,9 +24,19 @@ class ForumPost extends Component {
 
   handleLike() {
     console.log("Entered 'handleLike' method within Forum-Post.js");
-    this.setState({hide: true});
-    changeLike(this.props.like, this.props.id);
+    {this.state.hide === false ? (
+      this.setState({hide:true})
+    ) : (
+      this.setState({hide:false})
+    )}
+    changeLike(this.props.like, this.props.id, this.state.hide);
   }
+
+  //handleLikeRevert() {
+    //console.log("Entered 'handleLike' method within Forum-Post.js");
+    //this.setState({hide: false});
+    //changeLike(this.props.like, this.props.id, this.props.hide);
+  //}
 
   render() {
     return (
@@ -149,9 +159,37 @@ class ForumPost extends Component {
                     Likes: {this.props.like}
                   </Typography>
 
-                  <Button variant="contained" color="success" onClick={this.handleLike} disabled={this.state.hide}>
+                  {this.state.hide === false ? (
+                    <Button 
+                    variant="contained" 
+                    color="success"
+                    onClick={this.handleLike} 
+                    //disabled={this.state.hide}
+                    >
+                        Like
+                        </Button>
+                   ) : (
+                    <Button 
+                    variant="contained" 
+                    color="error"
+                    onClick={this.handleLike} 
+                    //disabled={this.state.hide}
+                    >
+                        Un-Like
+                        </Button>
+                   )
+                  }
+
+                  {/* 
+                  <Button 
+                  variant="contained" 
+                  color="success"
+                  onClick={this.handleLike} 
+                  //disabled={this.state.hide}
+                  >
                       Like
                       </Button>
+                  */}
                 {
                   this.props.myPost ? <>
                     <h5>
