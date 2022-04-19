@@ -8,6 +8,9 @@ import {
   getDoc, 
   where, 
   query, 
+  orderBy,
+  startAt,
+  endAt,
   deleteDoc 
 } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -41,13 +44,21 @@ export async function fetchAllPosts() {
 }
 
 // MY POSTS FEED: FETCH CURRENT USER'S POSTS
-export async function fetchMyPosts(userId) {
+export async function fetchMyPosts(userId, filterOptions) {
   const postsRef = collection(db, "posts");
   const myPosts = [];
 
+  var myPostsQuery;
+
   // Create a post query that searches for posts tagged with the current
-  // user's id
-  const myPostsQuery = query(postsRef, where("userId", "==", userId)); 
+  // user's id and with a specific field filter
+  switch(filterOptions.filterType){
+    case 'company': 
+      myPostsQuery = query(postsRef, where("userId", "==", userId), orderBy("company"), 
+      startAt(filterOptions.companySearchQuery), endAt(filterOptions.companySearchQuery + '\uf8ff')); break;
+    default: 
+      myPostsQuery = query(postsRef, where("userId", "==", userId)); 
+  }
 
   const myPostsQuerySnapshot = await getDocs(myPostsQuery);
   myPostsQuerySnapshot.forEach((post) => {
