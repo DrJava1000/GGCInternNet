@@ -27,6 +27,7 @@ class PageFeed extends Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onMajorChange = this.onMajorChange.bind(this);
     this.onConcentrationChange = this.onConcentrationChange.bind(this);
+    this.onSearch = this.onSearch.bind(this);
 
     this.state = {
       feedPosts: [],
@@ -63,7 +64,7 @@ class PageFeed extends Component {
       });
     } else {
       setTimeout(() => {
-        fetchMyPosts(this.context.currentUserID).then((posts) => {
+        fetchMyPosts(this.context.currentUserID, {}).then((posts) => {
           this.setState({
             feedPosts: posts,
           });
@@ -147,6 +148,31 @@ class PageFeed extends Component {
     });
   }
 
+  onSearch(e){
+    e.preventDefault(); 
+    
+    if (this.props.feedType === "main_posts") {
+      let fetchPostsPromise = fetchAllPosts();
+      fetchPostsPromise.then((posts) => {
+        this.setState({
+          feedPosts: posts,
+        });
+      });
+    } else if(this.props.feedType === "my_posts"){
+      setTimeout(() => {
+        fetchMyPosts(this.context.currentUserID, {
+          filterType: this.state.filterType,
+          companySearchQuery: this.state.selectedCompanyName
+        }).then((posts) => {
+          console.log(posts)
+          this.setState({
+            feedPosts: posts,
+          });
+        });
+      }, 3000);
+    }
+  }
+
   /**
    * @name render
    * 
@@ -198,11 +224,18 @@ class PageFeed extends Component {
               </>
             )}
             {/* Search Bar */}
-            <form>
+            <form onSubmit={this.onSearch}>
               {/* Filter Selection Dropdown*/}
               <select className={buttonStyles.likeSortButton} onChange={this.onFilterChange}>
                 <option className={buttonStyles.likeSortOptions} value="company">Filter by Company</option>
-                <option className={buttonStyles.likeSortOptions} value="major/concentration">Filter by Major/Concentration</option>
+                {
+                  // Remove the major/concentration filter for 'My Posts' page as 
+                  // this filter is for profiles and all posts in the current user's profile
+                  // don't change 
+                  this.props.feedType === 'main_posts' ?
+                    <option className={buttonStyles.likeSortOptions} value="major/concentration">Filter by Major/Concentration</option>
+                  : <div></div>
+                }
               </select>&nbsp;
               {
                 // Company Name Search Query (Text):
