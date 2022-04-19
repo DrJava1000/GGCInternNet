@@ -173,4 +173,14 @@ const ggc_degrees = [
     }
 ]
 
+// GET LIST OF CONCENTRATIONS BASED ON 
+// SELECTED MAJOR
+export function getConcentrations(major){
+    for(let step = 0; step < ggc_degrees.length; step++){
+        if(ggc_degrees[step].major === major){
+            return ggc_degrees[step].concentrations;
+        }
+    }
+}
+
 export { ggc_degrees }; 
