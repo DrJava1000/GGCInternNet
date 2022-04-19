@@ -52,17 +52,20 @@ class PageFeed extends Component {
    * @name componentDidMount
    * @author Ryan Gambrell
    * React Lifecycle Function: Fetches a different list of posts
-   * based on the feedType passed in.
+   * based on the feedType passed in. This lifecycle method handles
+   * the initial loading of a non-filtered feed. 
    */
   componentDidMount() {
+    // Fetch All Posts (no filter)
     if (this.props.feedType === "main_posts") {
-      let fetchPostsPromise = fetchAllPosts();
+      let fetchPostsPromise = fetchAllPosts({});
       fetchPostsPromise.then((posts) => {
         this.setState({
           feedPosts: posts,
         });
       });
     } else {
+      // Fetch My Posts (with no filter)
       setTimeout(() => {
         fetchMyPosts(this.context.currentUserID, {}).then((posts) => {
           this.setState({
@@ -148,23 +151,40 @@ class PageFeed extends Component {
     });
   }
 
+  /**
+   * @name onSearch
+   * @author Ryan Gambrell
+   * Utilize filter type and search queries (or selected dropdowns) to
+   * search and bring down a list of matching posts
+   * @param e Event the event containing the details of the search form submission
+   */
   onSearch(e){
     e.preventDefault(); 
     
     if (this.props.feedType === "main_posts") {
-      let fetchPostsPromise = fetchAllPosts();
+      // Fetch All Posts (using company or major/concentration filters)
+      // For the main post feed, pass through all 
+      // filter-related options and search queries 
+      // as the filter type will be used to determine
+      // which is relevant. 
+      let fetchPostsPromise = fetchAllPosts({
+        filterType: this.state.filterType,
+        companySearchQuery: this.state.selectedCompanyName,
+        major: this.state.selectedMajor,
+        concentration: this.state.selectedConcentration
+      });
       fetchPostsPromise.then((posts) => {
         this.setState({
           feedPosts: posts,
         });
       });
     } else if(this.props.feedType === "my_posts"){
+      // Fetch My Posts (using company filter)
       setTimeout(() => {
         fetchMyPosts(this.context.currentUserID, {
           filterType: this.state.filterType,
           companySearchQuery: this.state.selectedCompanyName
         }).then((posts) => {
-          console.log(posts)
           this.setState({
             feedPosts: posts,
           });
