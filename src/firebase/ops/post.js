@@ -165,20 +165,21 @@ export async function deletePost(postID) {
   });
 }
 
-export async function changeLike(like, id, hide) {
-  console.log("Entered 'changeLike' method within post.js: " + id + " " + like + " " + hide);
-  
-  var postRef = doc(db, "posts", id);
+// ADD/DELETE LIKE(s) FROM A POST
+export async function modifyPostLike(likeOperation, currentlikeCount, postID) {
+  // Post reference
+  var postRef = doc(db, "posts", postID);
 
-  var postDetails = null;
+  var newLikeCount; 
 
-  {hide === false ? (
-    postDetails = {like: like + 1}
-  ) : (
-    postDetails = {like: like}
-  )}
+  // Detect whether to add or remove a like
+  // and store the updated count
+  if(likeOperation == "addLike"){
+    newLikeCount = currentlikeCount + 1;
+  }else if(likeOperation == "removeLike"){
+    newLikeCount = currentlikeCount - 1;
+  }
 
-  //var postDetails = {like: like + 1};
-
-  await setDoc(postRef, postDetails, { merge: true });
+  // Update the like count for the post
+  await setDoc(postRef, { like: newLikeCount }, { merge: true });
 }
