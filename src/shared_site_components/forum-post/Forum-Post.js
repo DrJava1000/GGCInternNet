@@ -7,38 +7,68 @@ import titleStyle from '../../shared_site_css/button_styles/Button.module.css';
 import { Link } from "react-router-dom";
 import { Typography } from "../../../node_modules/@mui/material/index";
 import { Button } from "../../../node_modules/@mui/material/index";
-import { changeLike } from "../../firebase/ops/post";
+import { modifyPostLike } from "../../firebase/ops/post";
 import ThumbUpIcon from "../../../node_modules/@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "../../../node_modules/@mui/icons-material/ThumbDown";
 
+/**
+ * @name ForumPost
+ * 
+ * Component that represents a particular post
+ * @param props options passed to this component
+ */
 class ForumPost extends Component {
   constructor(props) {
     super(props);
 
-    //Local like counter
-    this.handleLike = this.handleLike.bind(this);
+    // Function Bindings (for this usage)
+    this.onLike = this.onLike.bind(this);
+    this.onDislike = this.onDislike.bind(this);
 
     this.state = {
-      hide: false
+      // Forum post properties
+      likeCount: this.props.like,
+
+      // Rendering-based properties
+      hasBeenLiked : false
     };
   }
 
-  handleLike() {
-    console.log("Entered 'handleLike' method within Forum-Post.js");
-    {this.state.hide === false ? (
-      this.setState({hide:true})
-    ) : (
-      this.setState({hide:false})
-    )}
-    changeLike(this.props.like, this.props.id, this.state.hide);
+  /**
+   * @name onLike
+   * @author Ryan Gambrell
+   * Adds a like to a post and prepares to toggle
+   * the like button to a 'thumbs down' view 
+   */
+  onLike(){
+    this.setState({
+      hasBeenLiked : true,
+      likeCount: this.state.likeCount + 1
+    });
+    modifyPostLike("addLike", this.state.likeCount, this.props.id);
   }
 
-  //handleLikeRevert() {
-    //console.log("Entered 'handleLike' method within Forum-Post.js");
-    //this.setState({hide: false});
-    //changeLike(this.props.like, this.props.id, this.props.hide);
-  //}
+  /**
+   * @name onDislike
+   * @author Ryan Gambrell
+   * Removes a like to a post and prepares to toggle
+   * the like button to a 'thumbs up' view
+   */
+  onDislike(){
+    console.log(this.state.likeCount);
+    this.setState({
+      hasBeenLiked : false,
+      likeCount: this.state.likeCount - 1
+    });
+    modifyPostLike("removeLike", this.state.likeCount, this.props.id);
+  }
 
+  /**
+   * @name render
+   * Renders a view for a forum post that lays out all
+   * the post's information. This view may also contain
+   * controls for modifying the post in such a way. 
+   */
   render() {
     return (
       <Fragment>
@@ -159,41 +189,31 @@ class ForumPost extends Component {
                   <Typography variant="p" className={titleStyle.likeCounter}>
                     Likes
                   </Typography>
-                  <div className={titleStyle.likeItem} style={{fontWeight:"bolder"}}>{this.props.like}</div>
+                  <div className={titleStyle.likeItem} style={{fontWeight:"bolder"}}>{this.state.likeCount}</div>
 
-                  {this.state.hide === false ? (
-                    <Button 
-                    variant="contained" 
-                    color="success"
-                    onClick={this.handleLike}
-                    sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
-                    >
-                      <ThumbUpIcon>
-                      </ThumbUpIcon>
-                    </Button>
-                   ) : (
-                    <Button 
-                    variant="contained" 
-                    color="error"
-                    onClick={this.handleLike} 
-                    sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
-                    >
-                      <ThumbDownIcon>
-                      </ThumbDownIcon>
-                    </Button>
-                   )
-                  }
-
-                  {/* 
-                  <Button 
-                  variant="contained" 
-                  color="success"
-                  onClick={this.handleLike} 
-                  //disabled={this.state.hide}
-                  >
-                      Like
+                  {
+                    this.state.hasBeenLiked ? (
+                      <Button 
+                        variant="contained" 
+                        color="error"
+                        onClick={this.onDislike} 
+                        sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
+                      >
+                        <ThumbDownIcon>
+                        </ThumbDownIcon>
                       </Button>
-                  */}
+                    ) : (
+                      <Button 
+                        variant="contained" 
+                        color="success"
+                        onClick={this.onLike}
+                        sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
+                      >
+                        <ThumbUpIcon>
+                        </ThumbUpIcon>
+                      </Button>
+                    )
+                  }
                 {
                   this.props.myPost ? <>
                     <h5>
