@@ -10,6 +10,7 @@ import { ggc_degrees, getConcentrations } from "../../../shared_js_modules/major
 import {
   TextField,
 } from "../../../../node_modules/@mui/material/index";
+import AddCircleRoundedIcon from '../../../../node_modules/@mui/icons-material/AddCircleRounded';
 
 /**
  * @name PageFeed
@@ -235,6 +236,9 @@ class PageFeed extends Component {
                     href="/Post_Creation"
                   >
                     Create New Post
+                    <AddCircleRoundedIcon sx={{marginLeft:"7px"}} style={{position:"relative", top:"4.5px"}}>
+
+                    </AddCircleRoundedIcon>
                   </a>
                 </h5>
               </>
@@ -247,13 +251,14 @@ class PageFeed extends Component {
             <form onSubmit={this.onSearch}>
               {/* Filter Selection Dropdown*/}
               <select className={buttonStyles.likeSortButton} onChange={this.onFilterChange}>
-                <option className={buttonStyles.likeSortOptions} value="company">Filter by Company</option>
+                <option className={buttonStyles.likeSortOptions} value="">Search By:</option>
+                <option className={buttonStyles.likeSortOptions} value="company">Company</option>
                 {
                   // Remove the major/concentration filter for 'My Posts' page as 
                   // this filter is for profiles and all posts in the current user's profile
                   // don't change 
                   this.props.feedType === 'main_posts' ?
-                    <option className={buttonStyles.likeSortOptions} value="major/concentration">Filter by Major/Concentration</option>
+                    <option className={buttonStyles.likeSortOptions} value="major/concentration">Major/Concentration</option>
                   : <div></div>
                 }
               </select>&nbsp;
@@ -265,14 +270,15 @@ class PageFeed extends Component {
                   <TextField
                     type="text"
                     inputProps={{
-                      style: { textAlign: "center", backgroundColor:"white" },
+                      style: { textAlign: "left", backgroundColor:"white", height: "18px",
+                      borderRadius: "5px"},
                     }}
                     variant="filled"
                     sx={{
-                      width: "20%",
+                      width: "30%"
                     }}
                     onChange={this.onCompanyNameChange}
-                    label={"Company"}
+                    label={"Type Company Name"}
                     value={this.state.company}
                     required
                   />
@@ -284,7 +290,7 @@ class PageFeed extends Component {
                 <Fragment>
                   {/* Major Dropdown */}
                   <select className={buttonStyles.likeSortButton} onChange={this.onMajorChange}>
-                    <option className={buttonStyles.likeSortOptions} value="">Select major</option>
+                    <option className={buttonStyles.likeSortOptions} value="">Select Major</option>
                     {
                       ggc_degrees.map(degree => <option key={degree.major} value={degree.major}>{degree.major}</option>)
                     }
@@ -293,7 +299,7 @@ class PageFeed extends Component {
                   {
                     this.state.selectedMajor ?
                       <select className={buttonStyles.likeSortButton} onChange={this.onConcentrationChange} disabled={!this.state.selectedMajor}>
-                        <option className={buttonStyles.likeSortOptions} value="">Select concentration</option>
+                        <option className={buttonStyles.likeSortOptions} value="">Select Concentration</option>
                         {
                           this.state.correspondingConcentrations.map(concentration => 
                             <option key={concentration} value={concentration}>{concentration}</option>)
@@ -315,12 +321,11 @@ class PageFeed extends Component {
                   /> : <span></span>
               }
               {/* Like Sort Dropdown */}
-              <br />
-              <br />
+              <div style={{height:"17px"}}></div>
               <select className={buttonStyles.likeSortButton} onChange={this.handleLikesOrderChange}>
-                <option className={buttonStyles.likeSortOptions} value="">Order By Likes</option>
-                <option className={buttonStyles.likeSortOptions} value="desc">Descending</option>
-                <option className={buttonStyles.likeSortOptions} value="asc">Ascending</option>
+                <option className={buttonStyles.likeSortOptions} value="">Sort By:</option>
+                <option className={buttonStyles.likeSortOptions} value="desc">Likes (Most to Least)</option>
+                <option className={buttonStyles.likeSortOptions} value="asc">Likes (Least to Most)</option>
               </select>
             </form>
             {this.props.feedType === "main_posts"

@@ -134,6 +134,39 @@
     margin-bottom: 0;
 }
 
+.likeCounter
+{
+    border: 1.5px outset #19721e;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #19721e;
+    color: white;
+    font-weight: bold;
+    width: 200px;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.likeItem
+{
+    border: 1.5px outset #deeedf;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #deeedf;
+    color: black;
+    width: 200px;
+    align-self: center;
+    font-size: 17px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
 .standaloneTitle
 {
     border: 3px outset #176748;
@@ -175,9 +208,8 @@
 
 .likeSortButton
 {
-    border: 3px outset #b5c8bd;
     border-radius: 15px;
-    background-color: #176748;
+    background-color: #318061;
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
