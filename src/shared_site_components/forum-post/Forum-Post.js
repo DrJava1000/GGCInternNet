@@ -1,6 +1,5 @@
 import { Component, Fragment } from "react";
 import { Grid, Paper } from "../../../node_modules/@mui/material/index";
-import { FormControl } from "../../../node_modules/@mui/material/index";
 import { Rating } from "../../../node_modules/@mui/material/index";
 import "react-widgets/styles.css";
 import bodyStyles from "../../shared_site_css/body_styles/internal-body.module.css";
@@ -9,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Typography } from "../../../node_modules/@mui/material/index";
 import { Button } from "../../../node_modules/@mui/material/index";
 import { changeLike } from "../../firebase/ops/post";
+import ThumbUpIcon from "../../../node_modules/@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "../../../node_modules/@mui/icons-material/ThumbDown";
 
 class ForumPost extends Component {
   constructor(props) {
@@ -155,28 +156,31 @@ class ForumPost extends Component {
                   </Typography>
                   <div className={titleStyle.postItem} style={{paddingTop:"15px"}}><Rating value={this.props.rating} readOnly/></div>
 
-                  <Typography variant="p" className={titleStyle.postTitle}>
-                    Likes: {this.props.like}
+                  <Typography variant="p" className={titleStyle.likeCounter}>
+                    Likes
                   </Typography>
+                  <div className={titleStyle.likeItem} style={{fontWeight:"bolder"}}>{this.props.like}</div>
 
                   {this.state.hide === false ? (
                     <Button 
                     variant="contained" 
                     color="success"
-                    onClick={this.handleLike} 
-                    //disabled={this.state.hide}
+                    onClick={this.handleLike}
+                    sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
                     >
-                        Like
-                        </Button>
+                      <ThumbUpIcon>
+                      </ThumbUpIcon>
+                    </Button>
                    ) : (
                     <Button 
                     variant="contained" 
                     color="error"
                     onClick={this.handleLike} 
-                    //disabled={this.state.hide}
+                    sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
                     >
-                        Un-Like
-                        </Button>
+                      <ThumbDownIcon>
+                      </ThumbDownIcon>
+                    </Button>
                    )
                   }
 
