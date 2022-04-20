@@ -190,40 +190,44 @@ class ForumPost extends Component {
                     Likes
                   </Typography>
                   <div className={titleStyle.likeItem} style={{fontWeight:"bolder"}}>{this.state.likeCount}</div>
-
                   {
-                    this.state.hasBeenLiked ? (
-                      <Button 
-                        variant="contained" 
-                        color="error"
-                        onClick={this.onDislike} 
-                        sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
-                      >
-                        <ThumbDownIcon>
-                        </ThumbDownIcon>
-                      </Button>
-                    ) : (
-                      <Button 
-                        variant="contained" 
-                        color="success"
-                        onClick={this.onLike}
-                        sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
-                      >
-                        <ThumbUpIcon>
-                        </ThumbUpIcon>
-                      </Button>
-                    )
+                    // Don't show like/dislike toggle button for my posts feed as users shouldn't
+                    // be able to like/dislike their own posts
+                    !this.props.myPost ? 
+                      this.state.hasBeenLiked ? (
+                        <Button 
+                          variant="contained" 
+                          color="error"
+                          onClick={this.onDislike} 
+                          sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
+                        >
+                          <ThumbDownIcon>
+                          </ThumbDownIcon>
+                        </Button>
+                      ) : (
+                        <Button 
+                          variant="contained" 
+                          color="success"
+                          onClick={this.onLike}
+                          sx={{width:"200px", alignSelf:"center", marginTop:"15px", paddingTop:"8px", paddingBottom:"8px"}}
+                        >
+                          <ThumbUpIcon>
+                          </ThumbUpIcon>
+                        </Button>
+                      )
+                      : <div></div>
                   }
                 {
+                  // Allow users to edit their own posts
+                  // by rendering the edit button on their posts
+                  // on their personal feed
                   this.props.myPost ? <>
                     <h5>
-                      
                         <Link to="/Post_Edit"
                           state= {{ postDetails: this.props }} 
                           className={titleStyle.createPostButton}
                         >Edit Post
-                        </Link>
-                      
+                        </Link> 
                     </h5>
                   </>: <>
                     <div></div>
