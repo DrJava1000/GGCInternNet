@@ -108,16 +108,25 @@ export async function fetchMyPosts(userId, filterOptions) {
 }
 
 // POST MODIFICATION: CREATE A POST OR EDIT A EXISTING ONE
-export async function createOrEditPost({ logoFile, ...postDetails }) {
+export async function createOrEditPost({ postOperationStatus, logoFile, ...postDetails }) {
   var postRef; 
 
+  // Figure out whether post is a new or already existing.
+  // If existing, build a reference to it.
+  // If new, just get a reference to the posts collection 
   if(postDetails.id){
     postRef = doc(db, "posts", postDetails.id);
   }else{
     postRef = doc(collection(db, "posts"));
   }
 
+  // Firebase Storage
   const storage = getStorage();
+  
+  // If logo has been passed, 
+  // store it and add a pointing URL in post.
+  // This approach to image storing is different from the procedures under profile.js
+  // as images are linked using a firebase URL rather than a full-path directory. 
   if (logoFile) {
     try {
       const logoRef = ref(
@@ -125,11 +134,21 @@ export async function createOrEditPost({ logoFile, ...postDetails }) {
         "logos/" + postDetails.userId + "/" + logoFile.name
       );
       await uploadBytes(logoRef, logoFile);
+      
+      // Obtain firebase URL after storing file
       const uploadUrl = await getDownloadURL(logoRef);
+      
+      // Add this URL to post for later reference
       postDetails.logoUrl = uploadUrl;
     } catch (err) {
       console.log("errrrr==>>", err);
     }
+  }else{
+    // If this is a new post and a logo hasn't been provided, 
+    // reference the default 
+    if(postOperationStatus == "create")
+      postDetails.logoUrl = "https://firebasestorage.googleapis.com/v0/b/grizzly-internnet.appspot.com/" +
+      "o/logos%2Fdefault%2Fgrizzly_logo.PNG?alt=media&token=a26efbaa-03ed-49d9-aacb-16e6f43e2870";
   }
 
   await setDoc(postRef, postDetails, { merge: true });

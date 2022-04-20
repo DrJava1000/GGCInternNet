@@ -18,14 +18,11 @@ import {
   Checkbox,
   MenuItem,
   Select,
-  InputLabel,
-  Rating,
-  ToggleButton,
+  Rating
 } from "../../../../node_modules/@mui/material/index";
 import {
   CheckBoxOutlineBlank,
-  CheckBox,
-  DisabledByDefault,
+  CheckBox
 } from "../../../../node_modules/@mui/icons-material/index";
 import DatePicker from "react-widgets/DatePicker";
 import "react-widgets/styles.css";
@@ -72,13 +69,14 @@ class PostCreation extends Component {
       logoFile: null,
       logoUrl: this.props.location.state
         ? this.props.location.state.postDetails.logoUrl
-        : "",
+        : "https://firebasestorage.googleapis.com/v0/b/grizzly-internnet.appspot.com/" + 
+          "o/logos%2Fdefault%2Fgrizzly_logo.PNG?alt=media&token=a26efbaa-03ed-49d9-aacb-16e6f43e2870",
       selectedCharacteristics: this.props.location.state
         ? this.props.location.state.postDetails.characteristics
         : [],
       payment: this.props.location.state
         ? this.props.location.state.postDetails.paymentType
-        : "Paid",
+        : "",
       startDate: this.props.location.state
         ? new Date(this.props.location.state.postDetails.startDate)
         : new Date(),
@@ -87,36 +85,37 @@ class PostCreation extends Component {
         : new Date(),
       rating: this.props.location.state
         ? this.props.location.state.postDetails.rating
-        : 0,
+        : 1,
       mondayTime: this.props.location.state
         ? this.props.location.state.postDetails.mondayTime
-        : "N/A",
+        : "",
       tuesdayTime: this.props.location.state
         ? this.props.location.state.postDetails.tuesdayTime
-        : "N/A",
+        : "",
       wednesdayTime: this.props.location.state
         ? this.props.location.state.postDetails.wednesdayTime
-        : "N/A",
+        : "",
       thursdayTime: this.props.location.state
         ? this.props.location.state.postDetails.thursdayTime
-        : "N/A",
+        : "",
       fridayTime: this.props.location.state
         ? this.props.location.state.postDetails.fridayTime
-        : "N/A",
+        : "",
       saturdayTime: this.props.location.state
         ? this.props.location.state.postDetails.saturdayTime
-        : "N/A",
+        : "",
       sundayTime: this.props.location.state
         ? this.props.location.state.postDetails.sundayTime
-        : "N/A",
+        : "",
       like: this.props.location.state
         ? this.props.location.state.postDetails.like
-        : 0,
+        : 1,
       id: this.props.location.state
         ? this.props.location.state.postDetails.id
         : "",
-      openDeletionConfirmation: false,
+      
       editingFinished: false,
+      openDeletionConfirmation: false
     };
   }
 
@@ -138,15 +137,15 @@ class PostCreation extends Component {
     });
   }
 
-  onStartDateChange(e, date) {
+  onStartDateChange(e) {
     this.setState({
-      startDate: date,
+      startDate: e,
     });
   }
 
-  onEndDateChange(e, date) {
+  onEndDateChange(e) {
     this.setState({
-      endDate: date,
+      endDate: e,
     });
   }
 
@@ -227,6 +226,7 @@ class PostCreation extends Component {
       saturdayTime: this.state.saturdayTime,
       sundayTime: this.state.sundayTime,
       like: this.state.like,
+      postOperationStatus: this.props.operation
     }).then(() => {
       this.setState({
         editingFinished: true,
@@ -406,7 +406,6 @@ class PostCreation extends Component {
                     {/* autocomplete input that allows us to select multiple characteristics */}
                     <Autocomplete
                       multiple
-                      required
                       onChange={this.handleCharacteristicsChange}
                       options={[
                         "Insightful Mentors",
@@ -439,7 +438,9 @@ class PostCreation extends Component {
                         <TextField
                           {...params}
                           label="Job Characteristics *"
-                          placeholder="Select 3 Characteristics"
+                          placeholder="Select Exactly 3 Characteristics"
+                          // To add validation for checking for exactly 3 characteristics,
+                          required={this.state.selectedCharacteristics.length < 3}
                         />
                       )}
                     />
@@ -471,11 +472,13 @@ class PostCreation extends Component {
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       value={this.state.payment}
+                      displayEmpty
                       label="payment Type"
                       onChange={this.handleChpaymentChange}
                       required
                       style={{ width: "97.25%" }}
                     >
+                      <MenuItem value={""}>Select an option from below.</MenuItem>
                       <MenuItem value={"Paid"}>Paid</MenuItem>
                       <MenuItem value={"Unpaid"}>Unpaid</MenuItem>
                       <MenuItem value={"Stipend-Based"}>Stipend-Based</MenuItem>
@@ -530,15 +533,11 @@ class PostCreation extends Component {
                         fontSize: "17px",
                         fontFamily: "Arial",
                       }}
+                      max={this.state.endDate}
+                      inputProps={{
+                        component: props => <input {...props} readOnly />
+                      }}
                     />
-                    {/*
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker 
-                        label="Start Date"
-                        onChange={this.onStartDateChange}
-                        />
-                    </LocalizationProvider>
-                    */}
                   </Grid>
                   <br></br>
                   {/*This is where EndDate goes*/}
@@ -572,15 +571,12 @@ class PostCreation extends Component {
                         fontSize: "17px",
                         fontFamily: "Arial",
                       }}
+                      inputProps={{
+                        component: props => <input {...props} readOnly />
+                      }}
+                      min={this.state.startDate}
+                      max={new Date()}
                     />
-                    {/*
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker 
-                        label="End Date"
-                        onChange={this.onEndDateChange}
-                        />
-                    </LocalizationProvider>
-                    */}
                   </Grid>
                   <br></br>
                   <Grid
@@ -632,6 +628,7 @@ class PostCreation extends Component {
                         label={"Sunday Hours"}
                         onChange={this.onSundayTimeChange}
                         value={this.state.sundayTime}
+                        required
                       />
                     </Grid>
                     <br></br>
@@ -652,6 +649,7 @@ class PostCreation extends Component {
                         label={"Monday Hours"}
                         onChange={this.onMondayTimeChange}
                         value={this.state.mondayTime}
+                        required
                       />
                     </Grid>
                     <br></br>
@@ -672,6 +670,7 @@ class PostCreation extends Component {
                         label={"Tuesday Hours"}
                         onChange={this.onTuesdayTimeChange}
                         value={this.state.tuesdayTime}
+                        required
                       />
                     </Grid>
                     <br></br>
@@ -692,6 +691,7 @@ class PostCreation extends Component {
                         label={"Wednesday Hours"}
                         onChange={this.onWednesdayTimeChange}
                         value={this.state.wednesdayTime}
+                        required
                       />
                     </Grid>
                     <br></br>
@@ -712,6 +712,7 @@ class PostCreation extends Component {
                         label={"Thursday Hours"}
                         onChange={this.onThursdayTimeChange}
                         value={this.state.thursdayTime}
+                        required
                       />
                     </Grid>
                     <br></br>
@@ -732,6 +733,7 @@ class PostCreation extends Component {
                         label={"Friday Hours"}
                         onChange={this.onFridayTimeChange}
                         value={this.state.fridayTime}
+                        required
                       />
                     </Grid>
                     <br></br>
@@ -752,6 +754,7 @@ class PostCreation extends Component {
                         label={"Saturday Hours"}
                         onChange={this.onSaturdayTimeChange}
                         value={this.state.saturdayTime}
+                        required
                       />
                     </Grid>
                   </Grid>
@@ -782,28 +785,6 @@ class PostCreation extends Component {
                       onChange={this.onRatingChange}
                       value={this.state.rating}
                     />
-                  </Grid>
-                  <br></br>
-                  {/*Like/Upvote Button*/}
-                  <Grid item>
-                    {/*
-                    <ToggleButton
-                    value="check"
-                    selected={hide}
-                    onChange={() => {
-                      setSelected(!hide);
-                    }}>
-                      <CheckIcon />
-                    </ToggleButton>
-                    */}
-                    <Button
-                      variant="contained"
-                      color="success"
-                      onClick={this.onLikeChange}
-                    >
-                      Like
-                    </Button>
-                    Likes: {this.state.like}
                   </Grid>
                   <br></br>
                   {this.props.operation === "create" ? (
