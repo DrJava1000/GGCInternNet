@@ -30,6 +30,11 @@ import "react-widgets/styles.css";
 const icon = <CheckBoxOutlineBlank fontSize="small" />;
 const checkedIcon = <CheckBox fontSize="small" />;
 
+/**
+ * @name PostCreation
+ * 
+ * This is where the user goes to fill out the necessary fields for a forum post
+ */
 class PostCreation extends Component {
   static contextType = AuthContext;
 
@@ -57,6 +62,7 @@ class PostCreation extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      //General attributes
       jobTitle: this.props.location.state
         ? this.props.location.state.postDetails.jobTitle
         : "",
@@ -66,26 +72,36 @@ class PostCreation extends Component {
       company: this.props.location.state
         ? this.props.location.state.postDetails.company
         : "",
+
+      //Logo, for storing and selecting an image on the post
       logoFile: null,
       logoUrl: this.props.location.state
         ? this.props.location.state.postDetails.logoUrl
         : "https://firebasestorage.googleapis.com/v0/b/grizzly-internnet.appspot.com/" + 
           "o/logos%2Fdefault%2Fgrizzly_logo.PNG?alt=media&token=a26efbaa-03ed-49d9-aacb-16e6f43e2870",
+
+      //Choose some pre-set characteristics for the internship
       selectedCharacteristics: this.props.location.state
         ? this.props.location.state.postDetails.characteristics
         : [],
       payment: this.props.location.state
         ? this.props.location.state.postDetails.paymentType
         : "",
+
+      //The dates the user started and ended their internship
       startDate: this.props.location.state
         ? new Date(this.props.location.state.postDetails.startDate)
         : new Date(),
       endDate: this.props.location.state
         ? new Date(this.props.location.state.postDetails.endDate)
         : new Date(),
+      
+      //Material UI's star rating widget, out of 5 stars
       rating: this.props.location.state
         ? this.props.location.state.postDetails.rating
         : 1,
+      
+      //Hours worked for each day of the week, all text fields
       mondayTime: this.props.location.state
         ? this.props.location.state.postDetails.mondayTime
         : "",
@@ -107,24 +123,39 @@ class PostCreation extends Component {
       sundayTime: this.props.location.state
         ? this.props.location.state.postDetails.sundayTime
         : "",
+
+      //Like counter for the post, to boost visibility
       like: this.props.location.state
         ? this.props.location.state.postDetails.like
         : 1,
+
+      //Primary Key for storing and fetching in Firebase
       id: this.props.location.state
         ? this.props.location.state.postDetails.id
         : "",
       
+      //Boolean values for whether or not the user is either done editing their post or wants to delete it (respectively)
       editingFinished: false,
       openDeletionConfirmation: false
     };
   }
 
+  /**
+   * @name onJobTitleChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Job Title"
+   * @param {*} e Event 
+   */
   onJobTitleChange(e) {
     this.setState({
       jobTitle: e.target.value,
     });
   }
 
+  /**
+   * 
+   * @param {*} e Event 
+   */
   onCompanyChange(e) {
     this.setState({
       company: e.target.value,
@@ -203,6 +234,12 @@ class PostCreation extends Component {
     });
   }
 
+  /**
+   * @name onSubmit
+   * @author Nicholas Porter
+   * When the user clicks the "submit" button on the page, it will create or update the state of the forum post object
+   * @param {*} e Event
+   */
   onSubmit(e) {
     e.preventDefault();
 
@@ -234,6 +271,12 @@ class PostCreation extends Component {
     });
   }
 
+  /**
+   * @name onFileUpload
+   * @author (unknown)
+   * Uploads the image submitted to Firebase as a logo
+   * @param {*} e Event
+   */
   onFileUpload = (e) => {
     // this.onProfileModification();
     this.setState({
@@ -242,16 +285,35 @@ class PostCreation extends Component {
     });
   };
 
+  /**
+   * @name handleCharacteristicsChange
+   * @author (unknown)
+   * Handles the amount of characteristics the user can input into the field
+   * @param {*} e Event
+   * @param {*} value 
+   */
   handleCharacteristicsChange = (e, value) => {
     if (value.length <= 3) {
       this.setState({ selectedCharacteristics: value });
     }
   };
 
+  /**
+   * @name handleChpaymentChange
+   * @author (unknown)
+   * Changes the field for the attribute "Payment"
+   * @param {*} e Event
+   * @param {*} value 
+   */
   handleChpaymentChange = (e, value) => {
     this.setState({ payment: e.target.value });
   };
 
+  /**
+   * @name onPostDeletionConfirmation
+   * @author (unknown)
+   * Handles when the user confirms that they want to delete the current forum post object
+   */
   onPostDeletionConfirmation() {
     deletePost(this.state.id).then(() => {
       this.setState({
@@ -260,12 +322,22 @@ class PostCreation extends Component {
     });
   }
 
+  /**
+   * @name onDeletePostDialogClick
+   * @author (unknown)
+   * Handles when the user decides to cancel their post deletion attempt
+   */
   onDeletePostDialogClick() {
     this.setState({
       openDeletionConfirmation: !this.state.openDeletionConfirmation,
     });
   }
 
+  /**
+   * @name componentDidMoutn
+   * @author (unknown)
+   * (Comment here)
+   */
   componentDidMount() {
     if (this.props.operation === "edit_and_delete") {
       this.setState({
@@ -319,6 +391,8 @@ class PostCreation extends Component {
                   borderRadius: "5px",
                 }}
               >
+                {/*Conditional statement for detecting if the user is 
+                on the Main Feed page (CREATE post) or My Posts page (EDIT post)*/}
                 <Typography variant="h6" className={titleStyle.standaloneTitle}>
                   {this.props.operation === "create" ? (
                     <span>Create a Forum Post</span>
@@ -329,7 +403,9 @@ class PostCreation extends Component {
 
                 <div style={{ height: "15px" }}></div>
 
+                {/*Form where all of the attributes are to be filled out by the user*/}
                 <form onSubmit={this.onSubmit}>
+                  {/*Company Logo selection*/}
                   <Grid
                     item
                     sx={{
@@ -370,6 +446,7 @@ class PostCreation extends Component {
                     )}
                   </Grid>
                   <br></br>
+                  {/*Company Name*/}
                   <Grid item>
                     <TextField
                       type="text"
@@ -386,6 +463,7 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
+                  {/*Job Title*/}
                   <Grid item>
                     <TextField
                       type="text"
@@ -402,6 +480,7 @@ class PostCreation extends Component {
                     />
                   </Grid>{" "}
                   <br></br>
+                  {/*Select 3 Characteristics*/}
                   <Grid item>
                     {/* autocomplete input that allows us to select multiple characteristics */}
                     <Autocomplete
@@ -446,6 +525,7 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
+                  {/*Payment Type*/}
                   <Grid
                     item
                     sx={{
@@ -486,6 +566,7 @@ class PostCreation extends Component {
                     </Select>
                   </Grid>
                   <br></br>
+                  {/*Description*/}
                   <Grid item>
                     <TextField
                       type="text"
@@ -502,7 +583,7 @@ class PostCreation extends Component {
                     />
                   </Grid>{" "}
                   <br></br>
-                  {/*This is where StartDate goes*/}
+                  {/*Start Date*/}
                   <Grid
                     item
                     sx={{
@@ -540,7 +621,7 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
-                  {/*This is where EndDate goes*/}
+                  {/*End Date*/}
                   <Grid
                     item
                     sx={{
@@ -579,6 +660,7 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
+                  {/*All 7 Hours Worked attributes*/}
                   <Grid
                     item
                     sx={{
@@ -611,7 +693,7 @@ class PostCreation extends Component {
                       i.e. 8:00 AM - 4:00 PM or N/A
                     </p>
                     <div style={{ height: "15px" }}></div>
-                    {/*This is where Sunday Time goes*/}
+                    {/*Sunday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -632,7 +714,7 @@ class PostCreation extends Component {
                       />
                     </Grid>
                     <br></br>
-                    {/*This is where Monday Time goes*/}
+                    {/*Monday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -653,7 +735,7 @@ class PostCreation extends Component {
                       />
                     </Grid>
                     <br></br>
-                    {/*This is where Tuesday Time goes*/}
+                    {/*Tuesday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -674,7 +756,7 @@ class PostCreation extends Component {
                       />
                     </Grid>
                     <br></br>
-                    {/*This is where Wednesday Time goes*/}
+                    {/*Wednesday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -695,7 +777,7 @@ class PostCreation extends Component {
                       />
                     </Grid>
                     <br></br>
-                    {/*This is where Thursday Time goes*/}
+                    {/*Thursday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -716,7 +798,7 @@ class PostCreation extends Component {
                       />
                     </Grid>
                     <br></br>
-                    {/*This is where Friday Time goes*/}
+                    {/*Friday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -737,7 +819,7 @@ class PostCreation extends Component {
                       />
                     </Grid>
                     <br></br>
-                    {/*This is where Saturday Time goes*/}
+                    {/*Saturday Time*/}
                     <Grid item>
                       <TextField
                         type="text"
@@ -759,7 +841,7 @@ class PostCreation extends Component {
                     </Grid>
                   </Grid>
                   <br></br>
-                  {/*This is where Rating goes*/}
+                  {/*Rating (out of 5 stars)*/}
                   <Grid
                     item
                     sx={{
@@ -787,6 +869,7 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
+                  {/*Conditional statement for determining if user is Creating or Editing a forum post object*/}
                   {this.props.operation === "create" ? (
                     <input
                       className={titleStyle.createPostButton}
