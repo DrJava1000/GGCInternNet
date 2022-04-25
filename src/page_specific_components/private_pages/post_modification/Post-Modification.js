@@ -144,7 +144,7 @@ class PostCreation extends Component {
    * @name onJobTitleChange
    * @author Nicholas Porter
    * Changes the text field for the attribute "Job Title"
-   * @param {*} e Event 
+   * @param {*} e Event
    */
   onJobTitleChange(e) {
     this.setState({
@@ -153,8 +153,10 @@ class PostCreation extends Component {
   }
 
   /**
-   * 
-   * @param {*} e Event 
+   * @name oCompanyChange
+   * @author Nicholas Porter
+   * Changes the text fied for the attribute "Company"
+   * @param {*} e Event
    */
   onCompanyChange(e) {
     this.setState({
@@ -162,72 +164,143 @@ class PostCreation extends Component {
     });
   }
 
+  /**
+   * @name onDescriptionChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Description"
+   * @param {*} e Event
+   */
   onDescriptionChange(e) {
     this.setState({
       description: e.target.value,
     });
   }
 
+  /**
+   * @name onStartDateChange
+   * @author Nicholas Porter
+   * Changes the Date field for the attribute "Start Date"
+   * @param {*} e Event
+   */
   onStartDateChange(e) {
     this.setState({
       startDate: e,
     });
   }
 
+  /**
+   * @name onEndDateChange
+   * @author Nicholas Porter
+   * Changes the Date field for the attribute "End Date"
+   * @param {*} e Event
+   */
   onEndDateChange(e) {
     this.setState({
       endDate: e,
     });
   }
 
+  /**
+   * @name onRatingChange
+   * @author Nicholas Porter
+   * Changes the Rating field for the attribute "Rating"
+   * @param {*} e Event
+   */
   onRatingChange(e) {
     this.setState({
       rating: e.target.value,
     });
   }
 
+  /**
+   * @name onMondayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Monday Time"
+   * @param {*} e Event
+   */
   onMondayTimeChange(e) {
     this.setState({
       mondayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onTuesdayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Tuesday Time"
+   * @param {*} e Event
+   */
   onTuesdayTimeChange(e) {
     this.setState({
       tuesdayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onWednesdayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Wednesday Time"
+   * @param {*} e Event
+   */
   onWednesdayTimeChange(e) {
     this.setState({
       wednesdayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onThursdayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Thursday Time"
+   * @param {*} e Event
+   */
   onThursdayTimeChange(e) {
     this.setState({
       thursdayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onFridayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Friday Time"
+   * @param {*} e Event
+   */
   onFridayTimeChange(e) {
     this.setState({
       fridayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onSaturdayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Saturday Time"
+   * @param {*} e Event
+   */
   onSaturdayTimeChange(e) {
     this.setState({
       saturdayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onSundayTimeChange
+   * @author Nicholas Porter
+   * Changes the text field for the attribute "Sunday Time"
+   * @param {*} e Event
+   */
   onSundayTimeChange(e) {
     this.setState({
       sundayTime: e.target.value,
     });
   }
 
+  /**
+   * @name onLikeChange
+   * @author Nicholas Porter
+   * Changes the integer counter for the aattribute "Like"
+   */
   onLikeChange() {
     this.setState({
       like: this.state.like + 1,
