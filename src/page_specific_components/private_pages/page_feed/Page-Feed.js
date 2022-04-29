@@ -86,12 +86,12 @@ class PageFeed extends Component {
     if (e.target.value === "descDate") {
       this.setState({
         feedPosts: this.state.feedPosts.sort((a, b) =>
-        a.startDate.split('/').reverse().join().localeCompare(b.startDate.split('/').reverse().join())),
+        a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
       });
     } else if (e.target.value === "ascDate") {
         this.setState({
           feedPosts: this.state.feedPosts.sort((b, a) =>
-          a.startDate.split('/').reverse().join().localeCompare(b.startDate.split('/').reverse().join())),
+          a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
         });
     } else if (e.target.value === "desc") {
       this.setState({

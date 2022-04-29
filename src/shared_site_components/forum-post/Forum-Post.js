@@ -109,6 +109,11 @@ class ForumPost extends Component {
                 }
 
                   <Typography variant="p" className={titleStyle.postTitle}>
+                      Date Posted
+                    </Typography>
+                    <p className={titleStyle.datesItem}>{this.props.createDate}</p>
+
+                  <Typography variant="p" className={titleStyle.postTitle}>
                       Job Title
                     </Typography>
                     <p className={titleStyle.postItem}>{this.props.jobTitle}</p>

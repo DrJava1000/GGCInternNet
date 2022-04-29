@@ -59,6 +59,7 @@ class PostCreation extends Component {
     this.onPostDeletionConfirmation =
       this.onPostDeletionConfirmation.bind(this);
     this.onDeletePostDialogClick = this.onDeletePostDialogClick.bind(this);
+    this.onCreateDateChange = this.onCreateDateChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -129,6 +130,11 @@ class PostCreation extends Component {
         ? this.props.location.state.postDetails.like
         : 1,
 
+      //Date the post was created
+      createDate: this.props.location.state
+        ? new Date(this.props.location.state.postDetails.createDate)
+        : new Date(),
+      
       //Primary Key for storing and fetching in Firebase
       id: this.props.location.state
         ? this.props.location.state.postDetails.id
@@ -308,6 +314,18 @@ class PostCreation extends Component {
   }
 
   /**
+   * @name onCreateDateChange
+   * @author Nicholas Porter
+   * Changes the Date value for the attribute "Create Date"
+   * @param {*} e Event
+   */
+   onCreateDateChange(e) {
+    this.setState({
+      createDate: e,
+    });
+  }
+
+  /**
    * @name onSubmit
    * @author Nicholas Porter
    * When the user clicks the "submit" button on the page, it will create or update the state of the forum post object
@@ -336,6 +354,7 @@ class PostCreation extends Component {
       saturdayTime: this.state.saturdayTime,
       sundayTime: this.state.sundayTime,
       like: this.state.like,
+      createDate: new Date(this.state.createDate).toISOString().substring(0, 10),
       postOperationStatus: this.props.operation
     }).then(() => {
       this.setState({
@@ -939,6 +958,44 @@ class PostCreation extends Component {
                     <Rating
                       onChange={this.onRatingChange}
                       value={this.state.rating}
+                    />
+                  </Grid>
+                  <br></br>
+                  {/*Create Date (manual override for testing)*/}
+                  <Grid
+                    item
+                    sx={{
+                      border: 1,
+                      borderColor: "#c4c4c4",
+                      borderRadius: 2,
+                      paddingBottom: "15px",
+                      paddingLeft: "15px",
+                      marginTop: "15px",
+                      textAlign: "left",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "15.5px",
+                        color: "#666666",
+                        fontFamily: "Arial",
+                      }}
+                    >
+                      Create Date *
+                    </p>
+                    <DatePicker
+                      onChange={this.onCreateDateChange}
+                      style={{
+                        width: "97.25%",
+                        color: "#666666",
+                        fontSize: "17px",
+                        fontFamily: "Arial",
+                      }}
+                      inputProps={{
+                        component: props => <input {...props} readOnly />
+                      }}
+                      min={this.state.startDate}
+                      max={new Date()}
                     />
                   </Grid>
                   <br></br>
