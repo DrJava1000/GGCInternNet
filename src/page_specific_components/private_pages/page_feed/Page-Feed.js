@@ -83,7 +83,17 @@ class PageFeed extends Component {
     or descending order
   */
   handleLikesOrderChange = (e) => {
-    if (e.target.value === "desc") {
+    if (e.target.value === "descDate") {
+      this.setState({
+        feedPosts: this.state.feedPosts.sort((a, b) =>
+        a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
+      });
+    } else if (e.target.value === "ascDate") {
+        this.setState({
+          feedPosts: this.state.feedPosts.sort((b, a) =>
+          a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
+        });
+    } else if (e.target.value === "desc") {
       this.setState({
         feedPosts: this.state.feedPosts.sort((a, b) =>
           parseInt(a.like) < parseInt(b.like) ? 1 : -1
@@ -326,6 +336,8 @@ class PageFeed extends Component {
                 <option className={buttonStyles.likeSortOptions} value="">Sort By:</option>
                 <option className={buttonStyles.likeSortOptions} value="desc">Likes (Most to Least)</option>
                 <option className={buttonStyles.likeSortOptions} value="asc">Likes (Least to Most)</option>
+                <option className={buttonStyles.likeSortOptions} value="descDate">Date (Oldest to Newest)</option>
+                <option className={buttonStyles.likeSortOptions} value="ascDate">Date (Newest to Oldest)</option>
               </select>
             </form>
             {this.props.feedType === "main_posts"
