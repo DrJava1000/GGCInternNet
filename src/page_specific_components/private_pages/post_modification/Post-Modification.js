@@ -961,44 +961,6 @@ class PostCreation extends Component {
                     />
                   </Grid>
                   <br></br>
-                  {/*Create Date (manual override for testing)*/}
-                  <Grid
-                    item
-                    sx={{
-                      border: 1,
-                      borderColor: "#c4c4c4",
-                      borderRadius: 2,
-                      paddingBottom: "15px",
-                      paddingLeft: "15px",
-                      marginTop: "15px",
-                      textAlign: "left",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: "15.5px",
-                        color: "#666666",
-                        fontFamily: "Arial",
-                      }}
-                    >
-                      Create Date *
-                    </p>
-                    <DatePicker
-                      onChange={this.onCreateDateChange}
-                      style={{
-                        width: "97.25%",
-                        color: "#666666",
-                        fontSize: "17px",
-                        fontFamily: "Arial",
-                      }}
-                      inputProps={{
-                        component: props => <input {...props} readOnly />
-                      }}
-                      min={this.state.startDate}
-                      max={new Date()}
-                    />
-                  </Grid>
-                  <br></br>
                   {/*Conditional statement for determining if user is Creating or Editing a forum post object*/}
                   {this.props.operation === "create" ? (
                     <input
