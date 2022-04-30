@@ -7,7 +7,7 @@ import { appAuthInstance } from './firebase/ops/auth.js';
 
 import React, {useState} from "react";
 
-import AuthContext from './context/AuthContext';
+import AuthContext from './context/authentication/AuthContext';
 
 // Public Page Imports
 import Portal from './page_specific_components/public_pages/login_portal/Portal';

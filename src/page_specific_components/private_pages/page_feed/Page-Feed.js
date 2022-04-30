@@ -5,7 +5,7 @@ import AppFooter from "../../../shared_site_components/page-footer/footer";
 import { fetchAllPosts, fetchMyPosts } from "../../../firebase/ops/post";
 import ForumPost from "../../../shared_site_components/forum-post/Forum-Post";
 import buttonStyles from "../../../shared_site_css/button_styles/Button.module.css";
-import AuthContext from "../../../context/AuthContext";
+import AuthContext from "../../../context/authentication/AuthContext";
 import {
   ggc_degrees,
   getConcentrations,

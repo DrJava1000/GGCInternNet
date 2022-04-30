@@ -5,7 +5,7 @@ import AppHeader from "../../../shared_site_components/page-header/header-and-na
 import AppFooter from "../../../shared_site_components/page-footer/footer";
 import { createOrEditPost, deletePost } from "../../../firebase/ops/post";
 import { Navigate } from "react-router-dom";
-import AuthContext from "../../../context/AuthContext";
+import AuthContext from "../../../context/authentication/AuthContext";
 import {
   Button,
   Dialog,

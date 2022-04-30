@@ -9,7 +9,7 @@ import { TextField } from '../../../../node_modules/@mui/material/index';
 import { Typography } from '../../../../node_modules/@mui/material/index';
 import { Select } from '../../../../node_modules/@mui/material/index';
 import titleStyle from '../../../shared_site_css/button_styles/Button.module.css';
-import AuthContext from '../../../context/AuthContext';
+import AuthContext from '../../../context/authentication/AuthContext';
 
 /**
  * @class Profile
