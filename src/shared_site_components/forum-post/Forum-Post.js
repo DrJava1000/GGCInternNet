@@ -87,7 +87,7 @@ class ForumPost extends Component {
                 direction="column"
                 sx={{ width: "650px", padding: "30px", marginBottom: "30px"}}
               >
-                  <img src={this.props.logoUrl} style={{paddingTop:"15px", paddingBottom:"40px", paddingLeft:"10px", paddingRight:"10px",  width:"150px", alignSelf:"center"}}/>
+                  <img src={this.props.logoUrl} alt="" style={{paddingTop:"15px", paddingBottom:"40px", paddingLeft:"10px", paddingRight:"10px",  width:"150px", alignSelf:"center"}}/>
 
                     <Typography variant="p" className={titleStyle.postTitle}>
                       Company Name
