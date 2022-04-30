@@ -6,15 +6,16 @@ import { fetchAllPosts, fetchMyPosts } from "../../../firebase/ops/post";
 import ForumPost from "../../../shared_site_components/forum-post/Forum-Post";
 import buttonStyles from "../../../shared_site_css/button_styles/Button.module.css";
 import AuthContext from "../../../context/AuthContext";
-import { ggc_degrees, getConcentrations } from "../../../shared_js_modules/majors_and_concentrations";
 import {
-  TextField,
-} from "../../../../node_modules/@mui/material/index";
-import AddCircleRoundedIcon from '../../../../node_modules/@mui/icons-material/AddCircleRounded';
+  ggc_degrees,
+  getConcentrations,
+} from "../../../shared_js_modules/majors_and_concentrations";
+import { TextField } from "../../../../node_modules/@mui/material/index";
+import AddCircleRoundedIcon from "../../../../node_modules/@mui/icons-material/AddCircleRounded";
 
 /**
  * @name PageFeed
- * 
+ *
  * Component that represents a particular a feed (view) of forum posts
  * @param props options passed to this component
  */
@@ -34,15 +35,15 @@ class PageFeed extends Component {
       feedPosts: [],
 
       // Selected Filters/Typed Queries
-      filterType: 'company',
-      selectedCompanyName: '',
-      selectedMajor: '',
-      selectedConcentration: '',
-      
+      filterType: "company",
+      selectedCompanyName: "",
+      selectedMajor: "",
+      selectedConcentration: "",
+
       // List of concentrations for
       // selected major (loaded on-the-fly)
       correspondingConcentrations: [],
-      
+
       // Is the search query complete
       // enough for searching?
       searchQueryComplete: false,
@@ -54,7 +55,7 @@ class PageFeed extends Component {
    * @author Ryan Gambrell
    * React Lifecycle Function: Fetches a different list of posts
    * based on the feedType passed in. This lifecycle method handles
-   * the initial loading of a non-filtered feed. 
+   * the initial loading of a non-filtered feed.
    */
   componentDidMount() {
     // Fetch All Posts (no filter)
@@ -77,27 +78,56 @@ class PageFeed extends Component {
     }
   }
 
-  /*
-    fires when the dropdown option is changed, it sorts the forum posts based
-    on the number of likes for each of the posts. the sorting could be done in ascending
-    or descending order
+  /**
+   * @name handleLikesOrderChange
+   * @author John Brandt
+    Fires when the dropdown option is changed, it sorts the forum posts based
+    on the selected criteria for each of the posts. The sorting could be done in ascending
+    or descending order. 
+    
+    For sorting by company name - a switch-case statement is used instead of an if-else
+    statement since we have more (4) conditions/options in the dropdown. The case is used
+    in matching the selected option's value in the sort dropdown (jsx). For company-name string comparison,
+    I converted the strings to lowercase format for accuracy. I also set a default
+    case which is optional.
   */
   handleLikesOrderChange = (e) => {
-    if (e.target.value === "desc") {
-      this.setState({
-        feedPosts: this.state.feedPosts.sort((a, b) =>
-          parseInt(a.like) < parseInt(b.like) ? 1 : -1
-        ),
-      });
-    } else {
-      this.setState({
-        feedPosts: this.state.feedPosts.sort((a, b) =>
-          parseInt(a.like) > parseInt(b.like) ? 1 : -1
-        ),
-      });
+    switch (e.target.value) {
+      case "likes-desc":
+        this.setState({
+          feedPosts: this.state.feedPosts.sort((a, b) =>
+            parseInt(a.like) < parseInt(b.like) ? 1 : -1
+          ),
+        });
+        break;
+      case "likes-asc":
+        this.setState({
+          feedPosts: this.state.feedPosts.sort((a, b) =>
+            parseInt(a.like) > parseInt(b.like) ? 1 : -1
+          ),
+        });
+        break;
+      case "company-name-desc":
+        this.setState({
+          feedPosts: this.state.feedPosts.sort((a, b) =>
+            a.company.toLowerCase() > b.company.toLowerCase() ? 1 : -1
+          ),
+        });
+        break;
+      case "company-name-asc":
+        this.setState({
+          feedPosts: this.state.feedPosts.sort((a, b) =>
+            a.company.toLowerCase() < b.company.toLowerCase() ? 1 : -1
+          ),
+        });
+        break;
+      default:
+        this.setState({
+          feedPosts: this.state.feedPosts,
+        });
     }
   };
-  
+
   /**
    * @name onFilterChange
    * @author Ryan Gambrell
@@ -109,7 +139,7 @@ class PageFeed extends Component {
   onFilterChange(e) {
     this.setState({
       filterType: e.target.value,
-      searchQueryComplete: false
+      searchQueryComplete: false,
     });
   }
 
@@ -119,10 +149,10 @@ class PageFeed extends Component {
    * Store company search query and prepare to unhide 'search' button
    * @param e Event the event containing the query string (company name) to search by
    */
-   onCompanyNameChange(e){
+  onCompanyNameChange(e) {
     this.setState({
       selectedCompanyName: e.target.value,
-      searchQueryComplete: true
+      searchQueryComplete: true,
     });
   }
 
@@ -135,7 +165,9 @@ class PageFeed extends Component {
   onMajorChange(e) {
     this.setState({
       selectedMajor: e.target.value,
-      correspondingConcentrations: e.target.value ? getConcentrations(e.target.value) : []
+      correspondingConcentrations: e.target.value
+        ? getConcentrations(e.target.value)
+        : [],
     });
   }
 
@@ -145,10 +177,10 @@ class PageFeed extends Component {
    * Store selected concentration and prepare to unhide 'search' button
    * @param e Event the event containing the company name search query
    */
-  onConcentrationChange(e){
+  onConcentrationChange(e) {
     this.setState({
       selectedConcentration: e.target.value,
-      searchQueryComplete: true
+      searchQueryComplete: true,
     });
   }
 
@@ -159,32 +191,32 @@ class PageFeed extends Component {
    * search and bring down a list of matching posts
    * @param e Event the event containing the details of the search form submission
    */
-  onSearch(e){
-    e.preventDefault(); 
-    
+  onSearch(e) {
+    e.preventDefault();
+
     if (this.props.feedType === "main_posts") {
       // Fetch All Posts (using company or major/concentration filters)
-      // For the main post feed, pass through all 
-      // filter-related options and search queries 
+      // For the main post feed, pass through all
+      // filter-related options and search queries
       // as the filter type will be used to determine
-      // which is relevant. 
+      // which is relevant.
       let fetchPostsPromise = fetchAllPosts({
         filterType: this.state.filterType,
         companySearchQuery: this.state.selectedCompanyName,
         major: this.state.selectedMajor,
-        concentration: this.state.selectedConcentration
+        concentration: this.state.selectedConcentration,
       });
       fetchPostsPromise.then((posts) => {
         this.setState({
           feedPosts: posts,
         });
       });
-    } else if(this.props.feedType === "my_posts"){
+    } else if (this.props.feedType === "my_posts") {
       // Fetch My Posts (using company filter)
       setTimeout(() => {
         fetchMyPosts(this.context.currentUserID, {
           filterType: this.state.filterType,
-          companySearchQuery: this.state.selectedCompanyName
+          companySearchQuery: this.state.selectedCompanyName,
         }).then((posts) => {
           this.setState({
             feedPosts: posts,
@@ -196,7 +228,7 @@ class PageFeed extends Component {
 
   /**
    * @name render
-   * 
+   *
    * React Lifecycle Function: Renders a search bar, filter and sort options,
    * create post button, and a list of posts
    */
@@ -236,9 +268,10 @@ class PageFeed extends Component {
                     href="/Post_Creation"
                   >
                     Create New Post
-                    <AddCircleRoundedIcon sx={{marginLeft:"7px"}} style={{position:"relative", top:"4.5px"}}>
-
-                    </AddCircleRoundedIcon>
+                    <AddCircleRoundedIcon
+                      sx={{ marginLeft: "7px" }}
+                      style={{ position: "relative", top: "4.5px" }}
+                    ></AddCircleRoundedIcon>
                   </a>
                 </h5>
               </>
@@ -250,82 +283,157 @@ class PageFeed extends Component {
             {/* Search Bar */}
             <form onSubmit={this.onSearch}>
               {/* Filter Selection Dropdown*/}
-              <select className={buttonStyles.likeSortButton} onChange={this.onFilterChange}>
-                <option className={buttonStyles.likeSortOptions} value="">Search By:</option>
-                <option className={buttonStyles.likeSortOptions} value="company">Company</option>
+              <select
+                className={buttonStyles.likeSortButton}
+                onChange={this.onFilterChange}
+              >
+                <option className={buttonStyles.likeSortOptions} value="">
+                  Search By:
+                </option>
+                <option
+                  className={buttonStyles.likeSortOptions}
+                  value="company"
+                >
+                  Company
+                </option>
                 {
-                  // Remove the major/concentration filter for 'My Posts' page as 
+                  // Remove the major/concentration filter for 'My Posts' page as
                   // this filter is for profiles and all posts in the current user's profile
-                  // don't change 
-                  this.props.feedType === 'main_posts' ?
-                    <option className={buttonStyles.likeSortOptions} value="major/concentration">Major/Concentration</option>
-                  : <div></div>
+                  // don't change
+                  this.props.feedType === "main_posts" ? (
+                    <option
+                      className={buttonStyles.likeSortOptions}
+                      value="major/concentration"
+                    >
+                      Major/Concentration
+                    </option>
+                  ) : (
+                    <div></div>
+                  )
                 }
-              </select>&nbsp;
+              </select>
+              &nbsp;
               {
                 // Company Name Search Query (Text):
                 // for searching based on company name
-                this.state.filterType === 'company' ?
-                <Fragment>
-                  <TextField
-                    type="text"
-                    inputProps={{
-                      style: { textAlign: "left", backgroundColor:"white", height: "18px",
-                      borderRadius: "5px"},
-                    }}
-                    variant="filled"
-                    sx={{
-                      width: "30%"
-                    }}
-                    onChange={this.onCompanyNameChange}
-                    label={"Type Company Name"}
-                    value={this.state.company}
-                    required
-                  />
-                  &nbsp;
-                </Fragment> :
-                // Major/Concentration Search Query (Dropdown)
+                this.state.filterType === "company" ? (
+                  <Fragment>
+                    <TextField
+                      type="text"
+                      inputProps={{
+                        style: {
+                          textAlign: "left",
+                          backgroundColor: "white",
+                          height: "18px",
+                          borderRadius: "5px",
+                        },
+                      }}
+                      variant="filled"
+                      sx={{
+                        width: "30%",
+                      }}
+                      onChange={this.onCompanyNameChange}
+                      label={"Type Company Name"}
+                      value={this.state.company}
+                      required
+                    />
+                    &nbsp;
+                  </Fragment>
+                ) : // Major/Concentration Search Query (Dropdown)
                 // for searching based on major/concentration
-                this.state.filterType === 'major/concentration' ?
-                <Fragment>
-                  {/* Major Dropdown */}
-                  <select className={buttonStyles.likeSortButton} onChange={this.onMajorChange}>
-                    <option className={buttonStyles.likeSortOptions} value="">Select Major</option>
-                    {
-                      ggc_degrees.map(degree => <option key={degree.major} value={degree.major}>{degree.major}</option>)
-                    }
-                  </select>
-                  &nbsp;
-                  {
-                    this.state.selectedMajor ?
-                      <select className={buttonStyles.likeSortButton} onChange={this.onConcentrationChange} disabled={!this.state.selectedMajor}>
-                        <option className={buttonStyles.likeSortOptions} value="">Select Concentration</option>
-                        {
-                          this.state.correspondingConcentrations.map(concentration => 
-                            <option key={concentration} value={concentration}>{concentration}</option>)
-                        }
-                      </select> : <span></span>
-                  }
-                  &nbsp;
-                </Fragment> : <span></span>
+                this.state.filterType === "major/concentration" ? (
+                  <Fragment>
+                    {/* Major Dropdown */}
+                    <select
+                      className={buttonStyles.likeSortButton}
+                      onChange={this.onMajorChange}
+                    >
+                      <option className={buttonStyles.likeSortOptions} value="">
+                        Select Major
+                      </option>
+                      {ggc_degrees.map((degree) => (
+                        <option key={degree.major} value={degree.major}>
+                          {degree.major}
+                        </option>
+                      ))}
+                    </select>
+                    &nbsp;
+                    {this.state.selectedMajor ? (
+                      <select
+                        className={buttonStyles.likeSortButton}
+                        onChange={this.onConcentrationChange}
+                        disabled={!this.state.selectedMajor}
+                      >
+                        <option
+                          className={buttonStyles.likeSortOptions}
+                          value=""
+                        >
+                          Select Concentration
+                        </option>
+                        {this.state.correspondingConcentrations.map(
+                          (concentration) => (
+                            <option key={concentration} value={concentration}>
+                              {concentration}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    ) : (
+                      <span></span>
+                    )}
+                    &nbsp;
+                  </Fragment>
+                ) : (
+                  <span></span>
+                )
               }
               {
-                // Search Button 
+                // Search Button
                 // (only shown if query has been detected)
-                this.state.searchQueryComplete ?
+                this.state.searchQueryComplete ? (
                   <input
                     className={buttonStyles.likeSortButton}
                     type="submit"
                     name="Search"
                     value="Search"
-                  /> : <span></span>
+                  />
+                ) : (
+                  <span></span>
+                )
               }
-              {/* Like Sort Dropdown */}
-              <div style={{height:"17px"}}></div>
-              <select className={buttonStyles.likeSortButton} onChange={this.handleLikesOrderChange}>
-                <option className={buttonStyles.likeSortOptions} value="">Sort By:</option>
-                <option className={buttonStyles.likeSortOptions} value="desc">Likes (Most to Least)</option>
-                <option className={buttonStyles.likeSortOptions} value="asc">Likes (Least to Most)</option>
+              {/* Sort Dropdown */}
+              <div style={{ height: "17px" }}></div>
+              <select
+                className={buttonStyles.likeSortButton}
+                onChange={this.handleLikesOrderChange}
+              >
+                <option className={buttonStyles.likeSortOptions} value="">
+                  Sort By:
+                </option>
+                <option
+                  className={buttonStyles.likeSortOptions}
+                  value="likes-desc"
+                >
+                  Likes (Most to Least)
+                </option>
+                <option
+                  className={buttonStyles.likeSortOptions}
+                  value="likes-asc"
+                >
+                  Likes (Least to Most)
+                </option>
+                <option
+                  className={buttonStyles.likeSortOptions}
+                  value="company-name-desc"
+                >
+                  Company Name (A-Z)
+                </option>
+                <option
+                  className={buttonStyles.likeSortOptions}
+                  value="company-name-asc"
+                >
+                  Company Name (Z-A)
+                </option>
               </select>
             </form>
             {this.props.feedType === "main_posts"
