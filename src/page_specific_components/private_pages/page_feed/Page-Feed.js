@@ -121,11 +121,22 @@ class PageFeed extends Component {
           ),
         });
         break;
+      case "descDate":
+        this.setState({
+        feedPosts: this.state.feedPosts.sort((a, b) =>
+          a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
+        });
+        break;
+      case "ascDate":
+        this.setState({
+          feedPosts: this.state.feedPosts.sort((b, a) =>
+          a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
+        });
       default:
         this.setState({
           feedPosts: this.state.feedPosts,
         });
-    }
+      }
   };
 
   /**
@@ -433,6 +444,18 @@ class PageFeed extends Component {
                   value="company-name-asc"
                 >
                   Company Name (Z-A)
+                </option>
+                <option 
+                  className={buttonStyles.likeSortOptions} 
+                  value="descDate"
+                >
+                  Date (Oldest to Newest)
+                </option>
+                <option 
+                  className={buttonStyles.likeSortOptions} 
+                   value="ascDate"
+                >
+                     Date (Newest to Oldest)
                 </option>
               </select>
             </form>
