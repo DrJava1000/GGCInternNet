@@ -12,8 +12,17 @@ export const appAuthInstance = getAuth();
 // CREATE AN ACCOUNT
 export async function createAccount(email, password, name)
 {
-    createUserWithEmailAndPassword(appAuthInstance, email, password)
+    var userInfo = {};
+    
+    await createUserWithEmailAndPassword(appAuthInstance, email, password)
     .then((userCredential) => {
+        
+        // Obtain id of new user
+        userInfo.id = userCredential.user.uid; 
+        // By default, accounts created from a public page
+        // will have the 'STUDENT' or non-admin role
+        userInfo.role = "STUDENT";
+        
         // For new accounts,
         // specify an associated user profile 
         // with the new user's id, name, and a
@@ -23,6 +32,7 @@ export async function createAccount(email, password, name)
             name: name,
             major: "Information Technology",
             concentration: "Data Science & Analytics",
+            role: "STUDENT"
         })
         console.log("User " + appAuthInstance.currentUser.email + " has been created successfully."); 
     })
@@ -30,6 +40,8 @@ export async function createAccount(email, password, name)
         console.log("User account couldn't be created. See below.");
         console.log(error);
     });
+
+    return userInfo; 
 }
 
 // LOGIN A USER
