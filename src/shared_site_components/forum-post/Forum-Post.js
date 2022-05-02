@@ -282,6 +282,7 @@ class ForumPost extends Component {
                   }
                   {/* Post Deletion Dialog*/}
                   {
+                    // Show 'delete' button when logged in as admins
                     this.context.currentUserRole === 'ADMIN' ?
                       <div>
                         <br />
