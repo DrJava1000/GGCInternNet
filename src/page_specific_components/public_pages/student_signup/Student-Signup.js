@@ -134,7 +134,7 @@ class UserProvisioning extends Component
                   <tr>
                     <td style={{fontWeight: 'bold'}}>Full Name<span className={regStyles.requiredAsterisk}>* </span></td>
                     <td><input className={regStyles.textRegistrationEntries} type="fullName" 
-                    placeholder="Enter your Full Name" onChange={this.onChangeName}/><br/></td>
+                    placeholder="Enter your Full Name" onChange={this.onChangeName} /><br/></td>
                   </tr>
                   <tr>
                     <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>* </span></td>
@@ -145,12 +145,12 @@ class UserProvisioning extends Component
                   <tr>
                     <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
                     <td><input className={regStyles.textRegistrationEntries} type="password" 
-                      placeholder="Enter your Password" onChange={this.onChangePassword}/><br/></td>
+                      placeholder="Enter your Password" onChange={this.onChangePassword} /><br/></td>
                   </tr>
                   <tr>
                       <td style={{fontWeight: 'bold'}}>Re-enter Password<span className={regStyles.requiredAsterisk}>* </span></td>
                       <td><input className={regStyles.textRegistrationEntries} type="password" 
-                      placeholder="Re-enter your Password" onChange={this.onChangeRetypePassword}/><br/></td>
+                      placeholder="Re-enter your Password" onChange={this.onChangeRetypePassword} /><br/></td>
                     </tr>
                 </tbody>
               </table>

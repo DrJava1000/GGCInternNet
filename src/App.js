@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUserID, setCurrentUserRole, setLoginStatus } from './react-redux/authentication/auth-slice';
 import AuthContext from './context/authentication/AuthContext';
 import Portal from './page_specific_components/public_pages/login_portal/Portal';
-import Signup from './page_specific_components/public_pages/signup/User-Provisioning'; 
+import Signup from './page_specific_components/public_pages/student_signup/Student-Signup'; 
 import PageFeed from './page_specific_components/private_pages/page_feed/Page-Feed';
 import PostModification from './page_specific_components/private_pages/post_modification/Post-Modification';
 import Profile from './page_specific_components/private_pages/user_profile/User-Profile';
