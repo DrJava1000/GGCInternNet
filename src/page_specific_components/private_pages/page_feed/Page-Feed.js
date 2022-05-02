@@ -1,4 +1,5 @@
 import { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 import bodyStyles from "../../../shared_site_css/body_styles/internal-body.module.css";
 import AppHeader from "../../../shared_site_components/page-header/header-and-navebar";
 import AppFooter from "../../../shared_site_components/page-footer/footer";
@@ -68,13 +69,11 @@ class PageFeed extends Component {
       });
     } else {
       // Fetch My Posts (with no filter)
-      setTimeout(() => {
-        fetchMyPosts(this.context.currentUserID, {}).then((posts) => {
-          this.setState({
-            feedPosts: posts,
-          });
+      fetchMyPosts(this.context.currentUserID, {}).then((posts) => {
+        this.setState({
+          feedPosts: posts,
         });
-      }, 3000);
+      });
     }
   }
 
@@ -132,6 +131,7 @@ class PageFeed extends Component {
           feedPosts: this.state.feedPosts.sort((b, a) =>
           a.createDate.split('/').reverse().join().localeCompare(b.createDate.split('/').reverse().join())),
         });
+        break; 
       default:
         this.setState({
           feedPosts: this.state.feedPosts,
@@ -224,16 +224,14 @@ class PageFeed extends Component {
       });
     } else if (this.props.feedType === "my_posts") {
       // Fetch My Posts (using company filter)
-      setTimeout(() => {
-        fetchMyPosts(this.context.currentUserID, {
-          filterType: this.state.filterType,
-          companySearchQuery: this.state.selectedCompanyName,
-        }).then((posts) => {
-          this.setState({
-            feedPosts: posts,
-          });
+      fetchMyPosts(this.context.currentUserID, {
+        filterType: this.state.filterType,
+        companySearchQuery: this.state.selectedCompanyName,
+      }).then((posts) => {
+        this.setState({
+          feedPosts: posts,
         });
-      }, 3000);
+      });
     }
   }
 
@@ -250,7 +248,7 @@ class PageFeed extends Component {
           navBarContents={[
             {
               text: "Main Forum",
-              link: "/Main_Feed",
+              link: "/Main_Feed"
             },
             {
               text: "Profile",
@@ -274,16 +272,16 @@ class PageFeed extends Component {
             {this.props.feedType === "main_posts" ? (
               <>
                 <h5>
-                  <a
+                  <Link
                     className={buttonStyles.createPostButton}
-                    href="/Post_Creation"
+                    to="/Post_Creation"
                   >
                     Create New Post
                     <AddCircleRoundedIcon
                       sx={{ marginLeft: "7px" }}
                       style={{ position: "relative", top: "4.5px" }}
                     ></AddCircleRoundedIcon>
-                  </a>
+                  </Link>
                 </h5>
               </>
             ) : (

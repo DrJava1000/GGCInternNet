@@ -118,24 +118,21 @@ class Profile extends Component{
 
   componentDidMount(){
     let userDetails;
-    setTimeout(() => {
-      if(this.state.locationState)
-        userDetails = loadUserProfile(this.state.locationState.userId);
-      else
-        userDetails = loadUserProfile(this.context.currentUserID);
-      
-      userDetails.then((profile) => {
-        this.setState({
-          name: profile.name,
-          picUrl: profile.pic,
-          major: profile.major,
-          concentration: profile.concentration,
-          concentrationList: this.loadConcentrations(profile.major),
-          resumeUrl: profile.resume
-        });
-      })
-    }, 
-    5000);
+    if(this.state.locationState)
+      userDetails = loadUserProfile(this.state.locationState.userId);
+    else
+      userDetails = loadUserProfile(this.context.currentUserID);
+    
+    userDetails.then((profile) => {
+      this.setState({
+        name: profile.name,
+        picUrl: profile.pic,
+        major: profile.major,
+        concentration: profile.concentration,
+        concentrationList: this.loadConcentrations(profile.major),
+        resumeUrl: profile.resume
+      });
+    })
   }
  
   render(){
