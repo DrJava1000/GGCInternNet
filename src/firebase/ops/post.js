@@ -146,7 +146,7 @@ export async function createOrEditPost({ postOperationStatus, logoFile, ...postD
   }else{
     // If this is a new post and a logo hasn't been provided, 
     // reference the default 
-    if(postOperationStatus == "create")
+    if(postOperationStatus === "create")
       postDetails.logoUrl = "https://firebasestorage.googleapis.com/v0/b/grizzly-internnet.appspot.com/" +
       "o/logos%2Fdefault%2Fgrizzly_logo.PNG?alt=media&token=a26efbaa-03ed-49d9-aacb-16e6f43e2870";
   }
@@ -174,9 +174,9 @@ export async function modifyPostLike(likeOperation, currentlikeCount, postID) {
 
   // Detect whether to add or remove a like
   // and store the updated count
-  if(likeOperation == "addLike"){
+  if(likeOperation === "addLike"){
     newLikeCount = currentlikeCount + 1;
-  }else if(likeOperation == "removeLike"){
+  }else if(likeOperation === "removeLike"){
     newLikeCount = currentlikeCount - 1;
   }
 
