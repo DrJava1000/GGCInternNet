@@ -1,7 +1,8 @@
 import { db } from '../firebase_init'; 
 
-import { doc, getDoc, setDoc } from "firebase/firestore"; 
+import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore"; 
 import { getStorage, ref, getDownloadURL, uploadBytes} from "firebase/storage";
+import { deletePost, fetchMyPosts } from './post';
 
 // CREATE USER PROFILE
 // Wrapper for updateUserProfile (for naming convenience)
@@ -22,6 +23,7 @@ export async function updateUserProfile(userDetails){
         name: userDetails.name, 
         major: userDetails.major,
         concentration: userDetails.concentration,
+        role: userDetails.role
     }, { 
         merge: true 
     });
@@ -152,4 +154,32 @@ export async function getRole(id){
     } else {
         console.log("No such document!");
     }
+}
+
+// DELETE A USER'S PROFILE, AND ALL THEIR POSTS
+//
+// This function doesn't remove the user from Firebase
+// as the Admin SDK will need to be implemented to remove them.
+// In addition, this function doesn't remove any stored profile 
+// pictures and resume and will need to be modified later to
+// include this functionality.  
+export async function deleteUserProfile(profileID){
+    // Get a reference to profile for deletion
+    var profileRef = doc(db, "profiles", profileID); 
+     
+    // Delete the user profile
+    await deleteDoc(profileRef).then(async (success) => {
+        // Then fetch all relevant posts and delete them
+        // using already-implemented fetchMyPosts() and deletePost()
+        // functions in post.js
+        await fetchMyPosts(profileID, {}).then((posts) => {
+            posts.forEach(async (post) => {
+                await deletePost(post.id);
+            });
+        }).catch(error => {
+            console.log(error);
+        })
+    }).catch((error) => {
+        console.log(error)
+    });
 }
