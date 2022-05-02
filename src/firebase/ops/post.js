@@ -155,6 +155,11 @@ export async function createOrEditPost({ postOperationStatus, logoFile, ...postD
 }
 
 // POST DELETION: DELETE AN EXISTING POST
+//
+// This function will not delete any associated
+// company logos that are stored and linked to this post.
+// This function will need to be modified later on for this
+// functionality. 
 export async function deletePost(postID) {
   var postRef = doc(db, "posts", postID); 
 
