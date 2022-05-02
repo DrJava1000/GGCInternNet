@@ -6,6 +6,7 @@ import { login } from '../../../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
 import { Link } from 'react-router-dom';
 import AuthContext from '../../../context/authentication/AuthContext';
+import { Snackbar, Alert } from '../../../../node_modules/@mui/material/index';
 
 /**
  * @class Portal
@@ -27,12 +28,18 @@ class Portal extends Component
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onLoginErrorSnackbarFade = this.onLoginErrorSnackbarFade.bind(this);
 
     this.state = 
     {
+      // Form-specific attributes
       accountEmail : "", // username to login with
-      accountLoginError : "", // username/password error message if username/password wrong
       accountPassword : "", // password to login with
+
+      // Rendering attributes
+      // Login Errors and Related Snackbar toggle functionality
+      accountLoginError : "", // username/password error message if username/password wrong
+      showLoginErrorSnackbar: false
     }
   }
 
@@ -61,6 +68,17 @@ class Portal extends Component
   }
 
   /**
+   * @name onLoginErrorSnackbarFade
+   * Callback that's used to disable login error snackbar
+   * after 5 seconds.
+   */
+  onLoginErrorSnackbarFade(){
+    this.setState({
+      showLoginErrorSnackbar: false
+    })
+  }
+
+  /**
    * @name onSubmit
    * Login: Validate Email/Password and Login if Successful, Set Error Message If Not
    * @param {Event} e
@@ -71,9 +89,18 @@ class Portal extends Component
     
     login(this.state.accountEmail, this.state.accountPassword)
     .then(userInfo => {
-      // Login locally (store logged-in user's id and role)
-      // The role will be needed for page routing. 
-      this.context.login(userInfo.id, userInfo.role);
+      // Check for a Firebase error 
+      // (and prevent login) if possible.
+      // As of this moment, we don't care about the specific
+      // kind of error for login, we just report invalid email/password
+      if(userInfo.signInError){
+        this.setState({
+          accountLoginError: 'Invalid email/password combination.',
+          showLoginErrorSnackbar: true
+        })
+      }else{
+        this.context.login(userInfo.id, userInfo.role);
+      }
     }).catch(error => {
       console.log(error);
     })
@@ -93,27 +120,32 @@ class Portal extends Component
             {
               'text': "Home",
               'link': "/"
-            }/*,
-            {
-              'text': "Admin Portal",
-              'link': "/Admin_Portal"
-            },*/
+            }
           ]
         }
         />
         <div className={bodyStyles.ScrollingContent}>
           <div className={styles.bodyLogIn}>
-            <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
-              <div className={styles.loginForm}>
-                <form onSubmit={this.onSubmit}>
-                    <div className={styles.prompt}><b>Username</b></div>
-                    <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeEmail}/><br/>
-                    <div className={styles.prompt}><b>Password</b></div>
-                    <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
-                    <input className={styles.loginButton} type="submit" name="login" value="Login"/>
-                </form>
-              </div>
-              <Link className={styles.registerPrompt} to="/Signup" style={{textDecoration: 'none'}}>Sign Up</Link>
+            <Snackbar open={this.state.showLoginErrorSnackbar} onClose={this.onLoginErrorSnackbarFade}
+              anchorOrigin={{
+                vertical: 'top', 
+                horizontal: 'center'
+              }} 
+              autoHideDuration={5000}>
+              <Alert severity="error" sx={{ width: '100%', fontSize: 24}}>
+                {this.state.accountLoginError}
+              </Alert>
+            </Snackbar>
+            <div className={styles.loginForm}>
+              <form onSubmit={this.onSubmit}>
+                  <div className={styles.prompt}><b>Username</b></div>
+                  <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeEmail} required/><br/>
+                  <div className={styles.prompt}><b>Password</b></div>
+                  <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword} required/><br/>
+                  <input className={styles.loginButton} type="submit" name="login" value="Login"/>
+              </form>
+            </div>
+            <Link className={styles.registerPrompt} to="/Signup" style={{textDecoration: 'none'}}>Sign Up</Link>
           </div>
           <AppFooter />
         </div>
