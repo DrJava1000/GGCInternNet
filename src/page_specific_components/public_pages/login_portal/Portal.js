@@ -4,7 +4,8 @@ import AppFooter from '../../../shared_site_components/page-footer/footer';
 import bodyStyles from '../../../shared_site_css/body_styles/internal-body.module.css';
 import { login } from '../../../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
-import {Navigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import AuthContext from '../../../context/authentication/AuthContext';
 
 /**
  * @class Portal
@@ -12,6 +13,7 @@ import {Navigate} from 'react-router-dom';
  */
 class Portal extends Component
 {
+  static contextType = AuthContext
   /**
    * @name Portal
    * Initialize Portal State Variables and Bind Methods
@@ -31,7 +33,6 @@ class Portal extends Component
       accountEmail : "", // username to login with
       accountLoginError : "", // username/password error message if username/password wrong
       accountPassword : "", // password to login with
-      redirectToInternal : false
     }
   }
 
@@ -68,11 +69,14 @@ class Portal extends Component
   { 
     e.preventDefault(); 
     
-    this.setState({
-      redirectToInternal : true
-    });
-    
-    login(this.state.accountEmail, this.state.accountPassword);
+    login(this.state.accountEmail, this.state.accountPassword)
+    .then(userInfo => {
+      // Login locally (store logged-in user's id and role)
+      // The role will be needed for page routing. 
+      this.context.login(userInfo.id, userInfo.role);
+    }).catch(error => {
+      console.log(error);
+    })
   }
     
   /**
@@ -81,46 +85,40 @@ class Portal extends Component
    */
   render()
   {
-    if(this.state.redirectToInternal)
-    {
-      return <Navigate to="/Main_Feed" />;
-    }else
-    {
-      return (
-        <Fragment>
-          <AppHeader navBarContents=
-          {
-            [
-              {
-                'text': "Home",
-                'link': "/"
-              }/*,
-              {
-                'text': "Admin Portal",
-                'link': "/Admin_Portal"
-              },*/
-            ]
-          }
-          />
-          <div className={bodyStyles.ScrollingContent}>
-            <div className={styles.bodyLogIn}>
-              <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
-                <div className={styles.loginForm}>
-                  <form onSubmit={this.onSubmit}>
-                      <div className={styles.prompt}><b>Username</b></div>
-                      <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeEmail}/><br/>
-                      <div className={styles.prompt}><b>Password</b></div>
-                      <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
-                      <input className={styles.loginButton} type="submit" name="login" value="Login"/>
-                  </form>
-                </div>
-                <a className={styles.registerPrompt} href="/Signup" style={{textDecoration: 'none'}}>Sign Up</a>
-            </div>
-            <AppFooter />
+    return (
+      <Fragment>
+        <AppHeader navBarContents=
+        {
+          [
+            {
+              'text': "Home",
+              'link': "/"
+            }/*,
+            {
+              'text': "Admin Portal",
+              'link': "/Admin_Portal"
+            },*/
+          ]
+        }
+        />
+        <div className={bodyStyles.ScrollingContent}>
+          <div className={styles.bodyLogIn}>
+            <span className={styles.accountError}>{this.state.accountLoginError}</span><br/>
+              <div className={styles.loginForm}>
+                <form onSubmit={this.onSubmit}>
+                    <div className={styles.prompt}><b>Username</b></div>
+                    <input className={styles.username} type="text" placeholder="Enter your Username" onChange={this.onChangeEmail}/><br/>
+                    <div className={styles.prompt}><b>Password</b></div>
+                    <input className={styles.password} type="password" placeholder="Enter your Password" onChange={this.onChangePassword}/><br/>
+                    <input className={styles.loginButton} type="submit" name="login" value="Login"/>
+                </form>
+              </div>
+              <Link className={styles.registerPrompt} to="/Signup" style={{textDecoration: 'none'}}>Sign Up</Link>
           </div>
-          </Fragment>
-        );
-    }
+          <AppFooter />
+        </div>
+        </Fragment>
+      );
   }
 }
   

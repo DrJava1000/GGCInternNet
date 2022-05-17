@@ -4,10 +4,11 @@ import regStyles from './Registration.module.css';
 import AppFooter from '../../../shared_site_components/page-footer/footer';
 import { createAccount } from '../../../firebase/ops/auth';
 import React, { Component, Fragment, } from "react";
-import {Navigate} from 'react-router-dom';
+import AuthContext from '../../../context/authentication/AuthContext';
 
 class UserProvisioning extends Component
 {
+  static contextType = AuthContext;
   /**
    * @name Portal
    * Initialize Portal State Variables and Bind Methods
@@ -31,7 +32,6 @@ class UserProvisioning extends Component
       accountLoginError : "", // username/password error message if username/password wrong
       desiredPassword : "", 
       desiredRetypePassword : '',
-      redirectToInternal: false
     }
   }
 
@@ -99,69 +99,68 @@ class UserProvisioning extends Component
       });
     }
 
-    createAccount(this.state.desiredEmail, this.state.desiredPassword, this.state.desiredName);
+    createAccount(this.state.desiredEmail, this.state.desiredPassword, this.state.desiredName)
+    .then(userInfo => {
+      // Login locally (store logged-in user's id and role)
+      // The role will be needed for page routing. 
+      this.context.login(userInfo.id, userInfo.role);
+    });
   }
 
   render()
   {
-    if(this.state.redirectToInternal)
-    {
-      return <Navigate to="/Main_Feed" />;
-    }else
-    {
-      return (
-        <Fragment>
-          <AppHeader navBarContents=
-          {
-            [
-              {
-                'text': "Home",
-                'link': "/"
-              }/*,
-              {
-                'text': "Admin Portal",
-                'link': "/Admin_Portal"
-              },*/
-            ]
-          }
-          />
-        <div className={bodyStyles.ScrollingContent}>
-          <div className={regStyles.bodySignUp}>
-            <h4 className={regStyles.registrationHeadings}>Fill out the form below to create an account<hr style={{color: '#ffffff'}}></hr><span style={{fontSize: '19px'}}>The <span className={regStyles.requiredAsterisk}>*</span> is for required fields.</span></h4>
-            <form style={{width:"57.75%"}} onSubmit={this.onSubmit}>
-                <table className={regStyles.registrationTable}>
-                  <tbody>
-                    <tr>
-                      <td style={{fontWeight: 'bold'}}>Full Name<span className={regStyles.requiredAsterisk}>* </span></td>
-                      <td><input className={regStyles.textRegistrationEntries} type="fullName" 
-                      placeholder="Enter your Full Name" onChange={this.onChangeName}/><br/></td>
-                    </tr>
-                    <tr>
-                      <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>* </span></td>
-                      <td><input className={regStyles.textRegistrationEntries} type="email"
-                      placeholder="Enter your E-mail" onChange={this.onChangeEmail}
-                      pattern=".+@ggc\.edu" title="The specified email is invalid. The domain should be @ggc.edu."/><br/></td>
-                    </tr>
-                    <tr>
-                      <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+    return (
+      <Fragment>
+        <AppHeader navBarContents=
+        {
+          [
+            {
+              'text': "Home",
+              'link': "/"
+            }/*,
+            {
+              'text': "Admin Portal",
+              'link': "/Admin_Portal"
+            },*/
+          ]
+        }
+        />
+      <div className={bodyStyles.ScrollingContent}>
+        <div className={regStyles.bodySignUp}>
+          <h4 className={regStyles.registrationHeadings}>Fill out the form below to create an account<hr style={{color: '#ffffff'}}></hr><span style={{fontSize: '19px'}}>The <span className={regStyles.requiredAsterisk}>*</span> is for required fields.</span></h4>
+          <form style={{width:"57.75%"}} onSubmit={this.onSubmit}>
+              <table className={regStyles.registrationTable}>
+                <tbody>
+                  <tr>
+                    <td style={{fontWeight: 'bold'}}>Full Name<span className={regStyles.requiredAsterisk}>* </span></td>
+                    <td><input className={regStyles.textRegistrationEntries} type="fullName" 
+                    placeholder="Enter your Full Name" onChange={this.onChangeName}/><br/></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontWeight: 'bold'}}>E-mail<span className={regStyles.requiredAsterisk}>* </span></td>
+                    <td><input className={regStyles.textRegistrationEntries} type="email"
+                    placeholder="Enter your E-mail" onChange={this.onChangeEmail}
+                    pattern=".+@ggc\.edu" title="The specified email is invalid. The domain should be @ggc.edu."/><br/></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontWeight: 'bold'}}>Password<span className={regStyles.requiredAsterisk}>*</span>:</td>
+                    <td><input className={regStyles.textRegistrationEntries} type="password" 
+                      placeholder="Enter your Password" onChange={this.onChangePassword}/><br/></td>
+                  </tr>
+                  <tr>
+                      <td style={{fontWeight: 'bold'}}>Re-enter Password<span className={regStyles.requiredAsterisk}>* </span></td>
                       <td><input className={regStyles.textRegistrationEntries} type="password" 
-                        placeholder="Enter your Password" onChange={this.onChangePassword}/><br/></td>
+                      placeholder="Re-enter your Password" onChange={this.onChangeRetypePassword}/><br/></td>
                     </tr>
-                    <tr>
-                        <td style={{fontWeight: 'bold'}}>Re-enter Password<span className={regStyles.requiredAsterisk}>* </span></td>
-                        <td><input className={regStyles.textRegistrationEntries} type="password" 
-                        placeholder="Re-enter your Password" onChange={this.onChangeRetypePassword}/><br/></td>
-                      </tr>
-                  </tbody>
-                </table>
-                <input className={regStyles.registrationButton} type="submit" name="Create" value="Create Account"/>
-              </form>
-          </div>
-          <AppFooter />
+                </tbody>
+              </table>
+              <input className={regStyles.registrationButton} type="submit" name="Create" value="Create Account"/>
+            </form>
         </div>
-        </Fragment>
-      );
-    }
+        <AppFooter />
+      </div>
+      </Fragment>
+    );
   }
 }
   

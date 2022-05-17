@@ -4,10 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import auth_store from './react-redux/authentication/auth-store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
+let persistor = persistStore(auth_store);
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={auth_store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );

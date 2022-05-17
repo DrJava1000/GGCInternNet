@@ -1,9 +1,9 @@
 import styles from './header-and-navebar.module.css';
 import internNetLogo from '../../images/Grizzly InternNET Logo Banner.png';
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { logout } from '../../firebase/ops/auth.js';
-import { Avatar } from '../../../node_modules/@mui/material/index';
-/* import { Link } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import AuthContext from '../../context/authentication/AuthContext';
 
 /**
  * @class AppHeader
@@ -42,7 +42,6 @@ class AppHeader extends Component
                         <img src={internNetLogo} className={styles.NgfLogo} alt="Grizzly InternNet" style={{userSelect:'none'}}/>
                     </div>
 
-
                 {/* App Navigation Bar*/}
                 <nav className={styles.AppNav}>
                     <ul>
@@ -70,15 +69,28 @@ class AppHeader extends Component
  */
 const NavBarContent = function NavBarContent(props)
 {
+    // Get context using hook for functional component
+    var authContext = useContext(AuthContext);
+    
     if(props.navLink === "Logout")
     { // logout on click of logout option 
         return (
-            <li><a href="/Portal" onClick={(e) => {logout(); return true}} >
-                {props.navText}</a></li>
+            <li><Link to="/Portal" onClick={(e) => {
+                logout()
+                .then(logoutResponse => {
+                    // Logout locally (strips user's login information)
+                    // The role will be needed for page routing. 
+                    authContext.logout();
+                }).catch(error => {
+                    console.log(error);
+                }) 
+                return true
+            }} >
+                {props.navText}</Link></li>
         )
     }else{
         return ( // for normal pages, create nav option here
-            <li><a href={props.navLink}>{props.navText}</a></li>
+            <li><Link to={props.navLink}>{props.navText}</Link></li>
         )
     }
 }
