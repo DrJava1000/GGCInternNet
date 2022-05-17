@@ -37,8 +37,7 @@ export async function createAccount(email, password, name)
         console.log("User " + appAuthInstance.currentUser.email + " has been created successfully."); 
     })
     .catch((error) => {
-        console.log("User account couldn't be created. See below.");
-        console.log(error);
+        userInfo.signupError = error; 
     });
 
     return userInfo; 
@@ -59,12 +58,12 @@ export async function login(email, password)
             userInfo.role = role;
             console.log("User " + userCredential.user.email + " has been signed in successfully."); 
         }).catch(error => {
-            console.log(error); 
+            console.log(error);
         })
     })
     .catch((error) => {
-        console.log("You couldn't be signed in. See below");
-        console.log(error);
+        // Return sign-in errors, if any
+        userInfo.signInError = error;
     });
 
     return userInfo;
